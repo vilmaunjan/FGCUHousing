@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FGCUHousing</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_resident_access">ResidentAccess</string>
+    <string name="title_activity_resident_register">ResidentRegister</string>
+    <string name="title_activity_resident_login">ResidentLogin</string>
+</resources>
