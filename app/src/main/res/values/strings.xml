@@ -4,4 +4,5 @@
     <string name="title_activity_resident_access">ResidentAccess</string>
     <string name="title_activity_resident_register">ResidentRegister</string>
     <string name="title_activity_resident_login">ResidentLogin</string>
+    <string name="title_activity_evest_list">EvestList</string>
 </resources>
