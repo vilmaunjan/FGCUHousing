@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select type of user"
+        android:text="@string/select_type_of_user"
         android:layout_marginBottom="23dp"
         android:layout_above="@+id/btnResident"
         android:layout_centerHorizontal="true" />
@@ -26,18 +26,17 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/logo"
         android:layout_above="@+id/btnResident"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="27dp"
-        android:layout_marginStart="27dp"
         android:layout_marginBottom="47dp"
         android:id="@+id/logoImg"
         tools:background="@android:color/transparent"
         android:background="@android:color/transparent"
-        android:backgroundTint="@android:color/transparent" />
+        android:backgroundTint="@android:color/transparent"
+        tools:ignore="ContentDescription,RtlHardcoded"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
-        android:text="Staff"
+        android:text="@string/staff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnStaff"
@@ -47,10 +46,11 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:onClick="buttonOnClick" />
+        android:onClick="buttonOnClick"
+        tools:ignore="RtlHardcoded" />
 
     <Button
-        android:text="Resident"
+        android:text="@string/resident"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnResident"
@@ -60,6 +60,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:onClick="buttonOnClick" />
+        android:onClick="buttonOnClick"
+        tools:ignore="RtlHardcoded" />
 
 </RelativeLayout>

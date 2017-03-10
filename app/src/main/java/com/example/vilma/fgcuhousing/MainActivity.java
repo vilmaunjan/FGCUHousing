@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         if (v == findViewById(R.id.btnResident)) { //go to residentAccess
             startActivity(new Intent(getApplicationContext(), ResidentAccess.class));
         } else if(v == findViewById(R.id.btnStaff)) { //go to staffAccess
-            //startActivity(new Intent(getApplicationContext(), ResidentAccess.class));
+            startActivity(new Intent(getApplicationContext(), EventList.class));
         }
     }
 
