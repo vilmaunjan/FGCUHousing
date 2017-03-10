@@ -33,8 +33,9 @@ public class ResidentRegister extends AppCompatActivity {
             //All buildings need to be added
             "Eagle", "Osprey", "Palmetto", "Biscayne", "Everglades", //South Village
             "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", //North Lake
-            "M", "N", "O", "P", "Q", "R", "S", "T", "Cypress", "Honors",
-            "Pelican", "Oak"
+            "M", "N", "O", "P", "Q", "R", "S", "T", "Cypress", "Falcon",
+            "Honors", "Pelican", "Oak", "Sandpiper", "Egret", "Mangrove",
+            "Flamingo", "Manatee", "Pompano", "Marlin", "Panther", "Tarpon" //West Lake
 
     };
 
