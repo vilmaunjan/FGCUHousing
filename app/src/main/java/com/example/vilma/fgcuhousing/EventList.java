@@ -32,6 +32,14 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
 
         spinnerFilter.setAdapter(adapter);
         spinnerFilter.setOnItemSelectedListener(this);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floatingActionAwards);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), Awards.class));
+            }
+        });
     }
 
     // This method is used for dropdown spinner when it filters by housing options(north, south, west)

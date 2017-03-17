@@ -41,6 +41,14 @@
         <activity
             android:name=".RatingPage"
             android:label="@string/title_activity_rating_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ResidentAccount"
+            android:label="@string/title_activity_resident_account"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Awards"
+            android:label="@string/title_activity_awards"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
