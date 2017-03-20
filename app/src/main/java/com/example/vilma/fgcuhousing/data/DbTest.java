@@ -22,42 +22,42 @@ public class DbTest {
         List<ContentValues> list = new ArrayList<ContentValues>();
 
         ContentValues cv = new ContentValues();
-        cv.put(HousingContract.HousingEntry.COLUMN_USER_NAME, "John Bourne");
-        cv.put(HousingContract.HousingEntry.COLUMN_EMAIL, "John@gmail.com");
-        cv.put(HousingContract.HousingEntry.COLUMN_PASSWORD, "John");
-        cv.put(HousingContract.HousingEntry.COLUMN_BUILDING, "North Village");
+        cv.put(HousingContract.ResidentEntry.COLUMN_USER_NAME, "John Bourne");
+        cv.put(HousingContract.ResidentEntry.COLUMN_EMAIL, "John@gmail.com");
+        cv.put(HousingContract.ResidentEntry.COLUMN_PASSWORD, "John");
+        cv.put(HousingContract.ResidentEntry.COLUMN_BUILDING, "North Village");
 
         list.add(cv);
 
         cv = new ContentValues();
-        cv.put(HousingContract.HousingEntry.COLUMN_USER_NAME, "Kim Bourne");
-        cv.put(HousingContract.HousingEntry.COLUMN_EMAIL, "Kim@gmail.com");
-        cv.put(HousingContract.HousingEntry.COLUMN_PASSWORD, "kim");
-        cv.put(HousingContract.HousingEntry.COLUMN_BUILDING, "South Village");
+        cv.put(HousingContract.ResidentEntry.COLUMN_USER_NAME, "Kim Bourne");
+        cv.put(HousingContract.ResidentEntry.COLUMN_EMAIL, "Kim@gmail.com");
+        cv.put(HousingContract.ResidentEntry.COLUMN_PASSWORD, "kim");
+        cv.put(HousingContract.ResidentEntry.COLUMN_BUILDING, "South Village");
 
         list.add(cv);
 
         cv = new ContentValues();
-        cv.put(HousingContract.HousingEntry.COLUMN_USER_NAME, "Joe Cena");
-        cv.put(HousingContract.HousingEntry.COLUMN_EMAIL, "Joe@gmail.com");
-        cv.put(HousingContract.HousingEntry.COLUMN_PASSWORD, "joe");
-        cv.put(HousingContract.HousingEntry.COLUMN_BUILDING, "West Village");
+        cv.put(HousingContract.ResidentEntry.COLUMN_USER_NAME, "Joe Cena");
+        cv.put(HousingContract.ResidentEntry.COLUMN_EMAIL, "Joe@gmail.com");
+        cv.put(HousingContract.ResidentEntry.COLUMN_PASSWORD, "joe");
+        cv.put(HousingContract.ResidentEntry.COLUMN_BUILDING, "West Village");
 
         list.add(cv);
 
         cv = new ContentValues();
-        cv.put(HousingContract.HousingEntry.COLUMN_USER_NAME, "Bandon Booughe");
-        cv.put(HousingContract.HousingEntry.COLUMN_EMAIL, "Bandon@gmail.com");
-        cv.put(HousingContract.HousingEntry.COLUMN_PASSWORD, "bandon");
-        cv.put(HousingContract.HousingEntry.COLUMN_BUILDING, "East Village");
+        cv.put(HousingContract.ResidentEntry.COLUMN_USER_NAME, "Bandon Booughe");
+        cv.put(HousingContract.ResidentEntry.COLUMN_EMAIL, "Bandon@gmail.com");
+        cv.put(HousingContract.ResidentEntry.COLUMN_PASSWORD, "bandon");
+        cv.put(HousingContract.ResidentEntry.COLUMN_BUILDING, "East Village");
 
         list.add(cv);
 
         cv = new ContentValues();
-        cv.put(HousingContract.HousingEntry.COLUMN_USER_NAME, "Plan Bo");
-        cv.put(HousingContract.HousingEntry.COLUMN_EMAIL, "plan@gmail.com");
-        cv.put(HousingContract.HousingEntry.COLUMN_PASSWORD, "bo");
-        cv.put(HousingContract.HousingEntry.COLUMN_BUILDING, "West Village");
+        cv.put(HousingContract.ResidentEntry.COLUMN_USER_NAME, "Plan Bo");
+        cv.put(HousingContract.ResidentEntry.COLUMN_EMAIL, "plan@gmail.com");
+        cv.put(HousingContract.ResidentEntry.COLUMN_PASSWORD, "bo");
+        cv.put(HousingContract.ResidentEntry.COLUMN_BUILDING, "West Village");
 
         list.add(cv);
 
@@ -66,10 +66,10 @@ public class DbTest {
         {
             db.beginTransaction();
             //clear the table first
-            db.delete (HousingContract.HousingEntry.TABLE_NAME,null,null);
+            db.delete (HousingContract.ResidentEntry.TABLE_NAME,null,null);
             //go through the list and add one by one
             for(ContentValues c:list){
-                db.insert(HousingContract.HousingEntry.TABLE_NAME, null, c);
+                db.insert(HousingContract.ResidentEntry.TABLE_NAME, null, c);
             }
             db.setTransactionSuccessful();
         }

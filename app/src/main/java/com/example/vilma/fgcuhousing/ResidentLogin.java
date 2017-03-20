@@ -3,8 +3,6 @@ package com.example.vilma.fgcuhousing;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -53,8 +51,8 @@ public class ResidentLogin extends AppCompatActivity {
             cusor.moveToFirst();
             //Trying to get some validation going right now but minor problems searching through the cursor
             while(cusor != null){
-                String e = cusor.getString(cusor.getColumnIndex(HousingContract.HousingEntry.COLUMN_EMAIL));
-                String p = cusor.getString(cusor.getColumnIndex(HousingContract.HousingEntry.COLUMN_PASSWORD));
+                String e = cusor.getString(cusor.getColumnIndex(HousingContract.ResidentEntry.COLUMN_EMAIL));
+                String p = cusor.getString(cusor.getColumnIndex(HousingContract.ResidentEntry.COLUMN_PASSWORD));
                 if(e == emailEntry){
                     Log.d("reg", "Found a Match");
                     if(p == passwordEntry){
@@ -82,13 +80,13 @@ public class ResidentLogin extends AppCompatActivity {
     private Cursor getallData(){
         //Adds all the data from a database and adds it to a cursor
         return mdb.query(
-                HousingContract.HousingEntry.TABLE_NAME,
+                HousingContract.ResidentEntry.TABLE_NAME,
                 null,
                 null,
                 null,
                 null,
                 null,
-                HousingContract.HousingEntry.COLUMN_USER_NAME
+                HousingContract.ResidentEntry.COLUMN_USER_NAME
         );
     }
 

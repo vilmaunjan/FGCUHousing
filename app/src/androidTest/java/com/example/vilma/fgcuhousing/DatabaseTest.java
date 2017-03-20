@@ -68,7 +68,7 @@ public class DatabaseTest {
         /* This Cursor will contain the names of each table in our database */
         Cursor tableNameCursor = database.rawQuery(
                 "SELECT name FROM sqlite_master WHERE type='table' AND name='" +
-                        HousingContract.HousingEntry.TABLE_NAME + "'",
+                        HousingContract.ResidentEntry.TABLE_NAME + "'",
                 null);
 
         /*
@@ -82,7 +82,7 @@ public class DatabaseTest {
 
         /* If this fails, it means that your database doesn't contain the expected table(s) */
         assertEquals("Error: Your database was created without the expected tables.",
-                HousingContract.HousingEntry.TABLE_NAME, tableNameCursor.getString(0));
+                HousingContract.ResidentEntry.TABLE_NAME, tableNameCursor.getString(0));
 
         /* Always close a cursor when you are done with it */
         tableNameCursor.close();
@@ -104,15 +104,15 @@ public class DatabaseTest {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues testValues = new ContentValues();
-        testValues.put(HousingContract.HousingEntry.COLUMN_USER_NAME, "John Bourne");
-        testValues.put(HousingContract.HousingEntry.COLUMN_EMAIL, "John@gmail.com");
-        testValues.put(HousingContract.HousingEntry.COLUMN_PASSWORD, "John");
-        testValues.put(HousingContract.HousingEntry.COLUMN_BUILDING, "North Village");
+        testValues.put(HousingContract.ResidentEntry.COLUMN_USER_NAME, "John Bourne");
+        testValues.put(HousingContract.ResidentEntry.COLUMN_EMAIL, "John@gmail.com");
+        testValues.put(HousingContract.ResidentEntry.COLUMN_PASSWORD, "John");
+        testValues.put(HousingContract.ResidentEntry.COLUMN_BUILDING, "North Village");
 
 
         /* Insert ContentValues into database and get first row ID back */
         long firstRowId = database.insert(
-                HousingContract.HousingEntry.TABLE_NAME,
+                HousingContract.ResidentEntry.TABLE_NAME,
                 null,
                 testValues);
 
@@ -125,7 +125,7 @@ public class DatabaseTest {
          */
         Cursor wCursor = database.query(
                 /* Name of table on which to perform the query */
-                HousingContract.HousingEntry.TABLE_NAME,
+                HousingContract.ResidentEntry.TABLE_NAME,
                 /* Columns; leaving this null returns every column in the table */
                 null,
                 /* Optional specification for columns in the "where" clause above */
@@ -169,21 +169,21 @@ public class DatabaseTest {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues testValues = new ContentValues();
-        testValues.put(HousingContract.HousingEntry.COLUMN_USER_NAME, "Kim Bourne");
-        testValues.put(HousingContract.HousingEntry.COLUMN_EMAIL, "Kim@gmail.com");
-        testValues.put(HousingContract.HousingEntry.COLUMN_PASSWORD, "kim");
-        testValues.put(HousingContract.HousingEntry.COLUMN_BUILDING, "South Village");
+        testValues.put(HousingContract.ResidentEntry.COLUMN_USER_NAME, "Kim Bourne");
+        testValues.put(HousingContract.ResidentEntry.COLUMN_EMAIL, "Kim@gmail.com");
+        testValues.put(HousingContract.ResidentEntry.COLUMN_PASSWORD, "kim");
+        testValues.put(HousingContract.ResidentEntry.COLUMN_BUILDING, "South Village");
 
 
         /* Insert ContentValues into database and get first row ID back */
         long firstRowId = database.insert(
-                HousingContract.HousingEntry.TABLE_NAME,
+                HousingContract.ResidentEntry.TABLE_NAME,
                 null,
                 testValues);
 
         /* Insert ContentValues into database and get another row ID back */
         long secondRowId = database.insert(
-                HousingContract.HousingEntry.TABLE_NAME,
+                HousingContract.ResidentEntry.TABLE_NAME,
                 null,
                 testValues);
 
@@ -213,21 +213,21 @@ public class DatabaseTest {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues testValues = new ContentValues();
-        testValues.put(HousingContract.HousingEntry.COLUMN_USER_NAME, "Joe Cena");
-        testValues.put(HousingContract.HousingEntry.COLUMN_EMAIL, "Joe@gmail.com");
-        testValues.put(HousingContract.HousingEntry.COLUMN_PASSWORD, "joe");
-        testValues.put(HousingContract.HousingEntry.COLUMN_BUILDING, "West Village");
+        testValues.put(HousingContract.ResidentEntry.COLUMN_USER_NAME, "Joe Cena");
+        testValues.put(HousingContract.ResidentEntry.COLUMN_EMAIL, "Joe@gmail.com");
+        testValues.put(HousingContract.ResidentEntry.COLUMN_PASSWORD, "joe");
+        testValues.put(HousingContract.ResidentEntry.COLUMN_BUILDING, "West Village");
 
 
         /* Insert ContentValues into database and get first row ID back */
         long firstRowId = database.insert(
-                HousingContract.HousingEntry.TABLE_NAME,
+                HousingContract.ResidentEntry.TABLE_NAME,
                 null,
                 testValues);
 
         /* Insert ContentValues into database and get another row ID back */
         long secondRowId = database.insert(
-                HousingContract.HousingEntry.TABLE_NAME,
+                HousingContract.ResidentEntry.TABLE_NAME,
                 null,
                 testValues);
 
@@ -237,7 +237,7 @@ public class DatabaseTest {
         /* This Cursor will contain the names of each table in our database */
         Cursor tableNameCursor = database.rawQuery(
                 "SELECT name FROM sqlite_master WHERE type='table' AND name='" +
-                        HousingContract.HousingEntry.TABLE_NAME + "'",
+                        HousingContract.ResidentEntry.TABLE_NAME + "'",
                 null);
 
         assertTrue(tableNameCursor.getCount() == 1);
@@ -248,7 +248,7 @@ public class DatabaseTest {
          */
         Cursor wCursor = database.query(
                 /* Name of table on which to perform the query */
-                HousingContract.HousingEntry.TABLE_NAME,
+                HousingContract.ResidentEntry.TABLE_NAME,
                 /* Columns; leaving this null returns every column in the table */
                 null,
                 /* Optional specification for columns in the "where" clause above */

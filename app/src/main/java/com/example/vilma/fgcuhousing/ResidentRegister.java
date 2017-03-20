@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -93,13 +91,13 @@ public class ResidentRegister extends AppCompatActivity {
 
         //Need content value to insert input into data base nicely
         ContentValues cv = new ContentValues();
-        cv.put(HousingContract.HousingEntry.COLUMN_USER_NAME, nameInput);
-        cv.put(HousingContract.HousingEntry.COLUMN_EMAIL, emailInput);
-        cv.put(HousingContract.HousingEntry.COLUMN_PASSWORD, passwordInput);
-        cv.put(HousingContract.HousingEntry.COLUMN_BUILDING, buildingInput);
+        cv.put(HousingContract.ResidentEntry.COLUMN_USER_NAME, nameInput);
+        cv.put(HousingContract.ResidentEntry.COLUMN_EMAIL, emailInput);
+        cv.put(HousingContract.ResidentEntry.COLUMN_PASSWORD, passwordInput);
+        cv.put(HousingContract.ResidentEntry.COLUMN_BUILDING, buildingInput);
         //Try's the insert into the database
         try{
-            mDb.insert(HousingContract.HousingEntry.TABLE_NAME, null, cv);
+            mDb.insert(HousingContract.ResidentEntry.TABLE_NAME, null, cv);
             Log.d("reg", "Insert Successful");
         }catch (SQLException e){
             Log.d("reg", "Insert Failedd");
@@ -112,7 +110,7 @@ public class ResidentRegister extends AppCompatActivity {
         Cursor cursor = getallData();
         Log.d("Cursor stuff" , "Cursor count is equal to " + cursor.getCount());
         cursor.moveToPosition(3);
-        Log.d("cursor stuff", "At crusor index 0 we have " + cursor.getString(cursor.getColumnIndex(HousingContract.HousingEntry.COLUMN_USER_NAME)));
+        Log.d("cursor stuff", "At crusor index 0 we have " + cursor.getString(cursor.getColumnIndex(HousingContract.ResidentEntry.COLUMN_USER_NAME)));
         cursor.close();
         */
 
@@ -122,13 +120,13 @@ public class ResidentRegister extends AppCompatActivity {
     private Cursor getallData(){
         //Adds all the data from a database and adds it to a cursor
         return mDb.query(
-                HousingContract.HousingEntry.TABLE_NAME,
+                HousingContract.ResidentEntry.TABLE_NAME,
                 null,
                 null,
                 null,
                 null,
                 null,
-                HousingContract.HousingEntry.COLUMN_USER_NAME
+                HousingContract.ResidentEntry.COLUMN_USER_NAME
         );
     }
 
