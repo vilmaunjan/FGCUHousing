@@ -38,12 +38,9 @@
         android:hint="Enter password" />
 
     <TextView
-        android:text="TextView"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
-        tools:text="Name:"
-        android:textSize="18sp"
         android:layout_alignBaseline="@+id/txtName"
         android:layout_alignBottom="@+id/txtName"
         android:layout_alignParentLeft="true"
@@ -51,21 +48,22 @@
         android:layout_marginLeft="19dp"
         android:layout_marginStart="19dp"
         android:layout_toLeftOf="@+id/txtName"
-        android:layout_toStartOf="@+id/txtName" />
+        android:layout_toStartOf="@+id/txtName"
+        android:text="Name:"
+        android:textSize="18sp" />
 
     <TextView
-        android:text="TextView"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/txtEmail"
         android:layout_alignLeft="@+id/textView2"
         android:layout_alignStart="@+id/textView2"
+        android:layout_alignTop="@+id/txtEmail"
         android:layout_marginTop="11dp"
-        android:id="@+id/textView3"
-        tools:text="Eagle email:"
-        android:textSize="18sp"
         android:layout_toLeftOf="@+id/txtEmail"
-        android:layout_toStartOf="@+id/txtEmail" />
+        android:layout_toStartOf="@+id/txtEmail"
+        android:text="Eagle email:"
+        android:textSize="18sp" />
 
     <EditText
         android:layout_width="wrap_content"

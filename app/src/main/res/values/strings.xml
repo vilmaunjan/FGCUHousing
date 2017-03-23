@@ -20,4 +20,12 @@
     <string name="staff">Staff</string>
     <string name="title_activity_event_page">EventPage</string>
     <string name="title_activity_rating_page">RatingPage</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_events__main">Events_Main</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_resident_account">ResidentAccount</string>
+    <string name="title_activity_awards">Awards</string>
 </resources>
