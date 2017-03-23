@@ -39,34 +39,33 @@
         android:hint="Enter eagle email"
         android:inputType="textPersonName" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_below="@+id/resEmail"
-        android:layout_alignRight="@+id/resEmail"
-        android:layout_alignEnd="@+id/resEmail"
-        android:layout_marginTop="63dp"
-        android:id="@+id/resPassword"
-        android:hint="Enter password" />
-
     <TextView
         android:text="Password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/resPassword"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/textView6" />
+        android:id="@+id/textView6"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
 
     <Button
-        android:text="Login"
+        android:id="@+id/btnLoginResidentLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="58dp"
-        android:id="@+id/btnLoginResidentLogin" />
+        android:onClick="buttonOnClick"
+        android:text="Login" />
+
+    <EditText
+        android:id="@+id/resPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/resEmail"
+        android:layout_alignStart="@+id/resEmail"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:hint="Enter password"
+        android:inputType="textPassword" />
 </RelativeLayout>
