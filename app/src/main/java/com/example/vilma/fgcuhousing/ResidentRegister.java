@@ -25,8 +25,7 @@ public class ResidentRegister extends AppCompatActivity {
     private EditText Email;
     private EditText Password;
     private AutoCompleteTextView Building;
-    private SQLiteDatabase mDb;
-    private DbHandler datCon;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,59 +74,10 @@ public class ResidentRegister extends AppCompatActivity {
             Log.d("Reg" , "Ther Password entered is " + passwordEntry);
             Log.d("Reg" , "Ther Building entered is " + buildingEntry);
 
-            //Sends to RegisterDataMethod to input into database
-            RegisterData(nameEntry, emailEntry, passwordEntry, buildingEntry);
-
             //Still need to write validation code
             startActivity(new Intent(getApplicationContext(), ResidentLogin.class));
         }
     }
 
-    //Void Method to insert data into database
-    public void RegisterData(String nameInput, String emailInput, String passwordInput, String buildingInput){
-        //How to get data from data base
-        datCon = new DbHandler(this);
-        mDb = datCon.getWritableDatabase();
-
-        //Need content value to insert input into data base nicely
-        ContentValues cv = new ContentValues();
-        cv.put(HousingContract.ResidentEntry.COLUMN_USER_NAME, nameInput);
-        cv.put(HousingContract.ResidentEntry.COLUMN_EMAIL, emailInput);
-        cv.put(HousingContract.ResidentEntry.COLUMN_PASSWORD, passwordInput);
-        cv.put(HousingContract.ResidentEntry.COLUMN_BUILDING, buildingInput);
-        //Try's the insert into the database
-        try{
-            mDb.insert(HousingContract.ResidentEntry.TABLE_NAME, null, cv);
-            Log.d("reg", "Insert Successful");
-        }catch (SQLException e){
-            Log.d("reg", "Insert Failedd");
-        };
-
-        /*
-        Code to test DataBase
-        DbTest.insertFakeData(mDb);
-
-        Cursor cursor = getallData();
-        Log.d("Cursor stuff" , "Cursor count is equal to " + cursor.getCount());
-        cursor.moveToPosition(3);
-        Log.d("cursor stuff", "At crusor index 0 we have " + cursor.getString(cursor.getColumnIndex(HousingContract.ResidentEntry.COLUMN_USER_NAME)));
-        cursor.close();
-        */
-
-
-    }
-
-    private Cursor getallData(){
-        //Adds all the data from a database and adds it to a cursor
-        return mDb.query(
-                HousingContract.ResidentEntry.TABLE_NAME,
-                null,
-                null,
-                null,
-                null,
-                null,
-                HousingContract.ResidentEntry.COLUMN_USER_NAME
-        );
-    }
 
 }
