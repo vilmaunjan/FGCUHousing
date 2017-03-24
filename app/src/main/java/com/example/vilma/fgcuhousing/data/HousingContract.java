@@ -25,6 +25,7 @@ public class HousingContract {
         public static final String Event_Title = "Title";
         public static final String Description = "Description";
         public static final String CreatedDate = "Created";
+        public static final String CreateTime = "Time";
         public static final String BUILDING = "Building";
         public static final String IMAGE = "Image";
     }
