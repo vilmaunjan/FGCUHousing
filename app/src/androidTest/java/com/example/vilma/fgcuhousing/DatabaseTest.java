@@ -68,8 +68,9 @@ public class DatabaseTest {
         /* This Cursor will contain the names of each table in our database */
         Cursor tableNameCursor = database.rawQuery(
                 "SELECT name FROM sqlite_master WHERE type='table' AND name='" +
-                        HousingContract.HousingEntry.TABLE_NAME + "'",
+                        HousingContract.UserEntry.TABLE_NAME + "'",
                 null);
+
 
         /*
          * If tableNameCursor.moveToFirst returns false from this query, it means the database
@@ -82,11 +83,98 @@ public class DatabaseTest {
 
         /* If this fails, it means that your database doesn't contain the expected table(s) */
         assertEquals("Error: Your database was created without the expected tables.",
-                HousingContract.HousingEntry.TABLE_NAME, tableNameCursor.getString(0));
+                HousingContract.UserEntry.TABLE_NAME, tableNameCursor.getString(0));
 
         /* Always close a cursor when you are done with it */
         tableNameCursor.close();
     }
+
+    @Test
+    public void create_database_test_Event() throws Exception{
+
+
+        /* Use reflection to try to run the correct constructor whenever implemented */
+        SQLiteOpenHelper dbHelper =
+                (SQLiteOpenHelper) mDbHelperClass.getConstructor(Context.class).newInstance(mContext);
+
+        /* Use WaitlistDbHelper to get access to a writable database */
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+
+
+        /* We think the database is open, let's verify that here */
+        String databaseIsNotOpen = "The database should be open and isn't";
+        assertEquals(databaseIsNotOpen,
+                true,
+                database.isOpen());
+
+        /* This Cursor will contain the names of each table in our database */
+        Cursor tableNameCursor = database.rawQuery(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name='" +
+                        HousingContract.EventEntry.TABLE_NAME + "'",
+                null);
+
+
+        /*
+         * If tableNameCursor.moveToFirst returns false from this query, it means the database
+         * wasn't created properly. In actuality, it means that your database contains no tables.
+         */
+        String errorInCreatingDatabase =
+                "Error: This means that the database has not been created correctly";
+        assertTrue(errorInCreatingDatabase,
+                tableNameCursor.moveToFirst());
+
+        /* If this fails, it means that your database doesn't contain the expected table(s) */
+        assertEquals("Error: Your database was created without the expected tables.",
+                HousingContract.EventEntry.TABLE_NAME, tableNameCursor.getString(0));
+
+        /* Always close a cursor when you are done with it */
+        tableNameCursor.close();
+    }
+
+    @Test
+    public void create_database_test_Awards() throws Exception{
+
+
+        /* Use reflection to try to run the correct constructor whenever implemented */
+        SQLiteOpenHelper dbHelper =
+                (SQLiteOpenHelper) mDbHelperClass.getConstructor(Context.class).newInstance(mContext);
+
+        /* Use WaitlistDbHelper to get access to a writable database */
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+
+
+        /* We think the database is open, let's verify that here */
+        String databaseIsNotOpen = "The database should be open and isn't";
+        assertEquals(databaseIsNotOpen,
+                true,
+                database.isOpen());
+
+        /* This Cursor will contain the names of each table in our database */
+        Cursor tableNameCursor = database.rawQuery(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name='" +
+                        HousingContract.Awards.TABLE_NAME + "'",
+                null);
+
+
+        /*
+         * If tableNameCursor.moveToFirst returns false from this query, it means the database
+         * wasn't created properly. In actuality, it means that your database contains no tables.
+         */
+        String errorInCreatingDatabase =
+                "Error: This means that the database has not been created correctly";
+        assertTrue(errorInCreatingDatabase,
+                tableNameCursor.moveToFirst());
+
+        /* If this fails, it means that your database doesn't contain the expected table(s) */
+        assertEquals("Error: Your database was created without the expected tables.",
+                HousingContract.Awards.TABLE_NAME, tableNameCursor.getString(0));
+
+        /* Always close a cursor when you are done with it */
+        tableNameCursor.close();
+    }
+
+
+
 
     /**
      * This method tests inserting a single record into an empty table from a brand new database.
@@ -104,15 +192,18 @@ public class DatabaseTest {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues testValues = new ContentValues();
-        testValues.put(HousingContract.HousingEntry.COLUMN_USER_NAME, "John Bourne");
-        testValues.put(HousingContract.HousingEntry.COLUMN_EMAIL, "John@gmail.com");
-        testValues.put(HousingContract.HousingEntry.COLUMN_PASSWORD, "John");
-        testValues.put(HousingContract.HousingEntry.COLUMN_BUILDING, "North Village");
+        testValues.put(HousingContract.UserEntry.Fname, "John");
+        testValues.put(HousingContract.UserEntry.Lname, "Bourne");
+        testValues.put(HousingContract.UserEntry.UIN, "894865412");
+        testValues.put(HousingContract.UserEntry.Email, "JohnBou@eagle.fgcu.edu");
+        testValues.put(HousingContract.UserEntry.Password, "north");
+        testValues.put(HousingContract.UserEntry.Type, "R");
+        testValues.put(HousingContract.UserEntry.Building, "North Village");
 
 
         /* Insert ContentValues into database and get first row ID back */
         long firstRowId = database.insert(
-                HousingContract.HousingEntry.TABLE_NAME,
+                HousingContract.UserEntry.TABLE_NAME,
                 null,
                 testValues);
 
@@ -125,7 +216,7 @@ public class DatabaseTest {
          */
         Cursor wCursor = database.query(
                 /* Name of table on which to perform the query */
-                HousingContract.HousingEntry.TABLE_NAME,
+                HousingContract.UserEntry.TABLE_NAME,
                 /* Columns; leaving this null returns every column in the table */
                 null,
                 /* Optional specification for columns in the "where" clause above */
@@ -169,27 +260,39 @@ public class DatabaseTest {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues testValues = new ContentValues();
-        testValues.put(HousingContract.HousingEntry.COLUMN_USER_NAME, "Kim Bourne");
-        testValues.put(HousingContract.HousingEntry.COLUMN_EMAIL, "Kim@gmail.com");
-        testValues.put(HousingContract.HousingEntry.COLUMN_PASSWORD, "kim");
-        testValues.put(HousingContract.HousingEntry.COLUMN_BUILDING, "South Village");
+        testValues.put(HousingContract.UserEntry.Fname, "Kim");
+        testValues.put(HousingContract.UserEntry.Lname, "Bourne");
+        testValues.put(HousingContract.UserEntry.UIN, "789875412");
+        testValues.put(HousingContract.UserEntry.Email, "KimBou@eagle.fgcu.edu");
+        testValues.put(HousingContract.UserEntry.Password, "north");
+        testValues.put(HousingContract.UserEntry.Type, "R");
+        testValues.put(HousingContract.UserEntry.Building, "North Village");
+
+        ContentValues cv = new ContentValues();
+        cv.put(HousingContract.UserEntry.Fname, "Bonnie");
+        cv.put(HousingContract.UserEntry.Lname, "Pogan");
+        cv.put(HousingContract.UserEntry.UIN, "894835712");
+        cv.put(HousingContract.UserEntry.Email, "Bonnie@eagle.fgcu.edu");
+        cv.put(HousingContract.UserEntry.Password, "north");
+        cv.put(HousingContract.UserEntry.Type, "R");
+        cv.put(HousingContract.UserEntry.Building, "North Village");
 
 
         /* Insert ContentValues into database and get first row ID back */
         long firstRowId = database.insert(
-                HousingContract.HousingEntry.TABLE_NAME,
+                HousingContract.UserEntry.TABLE_NAME,
                 null,
                 testValues);
 
         /* Insert ContentValues into database and get another row ID back */
         long secondRowId = database.insert(
-                HousingContract.HousingEntry.TABLE_NAME,
+                HousingContract.UserEntry.TABLE_NAME,
                 null,
-                testValues);
+                cv);
+
 
         assertEquals("ID Autoincrement test failed!",
-                firstRowId + 1, secondRowId);
-
+                firstRowId+1 , secondRowId);
 
     }
 
@@ -213,23 +316,35 @@ public class DatabaseTest {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues testValues = new ContentValues();
-        testValues.put(HousingContract.HousingEntry.COLUMN_USER_NAME, "Joe Cena");
-        testValues.put(HousingContract.HousingEntry.COLUMN_EMAIL, "Joe@gmail.com");
-        testValues.put(HousingContract.HousingEntry.COLUMN_PASSWORD, "joe");
-        testValues.put(HousingContract.HousingEntry.COLUMN_BUILDING, "West Village");
+        testValues.put(HousingContract.UserEntry.Fname, "Kim");
+        testValues.put(HousingContract.UserEntry.Lname, "Bourne");
+        testValues.put(HousingContract.UserEntry.UIN, "789875412");
+        testValues.put(HousingContract.UserEntry.Email, "KimBou@eagle.fgcu.edu");
+        testValues.put(HousingContract.UserEntry.Password, "north");
+        testValues.put(HousingContract.UserEntry.Type, "R");
+        testValues.put(HousingContract.UserEntry.Building, "North Village");
+
+        ContentValues testValue2 = new ContentValues();
+        testValue2.put(HousingContract.UserEntry.Fname, "Po");
+        testValue2.put(HousingContract.UserEntry.Lname, "Panager");
+        testValue2.put(HousingContract.UserEntry.UIN, "564789321");
+        testValue2.put(HousingContract.UserEntry.Email, "PoBanager@eagle.fgcu.edu");
+        testValue2.put(HousingContract.UserEntry.Password, "north");
+        testValue2.put(HousingContract.UserEntry.Type, "RA");
+        testValue2.put(HousingContract.UserEntry.Building, "North Village");
 
 
         /* Insert ContentValues into database and get first row ID back */
         long firstRowId = database.insert(
-                HousingContract.HousingEntry.TABLE_NAME,
+                HousingContract.UserEntry.TABLE_NAME,
                 null,
                 testValues);
 
         /* Insert ContentValues into database and get another row ID back */
         long secondRowId = database.insert(
-                HousingContract.HousingEntry.TABLE_NAME,
+                HousingContract.UserEntry.TABLE_NAME,
                 null,
-                testValues);
+                testValue2);
 
         dbHelper.onUpgrade(database, 0, 1);
         database = dbHelper.getReadableDatabase();
@@ -237,7 +352,7 @@ public class DatabaseTest {
         /* This Cursor will contain the names of each table in our database */
         Cursor tableNameCursor = database.rawQuery(
                 "SELECT name FROM sqlite_master WHERE type='table' AND name='" +
-                        HousingContract.HousingEntry.TABLE_NAME + "'",
+                        HousingContract.UserEntry.TABLE_NAME + "'",
                 null);
 
         assertTrue(tableNameCursor.getCount() == 1);
@@ -248,7 +363,7 @@ public class DatabaseTest {
          */
         Cursor wCursor = database.query(
                 /* Name of table on which to perform the query */
-                HousingContract.HousingEntry.TABLE_NAME,
+                HousingContract.UserEntry.TABLE_NAME,
                 /* Columns; leaving this null returns every column in the table */
                 null,
                 /* Optional specification for columns in the "where" clause above */
@@ -263,7 +378,6 @@ public class DatabaseTest {
                 null);
 
         /* Cursor.moveToFirst will return false if there are no records returned from your query */
-
         assertFalse("Database doesn't seem to have been dropped successfully when upgrading",
                 wCursor.moveToFirst());
 
