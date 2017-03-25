@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.vilma.fgcuhousing.data.DbHandler;
 
@@ -33,7 +32,7 @@ public class ResidentAccess extends AppCompatActivity {
         //testing for adding to database a different way
         //from a different screen
         //This also sends a toast message whenever a data is added
-        resi.addDataUsers(this,"Pepe", "Lepu", 812964812,
+        resi.addToUsers(this,"Pepe", "Lepu", 812964812,
                 "Lepu@gmail.com", "passpass", "RD", "North Village");
 
         //closes database connection

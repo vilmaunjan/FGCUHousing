@@ -24,10 +24,27 @@ public class HousingContract {
         public static final String Event_ID = "Event_ID";
         public static final String Event_Title = "Title";
         public static final String Description = "Description";
+        public static final String Location = "Location";
         public static final String CreatedDate = "Created";
         public static final String CreateTime = "Time";
         public static final String BUILDING = "Building";
         public static final String IMAGE = "Image";
+    }
+
+    public static final class Awards implements BaseColumns{
+        public static final String TABLE_NAME = "Awards";
+        public static final String COLUMN_Award_ID = "Award_ID";
+        public static final String COLUMN_Award_Name = "AwardName";
+        public static final String COLUMN_Award_Description = "AwardDescription";
+        public static final String COLUMN_Image = "Image";
+    }
+
+    public static final class OrganizedEvents implements BaseColumns{
+        public static final String TABLE_NAME = "OrganizedEvents";
+        public static final String OrganizedID = "OrganizedEventID";
+        public static final String RA_ID = "RA_ID";
+        public static final String Event_ID = "EventID";
+        public static final String Date = "Date";
     }
 
     public static final class AttendedEventEntry implements BaseColumns{
@@ -40,12 +57,6 @@ public class HousingContract {
         public static final String Rating_FeedBack = "RatingFeedBack";
     }
 
-    public static final class Awards implements BaseColumns{
-        public static final String TABLE_NAME = "Awards";
-        public static final String COLUMN_Award_ID = "Award_ID";
-        public static final String COLUMN_Image = "Image";
-    }
-
     public static final class AwardObtained implements BaseColumns{
         public static final String TABLE_NAME = "AwardsObtained";
         public static final String AwardObtained_ID = "AwardObtainedID";
@@ -53,13 +64,7 @@ public class HousingContract {
         public static final String Resident_ID = "ResidentID";
     }
 
-    public static final class OrganizedEvents implements BaseColumns{
-        public static final String TABLE_NAME = "OrganizedEvents";
-        public static final String OrganizedID = "OrganizedEventID";
-        public static final String RA_ID = "RA_ID";
-        public static final String Event_ID = "EventID";
-        public static final String Date = "Date";
-    }
+
 
 
 }
