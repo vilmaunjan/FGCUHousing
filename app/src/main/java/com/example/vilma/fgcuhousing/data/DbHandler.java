@@ -46,6 +46,7 @@ public class DbHandler extends SQLiteOpenHelper {
                 EventEntry.Event_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 EventEntry.Event_Title + " TEXT NOT NULL, " +
                 EventEntry.Description + " TEXT NOT NULL, " +
+                EventEntry.Location + " TEXT NOT NULL, " +
                 EventEntry.CreatedDate + " DATE, " +
                 EventEntry.CreateTime + " TIME, " +
                 EventEntry.BUILDING + " TEXT NOT NULL, " +
@@ -55,9 +56,22 @@ public class DbHandler extends SQLiteOpenHelper {
         final String CreateAwards = "CREATE TABLE " +
                 Awards.TABLE_NAME + "( "+
                 Awards.COLUMN_Award_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                Awards.COLUMN_Image + " TEXT NOT NULL " +
+                Awards.COLUMN_Award_Name + " TEXT NOT NULL, "+
+                Awards.COLUMN_Award_Description + " TEXT, "+
+                Awards.COLUMN_Image + " TEXT " +
                 ")";
 
+        final String CreateOrganizedEvents = "CREATE TABLE " +
+                OrganizedEvents.TABLE_NAME + "( "+
+                OrganizedEvents.OrganizedID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                OrganizedEvents.RA_ID+ " TEXT NOT NULL, " +
+                OrganizedEvents.Event_ID + " TEXT NOT NULL, " +
+                OrganizedEvents.Date + " TEXT NOT NULL, " +
+                " FOREIGN KEY ("+ OrganizedEvents.RA_ID +") REFERENCES "+
+                UserEntry.TABLE_NAME+"("+UserEntry._ID+")," +
+                " FOREIGN KEY ("+ OrganizedEvents.Event_ID +") REFERENCES "+
+                EventEntry.TABLE_NAME+"("+EventEntry._ID+")" +
+                ")";
 
         final String CreateAttendedEvent = "CREATE TABLE " +
                 AttendedEventEntry.TABLE_NAME + "( "+
@@ -74,8 +88,6 @@ public class DbHandler extends SQLiteOpenHelper {
                 EventEntry.TABLE_NAME+"("+EventEntry._ID+")" +
                 ")";
 
-
-
         final String CreateAwardObtained = "CREATE TABLE " +
                 AwardObtained.TABLE_NAME + "( "+
                 AwardObtained.AwardObtained_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
@@ -88,17 +100,7 @@ public class DbHandler extends SQLiteOpenHelper {
                 ")";
 
 
-        final String CreateOrganizedEvents = "CREATE TABLE " +
-                OrganizedEvents.TABLE_NAME + "( "+
-                OrganizedEvents.OrganizedID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                OrganizedEvents.RA_ID+ " TEXT NOT NULL, " +
-                OrganizedEvents.Event_ID + " TEXT NOT NULL, " +
-                OrganizedEvents.Date + " TEXT NOT NULL, " +
-                " FOREIGN KEY ("+ OrganizedEvents.RA_ID +") REFERENCES "+
-                UserEntry.TABLE_NAME+"("+UserEntry._ID+")," +
-                " FOREIGN KEY ("+ OrganizedEvents.Event_ID +") REFERENCES "+
-                EventEntry.TABLE_NAME+"("+EventEntry._ID+")" +
-                ")";
+
         //Execute the commands in proper order
         sqldb.execSQL(CreateUserTable);
         sqldb.execSQL(CreateEvent);
@@ -126,8 +128,8 @@ public class DbHandler extends SQLiteOpenHelper {
 
 
     //Call this method to insert a entry into the Residents Database
-    public boolean addDataUsers(Context c,String first,String last, int uin, String email,
-                                String pass, String r_ra_rd, String build){
+    public boolean addToUsers(Context c, String first, String last, int uin, String email,
+                              String pass, String r_ra_rd, String build){
         SQLiteDatabase homebase = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(UserEntry.Fname, first);

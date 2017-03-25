@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         //testing for adding to database a different way
         //Can change the toast message in class just added
         //for visual feed back
-        datCon.addDataUsers(this,"Andrew", "Charles", 814964812,
+        datCon.addToUsers(this,"Andrew", "Charles", 814418814,
                 "andrewmcharles@live.com", "passpass", "R", "North Village");
 
 
