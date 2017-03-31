@@ -49,6 +49,14 @@
         <activity
             android:name=".Awards"
             android:label="@string/title_activity_awards"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EventManager"
+            android:label="@string/title_activity_event_manager"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CreateEvent"
+            android:label="@string/title_activity_create_event"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

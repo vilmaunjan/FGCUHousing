@@ -28,4 +28,17 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_resident_account">ResidentAccount</string>
     <string name="title_activity_awards">Awards</string>
+    <string name="title_activity_event_manager">EventManager</string>
+    <string name="title_activity_create_event">CreateEvent</string>
+    <string name="event_manager">Event Manager</string>
+    <string name="event_name">Event name</string>
+    <string name="_1">1</string>
+    <string name="create_event">Create event</string>
+    <string name="create_new_event">Create new event</string>
+    <string name="event_building">Event building</string>
+    <string name="event_date">Event date</string>
+    <string name="event_time">Event time</string>
+    <string name="event_title">Event title:</string>
+    <string name="insert_poster">Insert Poster</string>
+    <string name="string_insert_poster" />
 </resources>
