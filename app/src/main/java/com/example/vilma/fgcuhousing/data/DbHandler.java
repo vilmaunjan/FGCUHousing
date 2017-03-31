@@ -21,7 +21,8 @@ public class DbHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "HousingDB";
     private static final int DATABASE_VERSION = 1;
     private static final String Tag = "DataBaseHelper";
-
+    SQLiteDatabase db;
+    int num;
     public DbHandler(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -113,6 +114,7 @@ public class DbHandler extends SQLiteOpenHelper {
         //click log cat and then where you see verbose just type the name of the Tag
         //I declared to see it's specific log only
         Log.d(Tag, "If it made it this far, database was created successfully");
+        db = sqldb;
     }
 
     //i'll get back to fixing the rest of the updates and inserts
@@ -125,35 +127,6 @@ public class DbHandler extends SQLiteOpenHelper {
         sqldb.execSQL("DROP TABLE IF EXISTS " + OrganizedEvents.TABLE_NAME);
         onCreate(sqldb);
     }
-
-
-    //Call this method to insert a entry into the Residents Database
-    public boolean addToUsers(Context c, String first, String last, int uin, String email,
-                              String pass, String r_ra_rd, String build){
-        SQLiteDatabase homebase = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(UserEntry.Fname, first);
-        cv.put(UserEntry.Lname, last);
-        cv.put(UserEntry.UIN, uin);
-        cv.put(UserEntry.Email, email);
-        cv.put(UserEntry.Password, pass);
-        cv.put(UserEntry.Type, r_ra_rd);
-        cv.put(UserEntry.Building, build);
-
-
-        Log.d(Tag, "addDataUser: adding " + first + " " + last + " to table "
-                + UserEntry.TABLE_NAME);
-        long result = homebase.insert(UserEntry.TABLE_NAME, null, cv);
-
-        if(result == -1){
-            toastMessage(c,"Error Error Error");
-            return false;
-        }else{
-            toastMessage(c,"Data Succesfully Inserted");
-            return true;
-        }
-    }
-
     /**
      * customize-able Toast Message
      * Message Pops up on android screen
@@ -181,16 +154,43 @@ public class DbHandler extends SQLiteOpenHelper {
         return data;
     }
 
-    //Get awards info
-    public Cursor getAwardsInfo(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor;
-        String [] projections = {Awards.COLUMN_Award_ID, Awards.COLUMN_Award_Description,
-            Awards.COLUMN_Award_Name, Awards.COLUMN_Image};
+    //Used to insert a user into the database
+    public void insertUser(Context c, User usr){
+        Log.d("insertUser", usr.getEmail());
+        SQLiteDatabase homebase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(UserEntry.Fname, usr.getName());
+        values.put(UserEntry.Lname, usr.getName());
+        values.put(UserEntry.UIN, 815074321);
+        values.put(UserEntry.Email, usr.getEmail());
+        values.put(UserEntry.Password, usr.getPassword());
+        values.put(UserEntry.Type, "r");
+        values.put(UserEntry.Building, usr.getBuilding());
+        long result = homebase.insert(UserEntry.TABLE_NAME, null, values);
+    }
 
-        cursor = db.query(Awards.TABLE_NAME, projections, null, null, null, null, null);
-
-        return cursor;
+    //Search for email and return corresponding password.
+    public String searchPassword(String emailEntry){
+        Log.d("696969", "Reached set password");
+        String password = "";
+        String email = "Not found";
+        db = this.getReadableDatabase();
+        String query = "select " + UserEntry.Email + ", " + UserEntry.Password + " from "
+                + UserEntry.TABLE_NAME + "";
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            do{
+                email = cursor.getString(0);
+                Log.d("searchPassword", email);
+                if(email.equals(emailEntry)){
+                    password = cursor.getString(1);
+                    Log.d("searchPasswor", password);
+                    break;
+                }
+            }
+            while(cursor.moveToNext());
+        }
+        return password;
     }
 
 }
