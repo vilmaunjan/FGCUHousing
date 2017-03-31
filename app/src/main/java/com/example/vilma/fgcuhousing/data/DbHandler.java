@@ -181,4 +181,16 @@ public class DbHandler extends SQLiteOpenHelper {
         return data;
     }
 
+    //Get awards info
+    public Cursor getAwardsInfo(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+        String [] projections = {Awards.COLUMN_Award_ID, Awards.COLUMN_Award_Description,
+            Awards.COLUMN_Award_Name, Awards.COLUMN_Image};
+
+        cursor = db.query(Awards.TABLE_NAME, projections, null, null, null, null, null);
+
+        return cursor;
+    }
+
 }
