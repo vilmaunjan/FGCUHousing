@@ -77,8 +77,7 @@ public class ResidentRegister extends AppCompatActivity {
             Log.d("Reg" , "Ther Password entered is " + passwordEntry);
             Log.d("Reg" , "Ther Building entered is " + buildingEntry);
 
-            //Still need to write validation code
-            startActivity(new Intent(getApplicationContext(), ResidentLogin.class));
+
 
             //Inserts user information into user class.
             User usr = new User();
@@ -89,6 +88,8 @@ public class ResidentRegister extends AppCompatActivity {
 
             //Inserts New User into the database
             db.insertUser(this,usr);
+            //Moves to next Activity
+            startActivity(new Intent(getApplicationContext(), ResidentLogin.class));
         }
     }
 
