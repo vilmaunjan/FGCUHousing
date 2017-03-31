@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         //Start's database
         datCon = new DbHandler(this);
         //get's and editable database to add parameters
@@ -41,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         //testing for adding to database a different way
         //Can change the toast message in class just added
         //for visual feed back
-        datCon.addToUsers(this,"Andrew", "Charles", 814418814,
-                "andrewmcharles@live.com", "passpass", "R", "North Village");
+//        datCon.addToUsers(this,"Andrew", "Charles", 814418814,
+//                "andrewmcharles@live.com", "passpass", "R", "North Village");
 
 
         //Example of getting all the data from database
@@ -59,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
             String builin = allData.getString(7);
            Log.d(s,"First name: " + name + " Last name: " + lname
            + " uin : "+ uin +" email : "+ email + "pass : "+pass +" status : "+ status +" builin : "+ builin);
-
 
 
 //            //Example of how to compare strings from table

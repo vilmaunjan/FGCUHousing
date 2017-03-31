@@ -17,6 +17,7 @@ import android.widget.EditText;
 
 import com.example.vilma.fgcuhousing.data.DbHandler;
 import com.example.vilma.fgcuhousing.data.HousingContract;
+import com.example.vilma.fgcuhousing.data.User;
 
 public class ResidentRegister extends AppCompatActivity {
 
@@ -25,6 +26,8 @@ public class ResidentRegister extends AppCompatActivity {
     private EditText Email;
     private EditText Password;
     private AutoCompleteTextView Building;
+
+    DbHandler db = new DbHandler(this);
 
 
     @Override
@@ -76,6 +79,16 @@ public class ResidentRegister extends AppCompatActivity {
 
             //Still need to write validation code
             startActivity(new Intent(getApplicationContext(), ResidentLogin.class));
+
+            //Inserts user information into user class.
+            User usr = new User();
+            usr.setName(nameEntry);
+            usr.setEmail(emailEntry);
+            usr.setPassword(passwordEntry);
+            usr.setBuilding(buildingEntry);
+
+            //Inserts New User into the database
+            db.insertUser(this,usr);
         }
     }
 
