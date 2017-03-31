@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.vilma.fgcuhousing.CreateEvent"
+    tools:showIn="@layout/activity_create_event">
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtEventDescription"
+        android:layout_alignLeft="@+id/textView20"
+        android:layout_alignStart="@+id/textView20"
+        android:layout_marginBottom="21dp"
+        android:text="@string/event_title"
+        android:textSize="18sp"
+        app:layout_constraintRight_toLeftOf="@+id/txtEventName"
+        tools:layout_editor_absoluteY="95dp" />
+
+    <EditText
+        android:id="@+id/txtTime"
+        android:layout_width="178dp"
+        android:layout_height="39dp"
+        android:layout_above="@+id/txtDate"
+        android:layout_alignEnd="@+id/txtBuilding"
+        android:layout_alignRight="@+id/txtBuilding"
+        android:layout_marginBottom="13dp"
+        android:ems="10"
+        android:hint="@string/event_time"
+        android:inputType="time"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="306dp" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtEventName"
+        android:layout_alignLeft="@+id/textView19"
+        android:layout_alignStart="@+id/textView19"
+        android:text="id:"
+        android:textSize="18sp"
+        app:layout_constraintRight_toLeftOf="@+id/txtId"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteY="53dp" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtTime"
+        android:layout_alignBottom="@+id/txtTime"
+        android:layout_alignLeft="@+id/textView22"
+        android:layout_alignStart="@+id/textView22"
+        android:text="Time:"
+        android:textSize="18sp"
+        app:layout_constraintRight_toLeftOf="@+id/txtTime"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteY="321dp" />
+
+    <Spinner
+        android:id="@+id/spinnerLocation"
+        android:layout_width="176dp"
+        android:layout_height="28dp"
+        android:layout_above="@+id/txtBuilding"
+        android:layout_alignEnd="@+id/txtEventDescription"
+        android:layout_alignRight="@+id/txtEventDescription"
+        android:layout_marginBottom="15dp"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="207dp" />
+
+    <EditText
+        android:id="@+id/txtEventDescription"
+        android:layout_width="177dp"
+        android:layout_height="61dp"
+        android:layout_above="@+id/spinnerLocation"
+        android:layout_alignLeft="@+id/txtEventName"
+        android:layout_alignStart="@+id/txtEventName"
+        android:layout_marginBottom="17dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="133dp" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/txtEventDescription"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="7dp"
+        android:layout_toLeftOf="@+id/txtEventDescription"
+        android:layout_toStartOf="@+id/txtEventDescription"
+        android:text="Description:"
+        android:textSize="18sp"
+        app:layout_constraintRight_toLeftOf="@+id/txtEventDescription"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteY="133dp" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/spinnerLocation"
+        android:layout_alignLeft="@+id/textView20"
+        android:layout_alignStart="@+id/textView20"
+        android:text="Location:"
+        android:textSize="18sp"
+        app:layout_constraintRight_toLeftOf="@+id/spinnerLocation"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteY="207dp" />
+
+    <TextView
+        android:id="@+id/txtId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView16"
+        android:layout_alignBottom="@+id/textView16"
+        android:layout_alignLeft="@+id/txtEventName"
+        android:layout_alignStart="@+id/txtEventName"
+        android:text="@string/_1"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="53dp" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnPoster"
+        android:layout_alignBottom="@+id/btnPoster"
+        android:layout_alignLeft="@+id/textView22"
+        android:layout_alignStart="@+id/textView22"
+        android:text="Image:"
+        android:textSize="18sp"
+        app:layout_constraintRight_toLeftOf="@+id/btnPoster"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteY="423dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/txtBuilding"
+        android:layout_width="182dp"
+        android:layout_height="45dp"
+        android:layout_above="@+id/txtTime"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="13dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginRight="39dp"
+        android:text="@string/event_building"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="360dp" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView16"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/textView16"
+        android:text="Enter information to create an event (all fields are required):"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_alignEnd="@+id/btnPoster"
+        android:layout_alignLeft="@+id/textView26"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/btnPoster"
+        android:layout_alignStart="@+id/textView26"
+        android:layout_marginBottom="11dp"
+        android:text="@string/create_event"
+        tools:layout_editor_absoluteX="89dp"
+        tools:layout_editor_absoluteY="472dp" />
+
+    <Button
+        android:id="@+id/btnPoster"
+        android:layout_width="183dp"
+        android:layout_height="48dp"
+        android:text="Insert Poster"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="406dp"
+        android:layout_above="@+id/button3"
+        android:layout_alignLeft="@+id/spinnerLocation"
+        android:layout_alignStart="@+id/spinnerLocation"
+        android:layout_marginBottom="9dp" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtBuilding"
+        android:layout_alignBottom="@+id/txtBuilding"
+        android:layout_alignLeft="@+id/textView21"
+        android:layout_alignStart="@+id/textView21"
+        android:text="Building:"
+        android:textSize="18sp"
+        app:layout_constraintRight_toLeftOf="@+id/txtBuilding"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteY="369dp" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtDate"
+        android:layout_alignBottom="@+id/txtDate"
+        android:layout_alignLeft="@+id/textView25"
+        android:layout_alignStart="@+id/textView25"
+        android:text="Date:"
+        android:textSize="18sp"
+        app:layout_constraintRight_toLeftOf="@+id/txtDate"
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteY="259dp" />
+
+    <EditText
+        android:id="@+id/txtEventName"
+        android:layout_width="178dp"
+        android:layout_height="38dp"
+        android:layout_alignBaseline="@+id/textView19"
+        android:layout_alignBottom="@+id/textView19"
+        android:layout_alignLeft="@+id/txtBuilding"
+        android:layout_alignStart="@+id/txtBuilding"
+        android:ems="10"
+        android:hint="@string/event_name"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="87dp" />
+
+    <EditText
+        android:id="@+id/txtDate"
+        android:layout_width="177dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="@string/event_date"
+        android:inputType="date"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="251dp"
+        android:layout_above="@+id/btnPoster"
+        android:layout_alignLeft="@+id/txtBuilding"
+        android:layout_alignStart="@+id/txtBuilding" />
+
+</RelativeLayout>
