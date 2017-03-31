@@ -21,7 +21,7 @@ public class DbHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "HousingDB";
     private static final int DATABASE_VERSION = 1;
     private static final String Tag = "DataBaseHelper";
-    SQLiteDatabase db;
+    private static SQLiteDatabase db = null;
 
     public DbHandler(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -177,20 +177,37 @@ public class DbHandler extends SQLiteOpenHelper {
         db = this.getReadableDatabase();
         String query = "select " + UserEntry.Email + ", " + UserEntry.Password + " from "
                 + UserEntry.TABLE_NAME + "";
-        Cursor cursor = db.rawQuery(query, null);
-        if(cursor.moveToFirst()){
-            do{
-                email = cursor.getString(0);
-                Log.d("searchPassword", email);
-                if(email.equals(emailEntry)){
-                    password = cursor.getString(1);
-                    Log.d("searchPasswor", password);
-                    break;
+        try {
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    email = cursor.getString(0);
+                    Log.d("searchPassword", email);
+                    if (email.equals(emailEntry)) {
+                        password = cursor.getString(1);
+                        Log.d("searchPasswor", password);
+                        break;
+                    }
                 }
+                while (cursor.moveToNext());
             }
-            while(cursor.moveToNext());
+            db.close();
+        }catch (Exception e){
+
         }
         return password;
+    }
+
+    //Get awards info
+    public Cursor getAwardsInfo(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+        String [] projections = {Awards.COLUMN_Award_ID, Awards.COLUMN_Award_Description,
+                Awards.COLUMN_Award_Name, Awards.COLUMN_Image};
+
+        cursor = db.query(Awards.TABLE_NAME, projections, null, null, null, null, null);
+
+        return cursor;
     }
 
 }
