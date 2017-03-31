@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.content.Intent;
 
 import com.example.vilma.fgcuhousing.data.DbHandler;
 import com.example.vilma.fgcuhousing.data.HousingContract;
@@ -17,7 +18,7 @@ import com.example.vilma.fgcuhousing.data.HousingContract;
 public class ResidentLogin extends AppCompatActivity {
 
     //Creates a connection to database
-
+    DbHandler db = new DbHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +42,16 @@ public class ResidentLogin extends AppCompatActivity {
             String emailEntry = Email.getText().toString();
             String passwordEntry = Password.getText().toString();
 
+            //Will be the value of the password stored in the database
+            String password = db.searchPassword(emailEntry);
+            //If what the user entered is the correct password then move to EventList
+            if(passwordEntry.equals(password)) {
+                Intent i = new Intent(this, EventList.class);
+                startActivity(i);
+                Log.d("Caleb", " password");
+            } else {
+                Log.d("Caleb", "Wrong password");
+            }
         }
     }
-
-
-
 }

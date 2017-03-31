@@ -32,8 +32,8 @@ public class ResidentAccess extends AppCompatActivity {
         //testing for adding to database a different way
         //from a different screen
         //This also sends a toast message whenever a data is added
-        resi.addToUsers(this,"Pepe", "Lepu", 812964812,
-                "Lepu@gmail.com", "passpass", "RD", "North Village");
+//        resi.addToUsers(this,"Pepe", "Lepu", 812964812,
+//                "Lepu@gmail.com", "passpass", "RD", "North Village");
 
         //closes database connection
         resi.close();
