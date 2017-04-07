@@ -130,7 +130,7 @@ public class DbHandler extends SQLiteOpenHelper {
     /**
      * customize-able Toast Message
      * Message Pops up on android screen
-     * @param message
+     * @param message Toast
      */
     private void toastMessage(Context c,String message){
         Toast.makeText(c,message, Toast.LENGTH_SHORT).show();
@@ -179,6 +179,8 @@ public class DbHandler extends SQLiteOpenHelper {
             values.put(EventEntry.Location, evt.getLocation());
             values.put(EventEntry.Event_Time, evt.getTime());
             values.put(EventEntry.Event_Date, evt.getDate());
+            values.put(EventEntry.BUILDING, evt.getBuilding());
+            values.put(EventEntry.IMAGE, evt.getImage());
             long result = db.insert(EventEntry.TABLE_NAME, null, values);
             if(result == -1)
                 return false;
@@ -204,15 +206,16 @@ public class DbHandler extends SQLiteOpenHelper {
                     Log.d("searchPassword", email);
                     if (email.equals(emailEntry)) {
                         password = cursor.getString(1);
-                        Log.d("searchPasswor", password);
+                        Log.d("searchPassword", password);
                         break;
                     }
                 }
                 while (cursor.moveToNext());
             }
+            cursor.close();
             db.close();
         }catch (Exception e){
-
+            Log.d("DataBase", e.getMessage());
         }
         return password;
     }
