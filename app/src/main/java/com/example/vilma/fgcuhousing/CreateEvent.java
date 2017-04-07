@@ -54,22 +54,23 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
 
     public void buttonOnClick(View v) {
         Button button = (Button) v;
-        Event event = null;
+        Event event = new Event();
         event.setTitle(title.getText().toString());
         event.setDescription(description.getText().toString());
         event.setBuilding(building.getText().toString());
         event.setTime(time.getText().toString());
         event.setDate(date.getText().toString());
         event.setLocation(location.getText().toString());
+        boolean isInserted = false;
         if (v == findViewById(R.id.btnCreateEvent)) {
-            boolean isInserted;
             try{
-             isInserted = datCon.insertEvent(event);
-        }catch(Exception e){
-            Log.d("insertEvent", "so whats the problem");
-            Log.d("insertEvent",e.getMessage());
-        }
-            if(isInserted = true)
+                Log.d("insertEvent", event.getDescription() +" "+event.getLocation() + "  " +  event.getBuilding()+"  "+ event.getTitle()+"  "+event.getDate()+"  "+ event.getTime());
+                isInserted = datCon.insertEvent(event);
+            }catch(Exception e){
+                Log.d("insertEvent", "so whats the problem");
+                Log.d("insertEvent",e.getMessage());
+            }
+            if(isInserted)
                 Toast.makeText(CreateEvent.this,"Event created successfully",Toast.LENGTH_LONG).show();
             else
                 Toast.makeText(CreateEvent.this,"Event was not created",Toast.LENGTH_LONG).show();
