@@ -48,8 +48,8 @@ public class DbHandler extends SQLiteOpenHelper {
                 EventEntry.Event_Title + " TEXT NOT NULL, " +
                 EventEntry.Description + " TEXT NOT NULL, " +
                 EventEntry.Location + " TEXT NOT NULL, " +
-                EventEntry.CreatedDate + " DATE, " +
-                EventEntry.CreateTime + " TIME, " +
+                EventEntry.Event_Date + " DATE, " +
+                EventEntry.Event_Time + " TIME, " +
                 EventEntry.BUILDING + " TEXT NOT NULL, " +
                 EventEntry.IMAGE + " TEXT " +
                 ")";
@@ -167,6 +167,25 @@ public class DbHandler extends SQLiteOpenHelper {
         values.put(UserEntry.Type, "r");
         values.put(UserEntry.Building, usr.getBuilding());
         long result = homebase.insert(UserEntry.TABLE_NAME, null, values);
+    }
+
+    public boolean insertEvent(Event evt){
+
+            Log.d("insertEvent", evt.getTitle());
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(EventEntry.Event_Title, evt.getTitle());
+            values.put(EventEntry.Description, evt.getDescription());
+            values.put(EventEntry.Location, evt.getLocation());
+            values.put(EventEntry.Event_Time, evt.getTime());
+            values.put(EventEntry.Event_Date, evt.getDate());
+            long result = db.insert(EventEntry.TABLE_NAME, null, values);
+            if(result == -1)
+                return false;
+            else
+                return true;
+
+
     }
 
     //Search for email and return corresponding password.

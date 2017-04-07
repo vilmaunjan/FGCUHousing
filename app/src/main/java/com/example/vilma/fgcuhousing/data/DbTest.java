@@ -90,8 +90,8 @@ public class DbTest {
         cv.put(EventEntry.Event_Title, "LakesPark");//title
         cv.put(EventEntry.Description, "FGCU Martial Arts");//description
         cv.put(EventEntry.Location, "LakesParkAddress");
-        cv.put(EventEntry.CreatedDate, "date('now')");//date
-        cv.put(EventEntry.CreateTime, "time(\"15:05\")");//time
+        cv.put(EventEntry.Event_Date, "date('now')");//date
+        cv.put(EventEntry.Event_Time, "time(\"15:05\")");//time
         cv.put(EventEntry.BUILDING, "All");//building
         cv.put(EventEntry.IMAGE, "LakesPark");//images
 
@@ -101,8 +101,8 @@ public class DbTest {
         cv.put(EventEntry.Event_Title, "PartyAtCindys");//title
         cv.put(EventEntry.Description, "Time to relax and mingle");//description
         cv.put(EventEntry.Location, "Cindy's House");
-        cv.put(EventEntry.CreatedDate, "date('now')");//date
-        cv.put(EventEntry.CreateTime, "time(\"17:05\")");//time
+        cv.put(EventEntry.Event_Date, "date('now')");//date
+        cv.put(EventEntry.Event_Time, "time(\"17:05\")");//time
         cv.put(EventEntry.BUILDING, "South Village");//building
         cv.put(EventEntry.IMAGE, "party");//images
 
@@ -112,8 +112,8 @@ public class DbTest {
         cv.put(EventEntry.Event_Title, "CampingOutside");//title
         cv.put(EventEntry.Description, "Camping adventures on nature Trail");//description
         cv.put(EventEntry.Location, "Front of South Village");
-        cv.put(EventEntry.CreatedDate, "date('now')");//date
-        cv.put(EventEntry.CreateTime, "time(\"19:05\")");//time
+        cv.put(EventEntry.Event_Date, "date('now')");//date
+        cv.put(EventEntry.Event_Time, "time(\"19:05\")");//time
         cv.put(EventEntry.BUILDING, "South Village");//building
         cv.put(EventEntry.IMAGE, "whatever");//images
 
