@@ -14,9 +14,11 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.vilma.fgcuhousing.data.DbHandler;
 import com.example.vilma.fgcuhousing.data.HousingContract;
+import com.example.vilma.fgcuhousing.data.User;
 
 public class ResidentRegister extends AppCompatActivity {
 
@@ -25,6 +27,8 @@ public class ResidentRegister extends AppCompatActivity {
     private EditText Email;
     private EditText Password;
     private AutoCompleteTextView Building;
+
+    DbHandler db = new DbHandler(this);
 
 
     @Override
@@ -69,13 +73,38 @@ public class ResidentRegister extends AppCompatActivity {
             String passwordEntry = Password.getText().toString();
             String buildingEntry = Building.getText().toString();
 
-            Log.d("Reg" , "Ther name entered is " + nameEntry);
-            Log.d("Reg" , "Ther Email entered is " + emailEntry);
-            Log.d("Reg" , "Ther Password entered is " + passwordEntry);
-            Log.d("Reg" , "Ther Building entered is " + buildingEntry);
+            Log.d("Reg" , "There name entered is " + nameEntry);
+            Log.d("Reg" , "There Email entered is " + emailEntry);
+            Log.d("Reg" , "There Password entered is " + passwordEntry);
+            Log.d("Reg" , "There Building entered is " + buildingEntry);
 
-            //Still need to write validation code
-            startActivity(new Intent(getApplicationContext(), ResidentLogin.class));
+
+
+            //Inserts user information into user class.
+            User usr = new User();
+            if(nameEntry=="" || nameEntry.isEmpty()){
+
+                Toast.makeText(this, "Please enter a valid name", Toast.LENGTH_SHORT).show();
+            }else if(emailEntry == " " || emailEntry.isEmpty()){
+
+                Toast.makeText(this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+            }else if(passwordEntry == " " || passwordEntry.isEmpty()){
+
+                Toast.makeText(this, "please enter a valid password", Toast.LENGTH_SHORT).show();
+            }else {
+                usr.setName(nameEntry);
+                usr.setEmail(emailEntry);
+                usr.setPassword(passwordEntry);
+                usr.setBuilding(buildingEntry);
+            }
+            try {
+                //Inserts New User into the database
+                db.insertUser(this, usr);
+                //Moves to next Activity
+                startActivity(new Intent(getApplicationContext(), ResidentLogin.class));
+            }catch(Exception e){
+                Toast.makeText(this, "Account Already Exisits", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

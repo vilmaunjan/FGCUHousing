@@ -9,12 +9,10 @@ import android.provider.BaseColumns;
 public class HousingContract {
     public static final class UserEntry implements BaseColumns{
         public static final String TABLE_NAME = "Resident";
-        public static final String Fname = "fname";
-        public static final String Lname = "lname";
+        public static final String Name = "fname";
         public static final String Email = "emailAddress";
         public static final String Password = "password";
         public static final String Building = "building";
-        public static final String UIN = "UIN";
         public static final String Type = "R_RA_RD";
 
     }

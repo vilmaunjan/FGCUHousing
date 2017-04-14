@@ -21,6 +21,7 @@ public class DbHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "HousingDB";
     private static final int DATABASE_VERSION = 1;
     private static final String Tag = "DataBaseHelper";
+    private static SQLiteDatabase db = null;
 
     public DbHandler(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,9 +33,7 @@ public class DbHandler extends SQLiteOpenHelper {
         final String CreateUserTable = "CREATE TABLE " +
                 UserEntry.TABLE_NAME + "( "+
                 UserEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                UserEntry.Fname + " TEXT NOT NULL, " +
-                UserEntry.Lname + " TEXT NOT NULL, " +
-                UserEntry.UIN + " INTEGER NOT NULL UNIQUE," +
+                UserEntry.Name + " TEXT NOT NULL, " +
                 UserEntry.Email + " TEXT NOT NULL, " +
                 UserEntry.Password + " TEXT NOT NULL," +
                 UserEntry.Type + " TEXT NOT NULL, " +
@@ -46,8 +45,9 @@ public class DbHandler extends SQLiteOpenHelper {
                 EventEntry.Event_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 EventEntry.Event_Title + " TEXT NOT NULL, " +
                 EventEntry.Description + " TEXT NOT NULL, " +
-                EventEntry.CreatedDate + " DATE, " +
-                EventEntry.CreateTime + " TIME, " +
+                EventEntry.Location + " TEXT NOT NULL, " +
+                EventEntry.Event_Date + " DATE, " +
+                EventEntry.Event_Time + " TIME, " +
                 EventEntry.BUILDING + " TEXT NOT NULL, " +
                 EventEntry.IMAGE + " TEXT " +
                 ")";
@@ -55,9 +55,22 @@ public class DbHandler extends SQLiteOpenHelper {
         final String CreateAwards = "CREATE TABLE " +
                 Awards.TABLE_NAME + "( "+
                 Awards.COLUMN_Award_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                Awards.COLUMN_Image + " TEXT NOT NULL " +
+                Awards.COLUMN_Award_Name + " TEXT NOT NULL, "+
+                Awards.COLUMN_Award_Description + " TEXT, "+
+                Awards.COLUMN_Image + " TEXT " +
                 ")";
 
+        final String CreateOrganizedEvents = "CREATE TABLE " +
+                OrganizedEvents.TABLE_NAME + "( "+
+                OrganizedEvents.OrganizedID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                OrganizedEvents.RA_ID+ " TEXT NOT NULL, " +
+                OrganizedEvents.Event_ID + " TEXT NOT NULL, " +
+                OrganizedEvents.Date + " TEXT NOT NULL, " +
+                " FOREIGN KEY ("+ OrganizedEvents.RA_ID +") REFERENCES "+
+                UserEntry.TABLE_NAME+"("+UserEntry._ID+")," +
+                " FOREIGN KEY ("+ OrganizedEvents.Event_ID +") REFERENCES "+
+                EventEntry.TABLE_NAME+"("+EventEntry._ID+")" +
+                ")";
 
         final String CreateAttendedEvent = "CREATE TABLE " +
                 AttendedEventEntry.TABLE_NAME + "( "+
@@ -74,8 +87,6 @@ public class DbHandler extends SQLiteOpenHelper {
                 EventEntry.TABLE_NAME+"("+EventEntry._ID+")" +
                 ")";
 
-
-
         final String CreateAwardObtained = "CREATE TABLE " +
                 AwardObtained.TABLE_NAME + "( "+
                 AwardObtained.AwardObtained_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
@@ -88,17 +99,7 @@ public class DbHandler extends SQLiteOpenHelper {
                 ")";
 
 
-        final String CreateOrganizedEvents = "CREATE TABLE " +
-                OrganizedEvents.TABLE_NAME + "( "+
-                OrganizedEvents.OrganizedID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                OrganizedEvents.RA_ID+ " TEXT NOT NULL, " +
-                OrganizedEvents.Event_ID + " TEXT NOT NULL, " +
-                OrganizedEvents.Date + " TEXT NOT NULL, " +
-                " FOREIGN KEY ("+ OrganizedEvents.RA_ID +") REFERENCES "+
-                UserEntry.TABLE_NAME+"("+UserEntry._ID+")," +
-                " FOREIGN KEY ("+ OrganizedEvents.Event_ID +") REFERENCES "+
-                EventEntry.TABLE_NAME+"("+EventEntry._ID+")" +
-                ")";
+
         //Execute the commands in proper order
         sqldb.execSQL(CreateUserTable);
         sqldb.execSQL(CreateEvent);
@@ -111,6 +112,7 @@ public class DbHandler extends SQLiteOpenHelper {
         //click log cat and then where you see verbose just type the name of the Tag
         //I declared to see it's specific log only
         Log.d(Tag, "If it made it this far, database was created successfully");
+        db = sqldb;
     }
 
     //i'll get back to fixing the rest of the updates and inserts
@@ -123,39 +125,10 @@ public class DbHandler extends SQLiteOpenHelper {
         sqldb.execSQL("DROP TABLE IF EXISTS " + OrganizedEvents.TABLE_NAME);
         onCreate(sqldb);
     }
-
-
-    //Call this method to insert a entry into the Residents Database
-    public boolean addDataUsers(Context c,String first,String last, int uin, String email,
-                                String pass, String r_ra_rd, String build){
-        SQLiteDatabase homebase = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(UserEntry.Fname, first);
-        cv.put(UserEntry.Lname, last);
-        cv.put(UserEntry.UIN, uin);
-        cv.put(UserEntry.Email, email);
-        cv.put(UserEntry.Password, pass);
-        cv.put(UserEntry.Type, r_ra_rd);
-        cv.put(UserEntry.Building, build);
-
-
-        Log.d(Tag, "addDataUser: adding " + first + " " + last + " to table "
-                + UserEntry.TABLE_NAME);
-        long result = homebase.insert(UserEntry.TABLE_NAME, null, cv);
-
-        if(result == -1){
-            toastMessage(c,"Error Error Error");
-            return false;
-        }else{
-            toastMessage(c,"Data Succesfully Inserted");
-            return true;
-        }
-    }
-
     /**
      * customize-able Toast Message
      * Message Pops up on android screen
-     * @param message
+     * @param message Toast
      */
     private void toastMessage(Context c,String message){
         Toast.makeText(c,message, Toast.LENGTH_SHORT).show();
@@ -177,6 +150,82 @@ public class DbHandler extends SQLiteOpenHelper {
         Cursor data = db.rawQuery(query, null);
         //returns the data
         return data;
+    }
+
+    //Used to insert a user into the database
+    public void insertUser(Context c, User usr){
+        Log.d("insertUser", usr.getEmail());
+        SQLiteDatabase homebase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(UserEntry.Name, usr.getName());
+        values.put(UserEntry.Email, usr.getEmail());
+        values.put(UserEntry.Password, usr.getPassword());
+        values.put(UserEntry.Type, "r");
+        values.put(UserEntry.Building, usr.getBuilding());
+        long result = homebase.insert(UserEntry.TABLE_NAME, null, values);
+    }
+
+    public boolean insertEvent(Event evt){
+
+            Log.d("insertEvent", evt.getTitle());
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(EventEntry.Event_Title, evt.getTitle());
+            values.put(EventEntry.Description, evt.getDescription());
+            values.put(EventEntry.Location, evt.getLocation());
+            values.put(EventEntry.Event_Time, evt.getTime());
+            values.put(EventEntry.Event_Date, evt.getDate());
+            values.put(EventEntry.BUILDING, evt.getBuilding());
+            values.put(EventEntry.IMAGE, evt.getImage());
+            long result = db.insert(EventEntry.TABLE_NAME, null, values);
+            if(result == -1)
+                return false;
+            else
+                return true;
+
+
+    }
+
+    //Search for email and return corresponding password.
+    public String searchPassword(String emailEntry){
+        Log.d("696969", "Reached set password");
+        String password = "";
+        String email = "Not found";
+        db = this.getReadableDatabase();
+        String query = "select " + UserEntry.Email + ", " + UserEntry.Password + " from "
+                + UserEntry.TABLE_NAME + "";
+        try {
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    email = cursor.getString(0);
+                    Log.d("searchPassword", email);
+                    if (email.equals(emailEntry)) {
+                        password = cursor.getString(1);
+                        Log.d("searchPassword", password);
+                        break;
+                    }
+                }
+                while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        }catch (Exception e){
+            Log.d("DataBase", e.getMessage());
+        }
+        return password;
+    }
+
+    //Get awards info
+    public Cursor getAwardsInfo(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+        String [] projections = {Awards.COLUMN_Award_ID, Awards.COLUMN_Award_Description,
+                Awards.COLUMN_Award_Name, Awards.COLUMN_Image};
+
+        cursor = db.query(Awards.TABLE_NAME, projections, null, null, null, null, null);
+
+        return cursor;
     }
 
 }
