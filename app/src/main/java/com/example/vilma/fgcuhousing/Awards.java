@@ -1,5 +1,6 @@
 package com.example.vilma.fgcuhousing;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -23,7 +24,6 @@ public class Awards extends AppCompatActivity {
     private SQLiteDatabase sqlDb;
     private DbHandler datCon;
     private Cursor cursor=null;
-    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +31,6 @@ public class Awards extends AppCompatActivity {
         setContentView(R.layout.activity_awards);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        //Start's database
-        datCon = new DbHandler(this);
-        //get's and editable database to add parameters
-        sqlDb = datCon.getWritableDatabase();
-        //Inserts some fake data
-        DbTest.insertFakeData(sqlDb);
 
         datCon = new DbHandler(getApplicationContext());
         sqlDb = datCon.getReadableDatabase();
@@ -51,25 +44,28 @@ public class Awards extends AppCompatActivity {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                 int position, long id) {
-                  Toast.makeText(Awards.this, "" + position,
+
+                startActivity(new Intent(getApplicationContext(), AwardInfo.class));
+
+                  Toast.makeText(Awards.this, "" + position +"id is " +id,
                         Toast.LENGTH_SHORT).show();
                 }
         });
 
-        while(cursor.moveToNext()){
-            String s = "awards";
-            // String id = cursor.getString(0);
-            String name = cursor.getString(1);
-            String description = cursor.getString(2);
-            String image = cursor.getString(3);
-
-            //    Button currentButton = new Button(name);
-
-            Log.d(s," name: " + name
-                    + " description : "+ description +" image : "+ image );
-
-            //    currentButton.setText(name);
-        }
+//        while(cursor.moveToNext()){
+//            String s = "awards";
+//            // String id = cursor.getString(0);
+//            String name = cursor.getString(1);
+//            String description = cursor.getString(2);
+//            String image = cursor.getString(3);
+//
+//            //    Button currentButton = new Button(name);
+//
+//            Log.d(s," name: " + name
+//                    + " description : "+ description +" image : "+ image );
+//
+//            //    currentButton.setText(name);
+//        }
 
 
 

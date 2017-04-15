@@ -193,8 +193,6 @@ public class DatabaseTest {
 
         ContentValues testValues = new ContentValues();
         testValues.put(HousingContract.UserEntry.Name, "John");
-        testValues.put(HousingContract.UserEntry.Lname, "Bourne");
-        testValues.put(HousingContract.UserEntry.UIN, "894865412");
         testValues.put(HousingContract.UserEntry.Email, "JohnBou@eagle.fgcu.edu");
         testValues.put(HousingContract.UserEntry.Password, "north");
         testValues.put(HousingContract.UserEntry.Type, "R");
@@ -261,8 +259,6 @@ public class DatabaseTest {
 
         ContentValues testValues = new ContentValues();
         testValues.put(HousingContract.UserEntry.Name, "Kim");
-        testValues.put(HousingContract.UserEntry.Lname, "Bourne");
-        testValues.put(HousingContract.UserEntry.UIN, "789875412");
         testValues.put(HousingContract.UserEntry.Email, "KimBou@eagle.fgcu.edu");
         testValues.put(HousingContract.UserEntry.Password, "north");
         testValues.put(HousingContract.UserEntry.Type, "R");
@@ -270,8 +266,6 @@ public class DatabaseTest {
 
         ContentValues cv = new ContentValues();
         cv.put(HousingContract.UserEntry.Name, "Bonnie");
-        cv.put(HousingContract.UserEntry.Lname, "Pogan");
-        cv.put(HousingContract.UserEntry.UIN, "894835712");
         cv.put(HousingContract.UserEntry.Email, "Bonnie@eagle.fgcu.edu");
         cv.put(HousingContract.UserEntry.Password, "north");
         cv.put(HousingContract.UserEntry.Type, "R");
@@ -317,8 +311,6 @@ public class DatabaseTest {
 
         ContentValues testValues = new ContentValues();
         testValues.put(HousingContract.UserEntry.Name, "Kim");
-        testValues.put(HousingContract.UserEntry.Lname, "Bourne");
-        testValues.put(HousingContract.UserEntry.UIN, "789875412");
         testValues.put(HousingContract.UserEntry.Email, "KimBou@eagle.fgcu.edu");
         testValues.put(HousingContract.UserEntry.Password, "north");
         testValues.put(HousingContract.UserEntry.Type, "R");
@@ -326,8 +318,6 @@ public class DatabaseTest {
 
         ContentValues testValue2 = new ContentValues();
         testValue2.put(HousingContract.UserEntry.Name, "Po");
-        testValue2.put(HousingContract.UserEntry.Lname, "Panager");
-        testValue2.put(HousingContract.UserEntry.UIN, "564789321");
         testValue2.put(HousingContract.UserEntry.Email, "PoBanager@eagle.fgcu.edu");
         testValue2.put(HousingContract.UserEntry.Password, "north");
         testValue2.put(HousingContract.UserEntry.Type, "RA");

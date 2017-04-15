@@ -31,9 +31,7 @@ public class DbTest {
 
         //create a list of fake guests
         ContentValues cv = new ContentValues();
-        cv.put(UserEntry.Fname, "John");
-        cv.put(UserEntry.Lname, "Bourne");
-        cv.put(UserEntry.UIN, "894865412");
+        cv.put(UserEntry.Name, "John");
         cv.put(UserEntry.Email, "JohnBou@eagle.fgcu.edu");
         cv.put(UserEntry.Password, "north");
         cv.put(UserEntry.Type, "R");
@@ -42,9 +40,7 @@ public class DbTest {
         User.add(cv);
 
         cv = new ContentValues();
-        cv.put(UserEntry.Fname, "Kim");
-        cv.put(UserEntry.Lname, "Bourne");
-        cv.put(UserEntry.UIN, "894865214");
+        cv.put(UserEntry.Name, "Kim");
         cv.put(UserEntry.Email, "KimBou@eagle.fgcu.edu");
         cv.put(UserEntry.Password, "north");
         cv.put(UserEntry.Type, "RA");
@@ -53,9 +49,7 @@ public class DbTest {
         User.add(cv);
 
         cv = new ContentValues();
-        cv.put(UserEntry.Fname, "Johnny");
-        cv.put(UserEntry.Lname, "BDepp");
-        cv.put(UserEntry.UIN, "852456915");
+        cv.put(UserEntry.Name, "Johnny");
         cv.put(UserEntry.Email, "JohnDep@fgcu.edu");
         cv.put(UserEntry.Password, "north");
         cv.put(UserEntry.Type, "RA");
@@ -64,9 +58,7 @@ public class DbTest {
         User.add(cv);
 
         cv = new ContentValues();
-        cv.put(UserEntry.Fname, "Bonnie");
-        cv.put(UserEntry.Lname, "Pogan");
-        cv.put(UserEntry.UIN, "894835712");
+        cv.put(UserEntry.Name, "Bonnie");
         cv.put(UserEntry.Email, "Bonnie@eagle.fgcu.edu");
         cv.put(UserEntry.Password, "north");
         cv.put(UserEntry.Type, "R");
@@ -75,9 +67,7 @@ public class DbTest {
         User.add(cv);
 
         cv = new ContentValues();
-        cv.put(UserEntry.Fname, "Belly");
-        cv.put(UserEntry.Lname, "Cooper");
-        cv.put(UserEntry.UIN, "357159852");
+        cv.put(UserEntry.Name, "Belly");
         cv.put(UserEntry.Email, "cooper@fgcu.edu");
         cv.put(UserEntry.Password, "north");
         cv.put(UserEntry.Type, "RD");
@@ -208,7 +198,7 @@ public class DbTest {
 
         String findKim = "Select "+ UserEntry._ID +
                 " from "+ UserEntry.TABLE_NAME +
-                " Where " + UserEntry.Fname + " = 'Kim'";
+                " Where " + UserEntry.Name + " = 'Kim'";
 
         //what I was last working on to try and get it to work, use the "Babe" keyword
         //to see in the log cat whats being printed out and the error

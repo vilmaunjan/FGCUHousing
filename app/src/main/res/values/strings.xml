@@ -41,4 +41,9 @@
     <string name="event_title">Event title:</string>
     <string name="insert_poster">Insert Poster</string>
     <string name="string_insert_poster" />
+    <string name="managermode">ManagerMode</string>
+    <string name="imageDescription">Go to 3 events!</string>
+    <string name="AwardName">FlooTheCoop</string>
+    <string name="AwardInfoTitle">Tiger Award</string>
+    <string name="awardInfoDescription">Description of the Award and how to get I wonder how many characters will show on this because Some migh thave a very long description but i doubt it for now so lets see.</string>
 </resources>

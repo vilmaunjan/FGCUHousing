@@ -33,9 +33,7 @@ public class DbHandler extends SQLiteOpenHelper {
         final String CreateUserTable = "CREATE TABLE " +
                 UserEntry.TABLE_NAME + "( "+
                 UserEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                UserEntry.Fname + " TEXT NOT NULL, " +
-                UserEntry.Lname + " TEXT NOT NULL, " +
-                UserEntry.UIN + " INTEGER NOT NULL UNIQUE," +
+                UserEntry.Name + " TEXT NOT NULL, " +
                 UserEntry.Email + " TEXT NOT NULL, " +
                 UserEntry.Password + " TEXT NOT NULL," +
                 UserEntry.Type + " TEXT NOT NULL, " +
@@ -159,9 +157,7 @@ public class DbHandler extends SQLiteOpenHelper {
         Log.d("insertUser", usr.getEmail());
         SQLiteDatabase homebase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(UserEntry.Fname, usr.getName());
-        values.put(UserEntry.Lname, usr.getName());
-        values.put(UserEntry.UIN, 815074321);
+        values.put(UserEntry.Name, usr.getName());
         values.put(UserEntry.Email, usr.getEmail());
         values.put(UserEntry.Password, usr.getPassword());
         values.put(UserEntry.Type, "r");

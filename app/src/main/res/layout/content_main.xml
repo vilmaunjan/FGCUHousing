@@ -62,4 +62,17 @@
         android:layout_alignParentEnd="true"
         android:onClick="buttonOnClick" />
 
+    <ImageButton
+        android:id="@+id/StarMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/managermode"
+        android:onClick="imageOnClick"
+        app:layout_anchorGravity="center_vertical|left"
+        app:srcCompat="@android:drawable/btn_star_big_on" />
+
+
+
 </RelativeLayout>

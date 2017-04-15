@@ -57,7 +57,10 @@
         <activity
             android:name=".CreateEvent"
             android:label="@string/title_activity_create_event"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".AwardInfo"
+            android:theme="@style/AppTheme.AwardTheme"/>
     </application>
 
 </manifest>
