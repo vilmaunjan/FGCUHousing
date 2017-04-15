@@ -10,6 +10,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.vilma.fgcuhousing.R;
 import com.example.vilma.fgcuhousing.data.HousingContract.*;
 /**
  * Created by Andrew on 3/10/2017.
@@ -87,34 +88,83 @@ public class DbTest {
 
         //create a list of fake events
         cv = new ContentValues();
-        cv.put(EventEntry.Event_Title, "LakesPark");//title
-        cv.put(EventEntry.Description, "FGCU Martial Arts");//description
-        cv.put(EventEntry.Location, "LakesParkAddress");
-        cv.put(EventEntry.Event_Date, "date('now')");//date
-        cv.put(EventEntry.Event_Time, "time(\"15:05\")");//time
-        cv.put(EventEntry.BUILDING, "All");//building
+        cv.put(EventEntry.Event_Title, "Sovivor");//title
+        cv.put(EventEntry.Description, "Kick off summer B in the best way possible.. with an" +
+                "ultimate water balloon fight, an inflatable water slide, a fire truck and more!" );//description
+        cv.put(EventEntry.Location, "SOVI Green");
+        cv.put(EventEntry.Event_Date, "06/21/2017");//date
+        cv.put(EventEntry.Event_Time, "16:00");//time
+        cv.put(EventEntry.BUILDING, "South Village");//building
         cv.put(EventEntry.IMAGE, "LakesPark");//images
 
         Event.add(cv);
 
         cv = new ContentValues();
-        cv.put(EventEntry.Event_Title, "PartyAtCindys");//title
-        cv.put(EventEntry.Description, "Time to relax and mingle");//description
-        cv.put(EventEntry.Location, "Cindy's House");
-        cv.put(EventEntry.Event_Date, "date('now')");//date
-        cv.put(EventEntry.Event_Time, "time(\"17:05\")");//time
-        cv.put(EventEntry.BUILDING, "South Village");//building
+        cv.put(EventEntry.Event_Title, "Apartments block party");//title
+        cv.put(EventEntry.Description, "We are excited to kick off the Apartments Block Party" +
+                "tomorrow night with all of our NLV & WLV residents! Join us for food, trivia," +
+                "&even a VIP room for overflow students.");//description
+        cv.put(EventEntry.Location, "Eagles' landing");
+        cv.put(EventEntry.Event_Date, "04/23/2017");//date
+        cv.put(EventEntry.Event_Time, "19:00");//time
+        cv.put(EventEntry.BUILDING, "North Village");//building
         cv.put(EventEntry.IMAGE, "party");//images
 
         Event.add(cv);
 
         cv = new ContentValues();
-        cv.put(EventEntry.Event_Title, "CampingOutside");//title
-        cv.put(EventEntry.Description, "Camping adventures on nature Trail");//description
-        cv.put(EventEntry.Location, "Front of South Village");
-        cv.put(EventEntry.Event_Date, "date('now')");//date
-        cv.put(EventEntry.Event_Time, "time(\"19:05\")");//time
+        cv.put(EventEntry.Event_Title, "Gardens kick back");//title
+        cv.put(EventEntry.Description, "Gardens kick back BBQ & Pool party");//description
+        cv.put(EventEntry.Location, "Commons Pool Area");
+        cv.put(EventEntry.Event_Date, "03/16/2017");//date
+        cv.put(EventEntry.Event_Time, "17:00");//time
         cv.put(EventEntry.BUILDING, "South Village");//building
+        cv.put(EventEntry.IMAGE, "whatever");//images
+
+        Event.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventEntry.Event_Title, "Glades Neighborhood night");//title
+        cv.put(EventEntry.Description, "Neighborhood night event. Come join us in eagle's landing. Free food");//description
+        cv.put(EventEntry.Location, "Eagle's landing");
+        cv.put(EventEntry.Event_Date, "04/14/2017");//date
+        cv.put(EventEntry.Event_Time, "18:00");//time
+        cv.put(EventEntry.BUILDING, "North Village");//building
+        cv.put(EventEntry.IMAGE, "whatever");//images
+
+        Event.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventEntry.Event_Title, "St. Pattys Day");//title
+        cv.put(EventEntry.Description, "Food, drinks, & more. Come out and have fun! If you have any questions, contact your RA");//description
+        cv.put(EventEntry.Location, "Chicke Hut");
+        cv.put(EventEntry.Event_Date, "03/17/2017");//date
+        cv.put(EventEntry.Event_Time, "19:00");//time
+        cv.put(EventEntry.BUILDING, "North Village");//building
+        cv.put(EventEntry.IMAGE, "whatever");//images
+
+        Event.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventEntry.Event_Title, "Sham Rock n' Roll");//title
+        cv.put(EventEntry.Description, "Is St. Patrick's more than a binge fest? Pool Party. " +
+                "Come out and enjoy. Free food, drinks & mocktails. Sunglasses giveaways & " +
+                "interactive Posters. Remote control car with obstacle courses");//description
+        cv.put(EventEntry.Location, "SoVi Pool");
+        cv.put(EventEntry.Event_Date, "03/17/2017");//date
+        cv.put(EventEntry.Event_Time, "17:00");//time
+        cv.put(EventEntry.BUILDING, "South Village");//building
+        cv.put(EventEntry.IMAGE, R.drawable.logo);//images
+
+        Event.add(cv);
+
+        cv = new ContentValues();
+        cv.put(EventEntry.Event_Title, "Late Night Breakfast");//title
+        cv.put(EventEntry.Description, "Come join us to the Late Night Breakfast. ");//description
+        cv.put(EventEntry.Location, "WLV community center");
+        cv.put(EventEntry.Event_Date, "12/04/2017");//date
+        cv.put(EventEntry.Event_Time, "21:00");//time
+        cv.put(EventEntry.BUILDING, "West Village");//building
         cv.put(EventEntry.IMAGE, "whatever");//images
 
         Event.add(cv);

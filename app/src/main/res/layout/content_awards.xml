@@ -19,7 +19,7 @@
         android:stretchMode="columnWidth"
         android:verticalSpacing="10dp"
         android:visibility="visible"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="40dp" />
+        tools:layout_editor_absoluteX="-70dp"
+        tools:layout_editor_absoluteY="-13dp" />
 
 </android.support.constraint.ConstraintLayout>

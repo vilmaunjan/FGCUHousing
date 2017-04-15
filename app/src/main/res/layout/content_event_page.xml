@@ -5,76 +5,118 @@
     android:id="@+id/content_event_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.vilma.fgcuhousing.EventPage"
     tools:showIn="@layout/activity_event_page">
 
-    <TextView
-        android:text="Event title will be written in this field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:id="@+id/txtEventTitle"
-        tools:ignore="HardcodedText,ObsoleteLayoutParam"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="18sp"
-        android:textAlignment="center" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="172dp"
-        app:srcCompat="@drawable/logo"
-        android:id="@+id/imageView3"
-        tools:ignore="ContentDescription" />
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui."
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView11"
-            tools:ignore="HardcodedText"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="23dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
 
-        <Button
-            android:text="Check Out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnCheckout"
-            android:visibility="invisible"
-            android:onClick="buttonOnClick"
-            android:enabled="false"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="47dp" />
+            <TextView
+                android:id="@+id/txt_event_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:paddingBottom="10dp"
+                android:text="Event title goes here"
+                android:textAlignment="center"
+                android:textSize="22sp"
+                tools:ignore="HardcodedText,ObsoleteLayoutParam"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
-        <Button
-            android:text="Check in"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnCheckIn"
-            tools:ignore="HardcodedText"
-            android:onClick="buttonOnClick"
-            android:layout_alignBaseline="@+id/btnCheckout"
-            android:layout_alignBottom="@+id/btnCheckout"
-            android:layout_centerHorizontal="true" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/img_poster"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:srcCompat="@drawable/logo"
+                tools:ignore="ContentDescription"
+                android:layout_marginTop="27dp"
+                android:layout_alignTop="@+id/txt_event_title"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/txt_event_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id."
+                tools:ignore="HardcodedText"
+                android:layout_below="@+id/img_poster"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:id="@+id/btnCheckout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="8dp"
+                android:enabled="false"
+                android:onClick="buttonOnClick"
+                android:text="Check Out"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/btnCheckIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="buttonOnClick"
+                android:text="Check in"
+                tools:ignore="HardcodedText"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/txt_event_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/txt_event_description"
+                android:text="Location: of event goes here" />
+
+            <TextView
+                android:id="@+id/txt_event_building"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/txt_event_location"
+                android:text="Event building: will be used to query events" />
+
+            <TextView
+                android:id="@+id/txt_event_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/txt_event_building"
+                android:text="Event time: goes here" />
+
+            <TextView
+                android:id="@+id/txt_event_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/txt_event_time"
+                android:layout_toStartOf="@+id/btnCheckout"
+                android:text="Event date: goes here" />
+        </RelativeLayout>
+    </ScrollView>
 
 </LinearLayout>
