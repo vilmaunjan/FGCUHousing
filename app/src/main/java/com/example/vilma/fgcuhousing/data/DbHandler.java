@@ -3,6 +3,7 @@ package com.example.vilma.fgcuhousing.data;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -182,8 +183,12 @@ public class DbHandler extends SQLiteOpenHelper {
                 return false;
             else
                 return true;
+    }
 
-
+    public Cursor QueryData(String query) throws SQLException{
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor data = db.rawQuery(query, null);
+        return data;
     }
 
     //Search for email and return corresponding password.

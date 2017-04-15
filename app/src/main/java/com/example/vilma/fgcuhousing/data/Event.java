@@ -1,10 +1,13 @@
 package com.example.vilma.fgcuhousing.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Vilma on 4/6/2017.
  */
 
-public class Event {
+public class Event implements Parcelable {
 
     private String title, description, location, building, time, date, image;
     private boolean validInput;
@@ -72,5 +75,15 @@ public class Event {
 
     public void setValidInput(boolean validInput) {
         this.validInput = validInput;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }
