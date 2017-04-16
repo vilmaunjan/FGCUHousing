@@ -25,15 +25,15 @@
                 android:id="@+id/txt_event_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:layout_marginTop="17dp"
-                android:paddingBottom="10dp"
+                android:paddingBottom="17dp"
                 android:text="Event title goes here"
                 android:textAlignment="center"
                 android:textSize="22sp"
-                tools:ignore="HardcodedText,ObsoleteLayoutParam"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                tools:ignore="HardcodedText,ObsoleteLayoutParam" />
 
             <ImageView
                 android:id="@+id/img_poster"
@@ -62,13 +62,12 @@
                 android:id="@+id/btnCheckout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="8dp"
                 android:enabled="false"
                 android:onClick="buttonOnClick"
                 android:text="Check Out"
-                android:visibility="invisible" />
+                android:visibility="invisible"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
 
             <Button
                 android:id="@+id/btnCheckIn"

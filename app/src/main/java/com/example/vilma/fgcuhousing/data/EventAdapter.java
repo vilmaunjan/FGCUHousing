@@ -51,7 +51,7 @@ public class EventAdapter extends ArrayAdapter<EventItem> {
         tv_id.setText(item.getId());
         tv_title.setText(item.getTitle());
         tv_date_time.setText("When: "+item.getDate()+"       at: "+item.getTime());
-       // iv_image.setImageResource(R.drawable.movie_night);
+        iv_image.setImageResource(Integer.parseInt(item.getPoster()));
 
 
         return convertView;
