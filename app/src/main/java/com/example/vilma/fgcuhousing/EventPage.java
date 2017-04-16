@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vilma.fgcuhousing.data.DbHandler;
@@ -51,7 +52,7 @@ public class EventPage extends AppCompatActivity {
                         event.setBuilding(cursorEventInfo.getString(6));
                         event.setTime(cursorEventInfo.getString(5));
                         event.setDate(cursorEventInfo.getString(4));
-                        //event.setImage(cursorEventInfo.getString(7));
+                        event.setImage(cursorEventInfo.getString(7));
 
                         //create variables with the id of the text fields
                         TextView txt_event_title = (TextView) findViewById(R.id.txt_event_title);
@@ -60,7 +61,7 @@ public class EventPage extends AppCompatActivity {
                         TextView txt_event_building = (TextView) findViewById(R.id.txt_event_building);
                         TextView txt_event_time = (TextView) findViewById(R.id.txt_event_time);
                         TextView txt_event_date = (TextView) findViewById(R.id.txt_event_date);
-                        //ImageView iv_image = (ImageView) findViewById(R.id.img_poster);
+                        ImageView iv_image = (ImageView) findViewById(R.id.img_poster);
 
                         //Get event values from the object created before and set it to the text fields
                         txt_event_title.setText(event.getTitle());
@@ -69,7 +70,7 @@ public class EventPage extends AppCompatActivity {
                         txt_event_building.setText("Village/building: "+event.getBuilding());
                         txt_event_time.setText("When: "+event.getTime());
                         txt_event_date.setText("What time: "+event.getDate());
-                        //iv_image.setText(event.getTime());
+                        iv_image.setImageResource(Integer.parseInt(event.getImage()));
                     }while (cursorEventInfo.moveToNext());
                 }
             }

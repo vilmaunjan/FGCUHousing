@@ -95,7 +95,7 @@ public class DbTest {
         cv.put(EventEntry.Event_Date, "06/21/2017");//date
         cv.put(EventEntry.Event_Time, "16:00");//time
         cv.put(EventEntry.BUILDING, "South Village");//building
-        cv.put(EventEntry.IMAGE, "LakesPark");//images
+        cv.put(EventEntry.IMAGE, R.drawable.event1);//images
 
         Event.add(cv);
 
@@ -108,7 +108,7 @@ public class DbTest {
         cv.put(EventEntry.Event_Date, "04/23/2017");//date
         cv.put(EventEntry.Event_Time, "19:00");//time
         cv.put(EventEntry.BUILDING, "North Village");//building
-        cv.put(EventEntry.IMAGE, "party");//images
+        cv.put(EventEntry.IMAGE, R.drawable.event2);//images
 
         Event.add(cv);
 
@@ -119,7 +119,7 @@ public class DbTest {
         cv.put(EventEntry.Event_Date, "03/16/2017");//date
         cv.put(EventEntry.Event_Time, "17:00");//time
         cv.put(EventEntry.BUILDING, "South Village");//building
-        cv.put(EventEntry.IMAGE, "whatever");//images
+        cv.put(EventEntry.IMAGE, R.drawable.event3);//images
 
         Event.add(cv);
 
@@ -130,7 +130,7 @@ public class DbTest {
         cv.put(EventEntry.Event_Date, "04/14/2017");//date
         cv.put(EventEntry.Event_Time, "18:00");//time
         cv.put(EventEntry.BUILDING, "North Village");//building
-        cv.put(EventEntry.IMAGE, "whatever");//images
+        cv.put(EventEntry.IMAGE, R.drawable.event4);//images
 
         Event.add(cv);
 
@@ -141,7 +141,7 @@ public class DbTest {
         cv.put(EventEntry.Event_Date, "03/17/2017");//date
         cv.put(EventEntry.Event_Time, "19:00");//time
         cv.put(EventEntry.BUILDING, "North Village");//building
-        cv.put(EventEntry.IMAGE, "whatever");//images
+        cv.put(EventEntry.IMAGE, R.drawable.event5);//images
 
         Event.add(cv);
 
@@ -154,7 +154,7 @@ public class DbTest {
         cv.put(EventEntry.Event_Date, "03/17/2017");//date
         cv.put(EventEntry.Event_Time, "17:00");//time
         cv.put(EventEntry.BUILDING, "South Village");//building
-        cv.put(EventEntry.IMAGE, R.drawable.logo);//images
+        cv.put(EventEntry.IMAGE, R.drawable.event6);//images
 
         Event.add(cv);
 
@@ -165,7 +165,7 @@ public class DbTest {
         cv.put(EventEntry.Event_Date, "12/04/2017");//date
         cv.put(EventEntry.Event_Time, "21:00");//time
         cv.put(EventEntry.BUILDING, "West Village");//building
-        cv.put(EventEntry.IMAGE, "whatever");//images
+        cv.put(EventEntry.IMAGE, R.drawable.event7);//images
 
         Event.add(cv);
 

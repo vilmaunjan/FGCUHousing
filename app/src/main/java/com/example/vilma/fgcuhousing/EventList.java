@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -40,7 +41,7 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
     //variables declaration
     ListView listView;
     ArrayList<EventItem> arrayList=new ArrayList<EventItem>();
-    EventAdapter adapter;
+    EventAdapter eventAdapter;
 
 
     @Override
@@ -68,26 +69,27 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
         datCon = new DbHandler(this);
 
         //this try catch queries all the events in the database and displays it in EventList page
-        try{
-            Cursor cursor=datCon.QueryData("select * from " + HousingContract.EventEntry.TABLE_NAME);
-            if(cursor !=null){
-                if(cursor.moveToFirst()){
-                    do{
-                        EventItem item=new EventItem();
+        try {
+            Cursor cursor = datCon.QueryData("select * from " + HousingContract.EventEntry.TABLE_NAME);
+            if (cursor != null) {
+                if (cursor.moveToFirst()) {
+                    do {
+                        EventItem item = new EventItem();
                         item.setId(cursor.getString(0));
                         item.setTitle(cursor.getString(1));
                         item.setTime(cursor.getString(5));
                         item.setDate(cursor.getString(4));
-                      //  item.setPoster(R.drawable.movie_night); //doesnt work, need to load posters for events
+                        item.setPoster(cursor.getString(7)); //doesnt work, need to load posters for events
                         arrayList.add(item);
-                    }while (cursor.moveToNext());
+                    } while (cursor.moveToNext());
                 }
             }
-        }catch (SQLException e){}
-        adapter = new EventAdapter(this, R.layout.custom_list_item,arrayList);
+        } catch (SQLException e) {
+        }
+        eventAdapter = new EventAdapter(this, R.layout.custom_list_item, arrayList);
         listView = (ListView) findViewById(R.id.list_event_item);
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        listView.setAdapter(eventAdapter);
+        eventAdapter.notifyDataSetChanged();
 
         //When clicking on an events, leads to the event info page
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -104,11 +106,52 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
 
     }
 
+    //protected Adapter initializedAdapter=null;
     // This method is used for dropdown spinner when it filters by housing options(north, south, west)
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         TextView spinnerDialogText = (TextView) view;
-        Toast.makeText(this, "you selected " + spinnerDialogText.getText(), Toast.LENGTH_SHORT).show();
+        String building = "";
+        Toast.makeText(this, "You selected " + spinnerDialogText.getText(), Toast.LENGTH_SHORT).show();
+
+        String selected = parent.getItemAtPosition(position).toString();
+
+        //If i dont create this new arrayList, and use the existing arrayList, it duplicates the events
+        ArrayList<EventItem> newArrayList=new ArrayList<EventItem>();
+        if(spinnerDialogText.getText().equals("South Lake Village")){
+            building = "South Village";
+        } else if(spinnerDialogText.getText().equals("North Lake Village")){
+            building = "North Village";
+        } else if(spinnerDialogText.getText().equals("West Lake Village")){
+            building = "West Village";
+        }
+
+        if(!building.equals("")) {
+            eventAdapter.clear(); //cleans adapter so that new data can be loaded
+            try {
+                Cursor cursor = datCon.QueryData("select * from " +
+                        HousingContract.EventEntry.TABLE_NAME + " where " +
+                        HousingContract.EventEntry.BUILDING + " = '" + building + "'");
+                if (cursor != null) {
+                    newArrayList.clear();
+                    if (cursor.moveToFirst()) {
+                        do {
+                            EventItem newItem = new EventItem();
+                            newItem.setId(cursor.getString(0));
+                            newItem.setTitle(cursor.getString(1));
+                            newItem.setTime(cursor.getString(5));
+                            newItem.setDate(cursor.getString(4));
+                            newItem.setPoster(cursor.getString(7));
+                            newArrayList.add(newItem);
+                        } while (cursor.moveToNext());
+                    }
+                }
+            } catch (SQLException e) {
+            }
+
+            eventAdapter.addAll(newArrayList); //adds new arrayList of events
+            eventAdapter.notifyDataSetChanged(); //notify changes to the adapter
+        }
     }
 
     //Does nothing but required by implementing interface
