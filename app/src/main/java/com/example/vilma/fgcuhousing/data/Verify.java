@@ -50,9 +50,11 @@ public class Verify {
             Log.d(ETag, "Did my email pass");
             return true;
         }
-        Toast.makeText(bleh, "Please enter an FGCU email",
-                Toast.LENGTH_SHORT).show();
-        return false;
+        {
+            Toast.makeText(bleh, "Please enter an FGCU email",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
     }
 
     boolean passVeri(){
