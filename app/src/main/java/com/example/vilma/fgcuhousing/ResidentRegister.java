@@ -14,10 +14,12 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.vilma.fgcuhousing.data.DbHandler;
 import com.example.vilma.fgcuhousing.data.HousingContract;
 import com.example.vilma.fgcuhousing.data.User;
+import com.example.vilma.fgcuhousing.data.Verify;
 
 public class ResidentRegister extends AppCompatActivity {
 
@@ -25,6 +27,7 @@ public class ResidentRegister extends AppCompatActivity {
     private EditText Name;
     private EditText Email;
     private EditText Password;
+    private EditText PasswordVerify;
     private AutoCompleteTextView Building;
 
     DbHandler db = new DbHandler(this);
@@ -40,9 +43,14 @@ public class ResidentRegister extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line,BUILDINGS);
-        AutoCompleteTextView textView = (AutoCompleteTextView)
-                findViewById(R.id.buildings_list);
-        textView.setAdapter(adapter);
+
+        Name = (EditText) findViewById(R.id.txtName);
+        Email = (EditText) findViewById(R.id.txtEmail);
+        Password = (EditText) findViewById(R.id.txtPassword);
+        PasswordVerify = (EditText) findViewById(R.id.txtPasswordVerify);
+        Building = (AutoCompleteTextView) findViewById(R.id.buildings_list);
+
+        Building.setAdapter(adapter);
 
     }
 
@@ -59,37 +67,34 @@ public class ResidentRegister extends AppCompatActivity {
     public void buttonOnClick(View v) {
         Button button = (Button)v;
         if (v == findViewById(R.id.btnSubmit)) {
-            //validate entry values and go to residentLogin
-            //Still working on validating the entry's
-            Name = (EditText) findViewById(R.id.txtName);
-            Email = (EditText) findViewById(R.id.txtEmail);
-            Password = (EditText) findViewById(R.id.txtPassword);
-            Building = (AutoCompleteTextView) findViewById(R.id.buildings_list);
 
             //gets the paramater from the android screen and convert to string
             String nameEntry = Name.getText().toString();
             String emailEntry = Email.getText().toString();
             String passwordEntry = Password.getText().toString();
+            String passwordVerify = PasswordVerify.getText().toString();
             String buildingEntry = Building.getText().toString();
 
-            Log.d("Reg" , "Ther name entered is " + nameEntry);
-            Log.d("Reg" , "Ther Email entered is " + emailEntry);
-            Log.d("Reg" , "Ther Password entered is " + passwordEntry);
-            Log.d("Reg" , "Ther Building entered is " + buildingEntry);
+            Verify ver = new Verify(getApplicationContext(), nameEntry, emailEntry, passwordEntry, passwordVerify);
 
+            if(ver.Verify()) {
+                //Inserts user information into user class.
+                User usr = new User();
+                usr.setName(nameEntry);
+                usr.setEmail(emailEntry);
+                usr.setPassword(passwordEntry);
+                usr.setBuilding(buildingEntry);
 
-
-            //Inserts user information into user class.
-            User usr = new User();
-            usr.setName(nameEntry);
-            usr.setEmail(emailEntry);
-            usr.setPassword(passwordEntry);
-            usr.setBuilding(buildingEntry);
-
-            //Inserts New User into the database
-            db.insertUser(this,usr);
-            //Moves to next Activity
-            startActivity(new Intent(getApplicationContext(), ResidentLogin.class));
+                //Inserts New User into the database
+                db.insertUser(this, usr);
+                //Moves to next Activity
+                startActivity(new Intent(getApplicationContext(), EventList.class));
+            }
+            else{
+                //popup with "'feild' is invalid"
+                Toast.makeText(getApplicationContext(), "Email Already Exists",
+                        Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

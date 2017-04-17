@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         //Start's database
         datCon = new DbHandler(this);
         //get's and editable database to add parameters
@@ -38,36 +37,7 @@ public class MainActivity extends AppCompatActivity {
         //Inserts some fake data
         DbTest.insertFakeData(mDb);
 
-        //testing for adding to database a different way
-        //Can change the toast message in class just added
-        //for visual feed back
-        datCon.addToUsers(this,"Andrew", "Charles", 814418814,
-                "andrewmcharles@live.com", "passpass", "R", "North Village");
 
-
-        //Example of getting all the data from database
-        Cursor allData = datCon.getData();
-        while(allData.moveToNext()){
-            String s = "curos";
-
-            String name = allData.getString(1);
-            String lname = allData.getString(2);
-            String uin = allData.getString(3);
-            String email = allData.getString(4);
-            String pass = allData.getString(5);
-            String status = allData.getString(6);
-            String builin = allData.getString(7);
-           Log.d(s,"First name: " + name + " Last name: " + lname
-           + " uin : "+ uin +" email : "+ email + "pass : "+pass +" status : "+ status +" builin : "+ builin);
-
-
-
-//            //Example of how to compare strings from table
-//            if(allData.getString(1).equals("Kim")){
-//                Log.d(s, "Found kim");
-//            }
-
-        }
 
         //Closes database connection
         datCon.close();

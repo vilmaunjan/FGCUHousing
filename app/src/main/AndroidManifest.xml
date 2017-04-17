@@ -60,7 +60,8 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".AwardInfo"
-            android:theme="@style/AppTheme.AwardTheme"/>
+            android:label="AwardInfo"
+            android:theme="@style/AppTheme.AwardTheme" />
     </application>
 
 </manifest>

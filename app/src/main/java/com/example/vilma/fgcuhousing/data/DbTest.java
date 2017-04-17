@@ -219,7 +219,7 @@ public class DbTest {
             db.endTransaction();
         }
 
-        addOrganizedEvents(db);
+       // addOrganizedEvents(db);
     }
 
 
@@ -231,89 +231,89 @@ public class DbTest {
      * to return right so far getting the column name as a return
      * which is weird
      **/
-    public static void addOrganizedEvents(SQLiteDatabase db){
-        Cursor ra;
-        ContentValues cv;
-        String KimId= "";
-
-        List<ContentValues> Obtained = new ArrayList<>();
-        List<ContentValues> Attended = new ArrayList<>();
-        List<ContentValues> Orangi = new ArrayList<>();
-
-
-        //Can do query like thi or just do a raw query
-        String event1 = "Select "+ EventEntry._ID +
-                " from "+ EventEntry.TABLE_NAME +
-                " Where " + EventEntry.Event_Title + " = 'LakesPark'";
-
-        String findKim = "Select "+ UserEntry._ID +
-                " from "+ UserEntry.TABLE_NAME +
-                " Where " + UserEntry.Name + " = 'Kim'";
-
-        //what I was last working on to try and get it to work, use the "Babe" keyword
-        //to see in the log cat whats being printed out and the error
-        try{
-            ra = db.rawQuery("SELECT ? FROM Resident WHERE fname = ? ", new String[] {UserEntry._ID,"Kim"});
-
-            if (ra != null) {
-                ra.moveToFirst();
-            }
-
-            KimId = ra.getString(0);
-            Log.d("Babe", "succesful and KimId = " + KimId);
-        } catch (Exception s){
-            Log.d("Babe", "not successful");
-            Log.d("Babe", s.toString());
-        }
-
-//        ra = db.rawQuery(event1, null);
-//        ra.moveToNext();
-//        String EventId = ra.getString(1);
-
-
-        Log.d("Babe", "Think we found kim here? lets check  " + KimId);
-
-        //create Organizing Events
-        cv = new ContentValues();
-        cv.put(OrganizedEvents.RA_ID, KimId);//title
-        cv.put(OrganizedEvents.Event_ID, "Idk");//description
-        cv.put(OrganizedEvents.Date, "date('now')");//date
-
-        Orangi.add(cv);
-
-//        //create a list of fake events
-//        cv = new ContentValues();
-//        cv.put(OrganizedEvents.RA_ID, KimId);//title
-//        cv.put(OrganizedEvents.Event_ID, "FGCU Martial Arts");//description
-//        cv.put(OrganizedEvents.Date, "date('now')");//date
+//    public static void addOrganizedEvents(SQLiteDatabase db){
+//        Cursor ra;
+//        ContentValues cv;
+//        String KimId= "";
 //
-//        Orangi.add(cv);
+//        List<ContentValues> Obtained = new ArrayList<>();
+//        List<ContentValues> Attended = new ArrayList<>();
+//        List<ContentValues> Orangi = new ArrayList<>();
 //
-//        //create a list of fake events
-//        cv = new ContentValues();
-//        cv.put(OrganizedEvents.RA_ID, KimId);//title
-//        cv.put(OrganizedEvents.Event_ID, "FGCU Martial Arts");//description
-//        cv.put(OrganizedEvents.Date, "date('now')");//date
 //
-//        Orangi.add(cv);
+//        //Can do query like thi or just do a raw query
+//        String event1 = "Select "+ EventEntry._ID +
+//                " from "+ EventEntry.TABLE_NAME +
+//                " Where " + EventEntry.Event_Title + " = 'LakesPark'";
 //
+//        String findKim = "Select "+ UserEntry._ID +
+//                " from "+ UserEntry.TABLE_NAME +
+//                " Where " + UserEntry.Name + " = 'Kim'";
+//
+//        //what I was last working on to try and get it to work, use the "Babe" keyword
+//        //to see in the log cat whats being printed out and the error
 //        try{
-//            db.beginTransaction();
+//            ra = db.rawQuery("SELECT ? FROM Resident WHERE fname = ? ", new String[] {UserEntry._ID,"Kim"});
 //
-//            for(ContentValues a : Orangi){
-//                db.insert(OrganizedEvents.TABLE_NAME, null, a);
+//            if (ra != null) {
+//                ra.moveToFirst();
 //            }
 //
-//            db.setTransactionSuccessful();
+//            KimId = ra.getString(0);
+//            Log.d("Babe", "succesful and KimId = " + KimId);
+//        } catch (Exception s){
+//            Log.d("Babe", "not successful");
+//            Log.d("Babe", s.toString());
 //        }
-//        catch (SQLException e) {
-//        //too bad :(
-//         }
-//        finally
-//         {
-//        db.endTransaction();
-//            }
-    }
+//
+////        ra = db.rawQuery(event1, null);
+////        ra.moveToNext();
+////        String EventId = ra.getString(1);
+//
+//
+//        Log.d("Babe", "Think we found kim here? lets check  " + KimId);
+//
+//        //create Organizing Events
+//        cv = new ContentValues();
+//        cv.put(OrganizedEvents.RA_ID, KimId);//title
+//        cv.put(OrganizedEvents.Event_ID, "Idk");//description
+//        cv.put(OrganizedEvents.Date, "date('now')");//date
+//
+//        Orangi.add(cv);
+//
+////        //create a list of fake events
+////        cv = new ContentValues();
+////        cv.put(OrganizedEvents.RA_ID, KimId);//title
+////        cv.put(OrganizedEvents.Event_ID, "FGCU Martial Arts");//description
+////        cv.put(OrganizedEvents.Date, "date('now')");//date
+////
+////        Orangi.add(cv);
+////
+////        //create a list of fake events
+////        cv = new ContentValues();
+////        cv.put(OrganizedEvents.RA_ID, KimId);//title
+////        cv.put(OrganizedEvents.Event_ID, "FGCU Martial Arts");//description
+////        cv.put(OrganizedEvents.Date, "date('now')");//date
+////
+////        Orangi.add(cv);
+////
+////        try{
+////            db.beginTransaction();
+////
+////            for(ContentValues a : Orangi){
+////                db.insert(OrganizedEvents.TABLE_NAME, null, a);
+////            }
+////
+////            db.setTransactionSuccessful();
+////        }
+////        catch (SQLException e) {
+////        //too bad :(
+////         }
+////        finally
+////         {
+////        db.endTransaction();
+////            }
+//    }
 
 
 }

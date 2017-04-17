@@ -14,9 +14,6 @@ public class AwardInfo extends Activity{
     private String title;
     private String Description;
 
-    AwardInfo(){
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
