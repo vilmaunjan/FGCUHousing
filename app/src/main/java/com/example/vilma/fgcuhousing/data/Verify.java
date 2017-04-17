@@ -21,21 +21,18 @@ public class Verify {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.passwordVerify = passwordVerify;
 
     }
 
-    public boolean Verify() {
+    public boolean Verifier() {
 
-        if(nameVeri() && emailVeri() && passVeri()){
-            return true;
-        }else{
-            return false;
-        }
+        return nameVeri() && emailVeri() && passVeri();
 
     }
 
-    boolean nameVeri(){
-       if(name.matches("[a-zA-Z\\s]+ ")){
+    private boolean nameVeri(){
+       if(name.matches("^[ A-Za-z]+$")){
            Log.d(ETag, "Did my name pass");
            return true;
        }else{
@@ -45,11 +42,11 @@ public class Verify {
         }
     }
 
-    boolean emailVeri(){
+    private boolean emailVeri(){
         if(email.endsWith("@eagle.fgcu.edu")){
             Log.d(ETag, "Did my email pass");
             return true;
-        }
+        }else
         {
             Toast.makeText(bleh, "Please enter an FGCU email",
                     Toast.LENGTH_SHORT).show();
@@ -57,13 +54,14 @@ public class Verify {
         }
     }
 
-    boolean passVeri(){
+    private boolean passVeri(){
         if(password.equals(passwordVerify)){
             Log.d(ETag, "Did my password pass");
             return true;
+        }else {
+            Toast.makeText(bleh, "passwords dont match",
+                    Toast.LENGTH_SHORT).show();
+            return false;
         }
-        Toast.makeText(bleh, "passwords dont match",
-                Toast.LENGTH_SHORT).show();
-        return false;
     }
 }

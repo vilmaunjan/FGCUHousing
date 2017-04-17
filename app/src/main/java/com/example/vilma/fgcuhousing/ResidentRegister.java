@@ -41,7 +41,7 @@ public class ResidentRegister extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line,BUILDINGS);
 
         Name = (EditText) findViewById(R.id.txtName);
@@ -77,7 +77,7 @@ public class ResidentRegister extends AppCompatActivity {
 
             Verify ver = new Verify(getApplicationContext(), nameEntry, emailEntry, passwordEntry, passwordVerify);
 
-            if(ver.Verify()) {
+            if(ver.Verifier()) {
                 //Inserts user information into user class.
                 User usr = new User();
                 usr.setName(nameEntry);

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.example.vilma.fgcuhousing.data.DbHandler;
 import com.example.vilma.fgcuhousing.data.HousingContract;
@@ -50,6 +51,8 @@ public class ResidentLogin extends AppCompatActivity {
                 startActivity(i);
                 Log.d("Caleb", " password");
             } else {
+                Toast.makeText(getApplicationContext(), "Incorrect Password or EmailAddress",
+                        Toast.LENGTH_SHORT).show();
                 Log.d("Caleb", "Wrong password");
             }
         }

@@ -25,7 +25,7 @@
         android:layout_marginStart="19dp"
         android:layout_toLeftOf="@+id/txtName"
         android:layout_toStartOf="@+id/txtName"
-        android:text="Name:"
+        android:text="@string/name"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -38,7 +38,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="46dp"
         android:ems="10"
-        android:hint="Enter name"
+        android:hint="@string/enter_name"
         android:inputType="textPersonName" />
 
     <TextView
@@ -51,7 +51,7 @@
         android:layout_marginTop="11dp"
         android:layout_toLeftOf="@+id/txtEmail"
         android:layout_toStartOf="@+id/txtEmail"
-        android:text="Eagle email:"
+        android:text="@string/eagle_email"
         android:textSize="18sp" />
 
     <EditText
@@ -63,7 +63,7 @@
         android:layout_below="@+id/txtName"
         android:layout_marginTop="34dp"
         android:ems="10"
-        android:hint="Enter eagle email"
+        android:hint="@string/enter_eagle_email"
         android:inputType="textEmailAddress" />
 
     <TextView
@@ -76,7 +76,7 @@
         android:layout_marginBottom="11dp"
         android:layout_toLeftOf="@+id/txtPassword"
         android:layout_toStartOf="@+id/txtPassword"
-        android:text="Password:"
+        android:text="@string/password"
         android:textSize="18sp" />
 
     <EditText
@@ -88,7 +88,7 @@
         android:layout_below="@+id/txtEmail"
         android:layout_marginTop="26dp"
         android:ems="10"
-        android:hint="Enter password"
+        android:hint="@string/enter_password"
         android:inputType="textPassword" />
 
     <TextView
@@ -100,14 +100,14 @@
         android:layout_alignStart="@+id/textView15"
         android:layout_marginBottom="16dp"
         android:layout_toLeftOf="@+id/txtPassword"
-        android:text="Re-Enter Password"
+        android:text="@string/re_enter_password"
         android:textSize="18sp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter password"
+        android:hint="@string/enter_password_verification"
         android:id="@+id/txtPasswordVerify"
         android:inputType="textPassword"
         android:layout_alignBottom="@+id/textView4"
@@ -124,7 +124,7 @@
         android:layout_marginTop="12dp"
         android:layout_toLeftOf="@+id/buildings_list"
         android:layout_toStartOf="@+id/buildings_list"
-        android:text="Building:"
+        android:text="@string/building"
         android:textSize="18sp" />
 
     <AutoCompleteTextView
@@ -137,11 +137,11 @@
         android:layout_alignParentRight="true"
         android:layout_alignStart="@+id/txtPassword"
         android:layout_marginBottom="49dp"
-        android:hint="Enter Building"
-        android:completionThreshold="2" />
+        android:hint="@string/enter_building"
+        android:completionThreshold="1" />
 
     <Button
-        android:text="Submit"
+        android:text="@string/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnSubmit"

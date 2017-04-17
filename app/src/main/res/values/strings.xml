@@ -46,4 +46,15 @@
     <string name="AwardName">FlooTheCoop</string>
     <string name="AwardInfoTitle">Tiger Award</string>
     <string name="awardInfoDescription">Description of the Award and how to get I wonder how many characters will show on this because Some migh thave a very long description but i doubt it for now so lets see.</string>
+    <string name="name">Name:</string>
+    <string name="enter_name">Enter name</string>
+    <string name="eagle_email">Eagle email:</string>
+    <string name="enter_eagle_email">Enter eagle email</string>
+    <string name="password">Password:</string>
+    <string name="enter_password">Enter password</string>
+    <string name="re_enter_password">Re-Enter Password</string>
+    <string name="enter_password_verification">Enter password</string>
+    <string name="building">Building:</string>
+    <string name="enter_building">Enter Building</string>
+    <string name="submit">Submit</string>
 </resources>
