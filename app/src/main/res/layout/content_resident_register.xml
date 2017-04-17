@@ -13,6 +13,57 @@
     tools:context="com.example.vilma.fgcuhousing.ResidentRegister"
     tools:showIn="@layout/activity_resident_register">
 
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtName"
+        android:layout_alignBottom="@+id/txtName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp"
+        android:layout_toLeftOf="@+id/txtName"
+        android:layout_toStartOf="@+id/txtName"
+        android:text="Name:"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="46dp"
+        android:ems="10"
+        android:hint="Enter name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter password"
+        android:id="@+id/txtPasswordVerify"
+        android:inputType="textPassword"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/txtPassword"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginBottom="11dp"
+        android:layout_toLeftOf="@+id/txtPassword"
+        android:layout_toStartOf="@+id/txtPassword"
+        android:text="Password:"
+        android:textSize="18sp" />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,12 +81,12 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:layout_below="@+id/txtEmail"
-        android:layout_alignRight="@+id/txtEmail"
-        android:layout_alignEnd="@+id/txtEmail"
-        android:layout_marginTop="27dp"
         android:id="@+id/txtPassword"
-        android:hint="Enter password" />
+        android:hint="Enter password"
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/txtEmail"
+        android:layout_alignLeft="@+id/txtEmail"
+        android:layout_alignStart="@+id/txtEmail" />
 
     <TextView
         android:id="@+id/textView2"
@@ -70,7 +121,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:layout_marginTop="102dp"
+        android:layout_marginTop="46dp"
         android:id="@+id/txtName"
         android:hint="Enter name"
         android:layout_alignParentTop="true"
@@ -78,29 +129,28 @@
         android:layout_alignParentEnd="true" />
 
     <TextView
-        android:text="Password:"
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/txtPassword"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_marginBottom="11dp"
-        android:id="@+id/textView4"
-        android:textSize="18sp"
+        android:layout_above="@+id/buildings_list"
+        android:layout_alignLeft="@+id/textView15"
+        android:layout_alignStart="@+id/textView15"
+        android:layout_marginBottom="16dp"
         android:layout_toLeftOf="@+id/txtPassword"
-        android:layout_toStartOf="@+id/txtPassword" />
+        android:text="Re-Enter Password"
+        android:textSize="18sp" />
 
     <AutoCompleteTextView
         android:text="Enter building"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtPassword"
-        android:layout_alignLeft="@+id/txtPassword"
-        android:layout_alignStart="@+id/txtPassword"
-        android:layout_marginTop="23dp"
         android:id="@+id/buildings_list"
+        android:layout_above="@+id/btnSubmit"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="49dp"
+        android:layout_alignLeft="@+id/txtPassword"
+        android:layout_alignStart="@+id/txtPassword" />
 
     <TextView
         android:text="Building:"
@@ -119,10 +169,9 @@
         android:text="Submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
         android:id="@+id/btnSubmit"
-        android:layout_below="@+id/buildings_list"
-        android:layout_toRightOf="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3"
-        android:onClick="buttonOnClick" />
+        android:onClick="buttonOnClick"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp" />
 </RelativeLayout>
