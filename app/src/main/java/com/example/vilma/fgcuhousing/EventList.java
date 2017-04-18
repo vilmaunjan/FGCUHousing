@@ -1,5 +1,6 @@
 package com.example.vilma.fgcuhousing;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -7,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -40,7 +42,7 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
 
     //variables declaration
     ListView listView;
-    ArrayList<EventItem> arrayList=new ArrayList<EventItem>();
+    ArrayList<EventItem> arrayList=new ArrayList<>();
     EventAdapter eventAdapter;
 
 
@@ -117,7 +119,7 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
         String selected = parent.getItemAtPosition(position).toString();
 
         //If i dont create this new arrayList, and use the existing arrayList, it duplicates the events
-        ArrayList<EventItem> newArrayList=new ArrayList<EventItem>();
+        ArrayList<EventItem> newArrayList=new ArrayList<>();
         if(spinnerDialogText.getText().equals("South Lake Village")){
             building = "South Village";
         } else if(spinnerDialogText.getText().equals("North Lake Village")){
@@ -190,6 +192,20 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Really Exit?")
+                .setMessage("Are you sure you want to exit?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        EventList.super.onBackPressed();
+                    }
+                }).create().show();
     }
 
 }

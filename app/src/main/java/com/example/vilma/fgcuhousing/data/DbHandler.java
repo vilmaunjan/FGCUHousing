@@ -30,90 +30,96 @@ public class DbHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqldb){
-        //Creates the tables
-        final String CreateUserTable = "CREATE TABLE " +
-                UserEntry.TABLE_NAME + "( "+
-                UserEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                UserEntry.Name + " TEXT NOT NULL, " +
-                UserEntry.Email + " TEXT NOT NULL, " +
-                UserEntry.Password + " TEXT NOT NULL," +
-                UserEntry.Type + " TEXT NOT NULL, " +
-                UserEntry.Building+ " TEXT NOT NULL" +
-                ")";
+            //create db
+            //Creates the tables
+            final String CreateUserTable = "CREATE TABLE " +
+                    UserEntry.TABLE_NAME + "( " +
+                    UserEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    UserEntry.Name + " TEXT NOT NULL, " +
+                    UserEntry.Email + " TEXT NOT NULL, " +
+                    UserEntry.Password + " TEXT NOT NULL," +
+                    UserEntry.Type + " TEXT NOT NULL, " +
+                    UserEntry.Building + " TEXT NOT NULL" +
+                    ")";
 
-        final String CreateEvent = "CREATE TABLE " +
-                EventEntry.TABLE_NAME + "( "+
-                EventEntry.Event_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                EventEntry.Event_Title + " TEXT NOT NULL, " +
-                EventEntry.Description + " TEXT NOT NULL, " +
-                EventEntry.Location + " TEXT NOT NULL, " +
-                EventEntry.Event_Date + " DATE, " +
-                EventEntry.Event_Time + " TIME, " +
-                EventEntry.BUILDING + " TEXT NOT NULL, " +
-                EventEntry.IMAGE + " TEXT " +
-                ")";
+            final String CreateEvent = "CREATE TABLE " +
+                    EventEntry.TABLE_NAME + "( " +
+                    EventEntry.Event_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    EventEntry.Event_Title + " TEXT NOT NULL, " +
+                    EventEntry.Description + " TEXT NOT NULL, " +
+                    EventEntry.Location + " TEXT NOT NULL, " +
+                    EventEntry.Event_Date + " DATE, " +
+                    EventEntry.Event_Time + " TIME, " +
+                    EventEntry.BUILDING + " TEXT NOT NULL, " +
+                    EventEntry.IMAGE + " TEXT " +
+                    ")";
 
-        final String CreateAwards = "CREATE TABLE " +
-                Awards.TABLE_NAME + "( "+
-                Awards.COLUMN_Award_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                Awards.COLUMN_Award_Name + " TEXT NOT NULL, "+
-                Awards.COLUMN_Award_Description + " TEXT, "+
-                Awards.COLUMN_Image + " TEXT " +
-                ")";
+            final String CreateAwards = "CREATE TABLE " +
+                    Awards.TABLE_NAME + "( " +
+                    Awards.COLUMN_Award_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    Awards.COLUMN_Award_Name + " TEXT NOT NULL, " +
+                    Awards.COLUMN_Award_Description + " TEXT, " +
+                    Awards.COLUMN_Image + " TEXT " +
+                    ")";
 
-        final String CreateOrganizedEvents = "CREATE TABLE " +
-                OrganizedEvents.TABLE_NAME + "( "+
-                OrganizedEvents.OrganizedID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                OrganizedEvents.RA_ID+ " TEXT NOT NULL, " +
-                OrganizedEvents.Event_ID + " TEXT NOT NULL, " +
-                OrganizedEvents.Date + " TEXT NOT NULL, " +
-                " FOREIGN KEY ("+ OrganizedEvents.RA_ID +") REFERENCES "+
-                UserEntry.TABLE_NAME+"("+UserEntry._ID+")," +
-                " FOREIGN KEY ("+ OrganizedEvents.Event_ID +") REFERENCES "+
-                EventEntry.TABLE_NAME+"("+EventEntry._ID+")" +
-                ")";
+            final String CreateOrganizedEvents = "CREATE TABLE " +
+                    OrganizedEvents.TABLE_NAME + "( " +
+                    OrganizedEvents.OrganizedID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    OrganizedEvents.RA_ID + " TEXT NOT NULL, " +
+                    OrganizedEvents.Event_ID + " TEXT NOT NULL, " +
+                    OrganizedEvents.Date + " TEXT NOT NULL, " +
+                    " FOREIGN KEY (" + OrganizedEvents.RA_ID + ") REFERENCES " +
+                    UserEntry.TABLE_NAME + "(" + UserEntry._ID + ")," +
+                    " FOREIGN KEY (" + OrganizedEvents.Event_ID + ") REFERENCES " +
+                    EventEntry.TABLE_NAME + "(" + EventEntry._ID + ")" +
+                    ")";
 
-        final String CreateAttendedEvent = "CREATE TABLE " +
-                AttendedEventEntry.TABLE_NAME + "( "+
-                AttendedEventEntry.Rating_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                AttendedEventEntry.Resident_ID + " INTEGER, " +
-                AttendedEventEntry.Event_ID + " INTEGER, " +
-                AttendedEventEntry.Time_Stayed + " TEXT NOT NULL, " +
-                AttendedEventEntry.Rating_Score + " TEXT NOT NULL, " +
-                AttendedEventEntry.Rating_FeedBack + " TEXT NOT NULL, " +
-                " FOREIGN KEY ("+
-                AttendedEventEntry.Resident_ID +
-                ") REFERENCES "+UserEntry.TABLE_NAME+"("+UserEntry._ID+")," +
-                " FOREIGN KEY ("+ AttendedEventEntry.Event_ID +") REFERENCES "+
-                EventEntry.TABLE_NAME+"("+EventEntry._ID+")" +
-                ")";
+            final String CreateAttendedEvent = "CREATE TABLE " +
+                    AttendedEventEntry.TABLE_NAME + "( " +
+                    AttendedEventEntry.Rating_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    AttendedEventEntry.Resident_ID + " INTEGER, " +
+                    AttendedEventEntry.Event_ID + " INTEGER, " +
+                    AttendedEventEntry.Time_Stayed + " TEXT NOT NULL, " +
+                    AttendedEventEntry.Rating_Score + " TEXT NOT NULL, " +
+                    AttendedEventEntry.Rating_FeedBack + " TEXT NOT NULL, " +
+                    " FOREIGN KEY (" +
+                    AttendedEventEntry.Resident_ID +
+                    ") REFERENCES " + UserEntry.TABLE_NAME + "(" + UserEntry._ID + ")," +
+                    " FOREIGN KEY (" + AttendedEventEntry.Event_ID + ") REFERENCES " +
+                    EventEntry.TABLE_NAME + "(" + EventEntry._ID + ")" +
+                    ")";
 
-        final String CreateAwardObtained = "CREATE TABLE " +
-                AwardObtained.TABLE_NAME + "( "+
-                AwardObtained.AwardObtained_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                AwardObtained.AwardID + " TEXT NOT NULL, " +
-                AwardObtained.Resident_ID + " TEXT NOT NULL, " +
-                " FOREIGN KEY ("+ AwardObtained.Resident_ID +") REFERENCES "+
-                UserEntry.TABLE_NAME+"("+UserEntry._ID+")," +
-                " FOREIGN KEY ("+ AwardObtained.AwardID +") REFERENCES "+
-                Awards.TABLE_NAME+"("+Awards.COLUMN_Award_ID+")" +
-                ")";
+            final String CreateAwardObtained = "CREATE TABLE " +
+                    AwardObtained.TABLE_NAME + "( " +
+                    AwardObtained.AwardObtained_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    AwardObtained.AwardID + " TEXT NOT NULL, " +
+                    AwardObtained.Resident_ID + " TEXT NOT NULL, " +
+                    " FOREIGN KEY (" + AwardObtained.Resident_ID + ") REFERENCES " +
+                    UserEntry.TABLE_NAME + "(" + UserEntry._ID + ")," +
+                    " FOREIGN KEY (" + AwardObtained.AwardID + ") REFERENCES " +
+                    Awards.TABLE_NAME + "(" + Awards.COLUMN_Award_ID + ")" +
+                    ")";
 
 
+            //Execute the commands in proper order
+            sqldb.execSQL(CreateUserTable);
+            sqldb.execSQL(CreateEvent);
+            sqldb.execSQL(CreateAwards);
+            sqldb.execSQL(CreateAttendedEvent);
+            sqldb.execSQL(CreateAwardObtained);
+            sqldb.execSQL(CreateOrganizedEvents);
 
-        //Execute the commands in proper order
-        sqldb.execSQL(CreateUserTable);
-        sqldb.execSQL(CreateEvent);
-        sqldb.execSQL(CreateAwards);
-        sqldb.execSQL(CreateAttendedEvent);
-        sqldb.execSQL(CreateAwardObtained);
-        sqldb.execSQL(CreateOrganizedEvents);
 
         //Log is used like system.out.println. You have to click on android monitor on the bottom
         //click log cat and then where you see verbose just type the name of the Tag
         //I declared to see it's specific log only
         Log.d(Tag, "If it made it this far, database was created successfully");
         db = sqldb;
+        insertDaFakes(db);
+    }
+
+    private void insertDaFakes(SQLiteDatabase db) {
+        DbTest.insertFakeData(db);
     }
 
     //i'll get back to fixing the rest of the updates and inserts

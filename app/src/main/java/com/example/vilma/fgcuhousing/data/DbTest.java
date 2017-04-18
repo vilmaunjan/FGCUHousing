@@ -184,12 +184,6 @@ public class DbTest {
         {
             db.beginTransaction();
 
-
-            //clear the table first
-            db.delete (UserEntry.TABLE_NAME,null,null);
-            db.delete(EventEntry.TABLE_NAME, null,null);
-            db.delete(Awards.TABLE_NAME, null,null);
-
             //go through the list and add one by one
             for(ContentValues c:User){
                 db.insert(UserEntry.TABLE_NAME, null, c);

@@ -16,7 +16,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.example.vilma.fgcuhousing.data.DbHandler;
-import com.example.vilma.fgcuhousing.data.DbTest;
+
 
 public class Awards extends AppCompatActivity {
 
