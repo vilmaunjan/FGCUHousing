@@ -1,8 +1,6 @@
 package com.example.vilma.fgcuhousing;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,11 +8,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.content.Intent;
 import android.widget.Toast;
 
+import com.example.vilma.fgcuhousing.data.CurrentUser;
 import com.example.vilma.fgcuhousing.data.DbHandler;
-import com.example.vilma.fgcuhousing.data.HousingContract;
+
+import static com.example.vilma.fgcuhousing.data.logIn.LogIN;
+
 
 public class ResidentLogin extends AppCompatActivity {
 
@@ -47,7 +47,13 @@ public class ResidentLogin extends AppCompatActivity {
             String password = db.searchPassword(emailEntry);
             //If what the user entered is the correct password then move to EventList
             if(passwordEntry.equals(password)) {
-                Intent i = new Intent(this, EventList.class);
+                Intent i = new Intent(getApplicationContext(), EventList.class);
+
+                //Use to create current user
+               // CurrentUser usr = LogIN(emailEntry);
+                //Adds the Current user data to be passed
+                //i.putExtra("CurrentUser", usr);
+                //Go to the next activity
                 startActivity(i);
                 Log.d("Caleb", " password");
             } else {
@@ -57,4 +63,6 @@ public class ResidentLogin extends AppCompatActivity {
             }
         }
     }
+
+
 }

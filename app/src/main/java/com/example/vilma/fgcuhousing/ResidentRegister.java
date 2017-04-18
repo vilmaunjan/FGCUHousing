@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.vilma.fgcuhousing.data.CurrentUser;
 import com.example.vilma.fgcuhousing.data.DbHandler;
 import com.example.vilma.fgcuhousing.data.User;
 import com.example.vilma.fgcuhousing.data.Verify;
@@ -83,8 +84,14 @@ public class ResidentRegister extends AppCompatActivity {
 
                 //Inserts New User into the database
                 db.insertUser(this, usr);
+                //Creates intent to go to next activity
+                Intent CU = new Intent(getApplicationContext(), EventList.class);
+                //add's a new Current user to be passed
+              //  CU.putExtra("CurrentUser", new CurrentUser(usr.getName(), usr.getEmail(),
+               // usr.getPassword(), usr.getBuilding()));
+
                 //Moves to next Activity
-                startActivity(new Intent(getApplicationContext(), EventList.class));
+                startActivity(CU);
             }
             else{
                 //popup with "'feild' is invalid"

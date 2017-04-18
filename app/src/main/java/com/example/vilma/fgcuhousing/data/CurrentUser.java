@@ -28,7 +28,7 @@ public class CurrentUser implements Parcelable {
         super();
     }
 
-    CurrentUser(String name, String Email, String pass, String Building){
+   public CurrentUser(String name, String Email, String pass, String Building){
         this.name = name;
         this.email = Email;
         this.password = pass;

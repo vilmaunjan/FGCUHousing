@@ -24,6 +24,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.vilma.fgcuhousing.data.CurrentUser;
 import com.example.vilma.fgcuhousing.data.DbHandler;
 import com.example.vilma.fgcuhousing.data.Event;
 import com.example.vilma.fgcuhousing.data.EventAdapter;
@@ -39,6 +40,7 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
     //Need these whenever Connecting to database
     private SQLiteDatabase mDb;
     private DbHandler datCon;
+    private CurrentUser CU;
 
     //variables declaration
     ListView listView;
@@ -52,6 +54,10 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
         setContentView(R.layout.activity_event_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //Setsup Current User
+       // Bundle data = getIntent().getExtras();
+        //CU = data.getParcelable("CurrentUser");
 
         Spinner spinnerFilter = (Spinner) findViewById(R.id.spinnerFilter);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.spinner_housing_options, android.R.layout.simple_spinner_item);
