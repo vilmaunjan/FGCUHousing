@@ -1,14 +1,9 @@
 package com.example.vilma.fgcuhousing;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -17,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.vilma.fgcuhousing.data.DbHandler;
-import com.example.vilma.fgcuhousing.data.HousingContract;
 import com.example.vilma.fgcuhousing.data.User;
 import com.example.vilma.fgcuhousing.data.Verify;
 
@@ -75,9 +69,11 @@ public class ResidentRegister extends AppCompatActivity {
             String passwordVerify = PasswordVerify.getText().toString();
             String buildingEntry = Building.getText().toString();
 
+
             Verify ver = new Verify(getApplicationContext(), nameEntry, emailEntry, passwordEntry, passwordVerify);
 
-            if(ver.Verifier()) {
+            if(ver.Verifier() && !db.emailCheck(emailEntry)) {
+
                 //Inserts user information into user class.
                 User usr = new User();
                 usr.setName(nameEntry);

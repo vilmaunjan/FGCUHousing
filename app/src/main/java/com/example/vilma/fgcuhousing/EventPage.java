@@ -23,6 +23,7 @@ public class EventPage extends AppCompatActivity {
     //Need these whenever Connecting to database
     private SQLiteDatabase mDb;
     private DbHandler datCon;
+    private boolean CheckedIN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -46,8 +46,7 @@ public class Verify {
         if(email.endsWith("@eagle.fgcu.edu")){
             Log.d(ETag, "Did my email pass");
             return true;
-        }else
-        {
+        }else{
             Toast.makeText(bleh, "Please enter an FGCU email",
                     Toast.LENGTH_SHORT).show();
             return false;

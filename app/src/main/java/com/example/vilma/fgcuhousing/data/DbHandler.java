@@ -198,6 +198,36 @@ public class DbHandler extends SQLiteOpenHelper {
     }
 
     //Search for email and return corresponding password.
+    public boolean emailCheck(String emailEntry){
+        Log.d("696969", "Reached set password");
+        boolean exists = false;
+        String email = "Not found";
+        db = this.getReadableDatabase();
+        String query = "select " + UserEntry.Email + " from "
+                + UserEntry.TABLE_NAME ;
+        try {
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    email = cursor.getString(0);
+                    Log.d("EmailCheck", email);
+                    if (email.equals(emailEntry)) {
+                        exists = true;
+                        Log.d("searchPassword", "I guess it lives!");
+                    }
+                }
+                while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        }catch (Exception e){
+
+            Log.d("EmailCheck", e.getMessage());
+        }
+        return exists;
+    }
+
+    //Search for email and return corresponding password.
     public String searchPassword(String emailEntry){
         Log.d("696969", "Reached set password");
         String password = "";

@@ -4,6 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import static android.R.attr.rating;
 
 /**
  * Created by Andrew on 4/17/2017.
@@ -11,10 +14,13 @@ import java.util.ArrayList;
 
 public class CurrentUser implements Parcelable {
 
-    private String Name;
-    private String Email;
-    private String Password;
-    private String Building;
+    private String ID;
+    private String name;
+    private String email;
+    private String password;
+    private String building;
+    private String AccountType;
+    private HashMap<String, Boolean> Events;
     private ArrayList<String> awarded = new ArrayList<>();
 
 
@@ -23,18 +29,46 @@ public class CurrentUser implements Parcelable {
     }
 
     CurrentUser(String name, String Email, String pass, String Building){
-        this.Name = name;
-        this.Email = Email;
-        this.Password = pass;
-        this.Building = Building;
+        this.name = name;
+        this.email = Email;
+        this.password = pass;
+        this.building = Building;
     }
 
     public CurrentUser(Parcel par){
-        this.Name = par.readString();
-        this.Email = par.readString();
-        this.Password = par.readString();
-        this.Building = par.readString();
+        this.name = par.readString();
+        this.email = par.readString();
+        this.password = par.readString();
+        this.building = par.readString();
         this.awarded = par.readArrayList(null);
+
+    }
+
+    /**
+     * Gets the rating score for the current event if rated already
+     * @param RatingId
+     * @return
+     */
+    public int getRating(int RatingId){
+
+        return 0;
+    }
+
+    /**
+     * sets the rating in the database
+     * @param Rating
+     */
+
+    public void setRating(int Rating){
+
+    }
+
+    private void Account(){
+        if(email.endsWith("@eagle.fgcu.edu")){
+            AccountType = "R";
+        }else if(email.endsWith("@fgcu.edu")){
+            AccountType = "RA";
+        }
 
     }
 
@@ -45,10 +79,10 @@ public class CurrentUser implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.Name);
-        dest.writeString(this.Email);
-        dest.writeString(this.Password);
-        dest.writeString(this.Building);
+        dest.writeString(this.name);
+        dest.writeString(this.email);
+        dest.writeString(this.password);
+        dest.writeString(this.building);
         dest.writeList(this.awarded);
     }
 
