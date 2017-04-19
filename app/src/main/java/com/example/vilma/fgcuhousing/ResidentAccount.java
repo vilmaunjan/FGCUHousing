@@ -8,8 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.example.vilma.fgcuhousing.data.CurrentUser;
 
 public class ResidentAccount extends AppCompatActivity {
+
+    private CurrentUser CU;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +23,8 @@ public class ResidentAccount extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Bundle data = getIntent().getExtras();
+        CU = data.getParcelable("CurrentUser");
 
     }
 
@@ -27,9 +34,16 @@ public class ResidentAccount extends AppCompatActivity {
         //This should be changed so that when any buttonEvent is pressed it goes to EventPage
         //with its info.
         if (v == findViewById(R.id.btnAwards)) { //go to EventPage
-            startActivity(new Intent(getApplicationContext(), Awards.class));
-
+            Intent awards = new Intent(getApplicationContext(), Awards.class);
+            awards.putExtra("CurrentUser", CU);
+            startActivity(awards);
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent Account = new Intent(getApplicationContext(), EventList.class);
+        Account.putExtra("CurrentUser", CU);
+        startActivity(Account);
+    }
 }

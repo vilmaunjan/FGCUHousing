@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.vilma.fgcuhousing.data.DbHandler;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //Creates a connection to database and creates database
+        DbHandler db = new DbHandler(getApplicationContext());
 
     }
 

@@ -15,6 +15,7 @@ import com.example.vilma.fgcuhousing.data.CurrentUser;
 import com.example.vilma.fgcuhousing.data.DbHandler;
 import com.example.vilma.fgcuhousing.data.User;
 import com.example.vilma.fgcuhousing.data.Verify;
+import static com.example.vilma.fgcuhousing.data.logIn.LogIN;
 
 public class ResidentRegister extends AppCompatActivity {
 
@@ -86,9 +87,9 @@ public class ResidentRegister extends AppCompatActivity {
                 db.insertUser(this, usr);
                 //Creates intent to go to next activity
                 Intent CU = new Intent(getApplicationContext(), EventList.class);
+                CurrentUser Current = LogIN(getApplicationContext(), emailEntry);
                 //add's a new Current user to be passed
-              //  CU.putExtra("CurrentUser", new CurrentUser(usr.getName(), usr.getEmail(),
-               // usr.getPassword(), usr.getBuilding()));
+                CU.putExtra("CurrentUser", Current);
 
                 //Moves to next Activity
                 startActivity(CU);

@@ -2,6 +2,7 @@ package com.example.vilma.fgcuhousing.data;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.AbstractCursor;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -67,7 +68,7 @@ public class DbHandler extends SQLiteOpenHelper {
                     OrganizedEvents.OrganizedID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     OrganizedEvents.RA_ID + " TEXT NOT NULL, " +
                     OrganizedEvents.Event_ID + " TEXT NOT NULL, " +
-                    OrganizedEvents.Date + " TEXT NOT NULL, " +
+                    OrganizedEvents.Date + " DATETIME DEFAULT CURRENT_TIMESTAMP, " +
                     " FOREIGN KEY (" + OrganizedEvents.RA_ID + ") REFERENCES " +
                     UserEntry.TABLE_NAME + "(" + UserEntry._ID + ")," +
                     " FOREIGN KEY (" + OrganizedEvents.Event_ID + ") REFERENCES " +
@@ -167,15 +168,18 @@ public class DbHandler extends SQLiteOpenHelper {
         values.put(UserEntry.Name, usr.getName());
         values.put(UserEntry.Email, usr.getEmail());
         values.put(UserEntry.Password, usr.getPassword());
-        values.put(UserEntry.Type, "r");
+        values.put(UserEntry.Type, usr.getType());
         values.put(UserEntry.Building, usr.getBuilding());
         long result = homebase.insert(UserEntry.TABLE_NAME, null, values);
     }
 
-    public boolean insertEvent(Event evt){
-
+    public boolean insertEvent(Event evt, CurrentUser creator) {
+        boolean TheReturner = false;
+        //If event does not exist
+        if(!Eventcheck(evt.getTitle())) {
             Log.d("insertEvent", evt.getTitle());
-            SQLiteDatabase db = this.getWritableDatabase();
+
+            SQLiteDatabase sb = this.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put(EventEntry.Event_Title, evt.getTitle());
             values.put(EventEntry.Description, evt.getDescription());
@@ -184,11 +188,85 @@ public class DbHandler extends SQLiteOpenHelper {
             values.put(EventEntry.Event_Date, evt.getDate());
             values.put(EventEntry.BUILDING, evt.getBuilding());
             values.put(EventEntry.IMAGE, evt.getImage());
-            long result = db.insert(EventEntry.TABLE_NAME, null, values);
-            if(result == -1)
-                return false;
-            else
-                return true;
+
+            long result = sb.insert(EventEntry.TABLE_NAME, null, values);
+            TheReturner = result != -1;
+            AddCreator(evt, creator);
+        }else{
+            TheReturner = false;
+        }
+        return TheReturner;
+    }
+
+    private void AddCreator(Event evt, CurrentUser creator) {
+
+        String query = "Select * from "+ EventEntry.TABLE_NAME +" where " + EventEntry.Event_Title +" = \"" + evt.getTitle() + "\";";
+        Cursor find = QueryData(query);
+        try {
+            if (find.moveToFirst()) {
+                do {
+                    evt.setId(find.getInt(0));
+                    Log.d("CreatingEvent", "The name is :" + find.getString(1) + " The id for this is : " + evt.getId());
+                }
+                while (find.moveToNext());
+            }
+        }catch (Exception e){
+            Log.d("CreatingEvent", "Somethign went wong");
+        }
+
+
+        ContentValues Manager = new ContentValues();
+        Manager.put(OrganizedEvents.RA_ID, creator.getID());
+        Manager.put(OrganizedEvents.Event_ID, evt.getId());
+
+
+
+        try {
+            db = this.getWritableDatabase();
+            db.insert(OrganizedEvents.TABLE_NAME, null, Manager);
+            db.close();
+        } catch (Exception e) {
+            Log.d("CreatingEvent", e.getMessage() );
+        }
+    }
+
+    public boolean Eventcheck(String EventTitle){
+        db = this.getReadableDatabase();
+        boolean Here= false;
+        String query = "Select * from "+ EventEntry.TABLE_NAME +" where " + EventEntry.Event_Title +" = \"" + EventTitle + "\";";
+        Cursor find = QueryData(query);
+        try {
+            if (find.moveToFirst()) {
+                do {
+                    find.getString(1);
+                    Here = true;
+                    Log.d("CreatingEvent", "The name is :" + find.getString(1) + " The id for this is : " + find.getInt(0));
+                }
+                while (find.moveToNext());
+            }
+        }catch (Exception e){
+            Log.d("CreatingEvent", "Somethign went wong");
+        }
+        db.close();
+        return Here;
+    }
+
+    public boolean updateEvent(int id, ContentValues cv){
+
+        /*
+        ContentValues cv = new ContentValues();
+        cv.put(EventEntry.Event_Title,"Bob"); //These Fields should be your String values of actual column names
+        cv.put(EventEntry.Description,"19");
+        cv.put(EventEntry.Location,"Male");
+        cv.put(EventEntry.BUILDING,"19");
+        cv.put(EventEntry.Event_Time,"Male");
+        cv.put(EventEntry.Event_Date,"19");
+        cv.put(EventEntry.IMAGE,"Male");
+        */
+
+
+        int update = db.update(EventEntry.TABLE_NAME, cv,"where " + EventEntry.Event_ID +" = " + id, null);
+        return update != -1;
     }
 
     public Cursor QueryData(String query) throws SQLException{
@@ -201,7 +279,7 @@ public class DbHandler extends SQLiteOpenHelper {
     public boolean emailCheck(String emailEntry){
         Log.d("696969", "Reached set password");
         boolean exists = false;
-        String email = "Not found";
+        String email = "";
         db = this.getReadableDatabase();
         String query = "select " + UserEntry.Email + " from "
                 + UserEntry.TABLE_NAME ;
@@ -210,7 +288,9 @@ public class DbHandler extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
                 do {
                     email = cursor.getString(0);
+
                     Log.d("EmailCheck", email);
+
                     if (email.equals(emailEntry)) {
                         exists = true;
                         Log.d("searchPassword", "I guess it lives!");
@@ -231,10 +311,10 @@ public class DbHandler extends SQLiteOpenHelper {
     public String searchPassword(String emailEntry){
         Log.d("696969", "Reached set password");
         String password = "";
-        String email = "Not found";
+        String email = "";
         db = this.getReadableDatabase();
         String query = "select " + UserEntry.Email + ", " + UserEntry.Password + " from "
-                + UserEntry.TABLE_NAME + "";
+                + UserEntry.TABLE_NAME + ";";
         try {
             Cursor cursor = db.rawQuery(query, null);
             if (cursor.moveToFirst()) {

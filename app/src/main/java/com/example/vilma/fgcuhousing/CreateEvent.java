@@ -1,5 +1,6 @@
 package com.example.vilma.fgcuhousing;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.vilma.fgcuhousing.data.CurrentUser;
 import com.example.vilma.fgcuhousing.data.DbHandler;
 import com.example.vilma.fgcuhousing.data.Event;
 import com.example.vilma.fgcuhousing.data.HousingContract;
@@ -27,6 +29,7 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
     EditText title, description, building, time, date;
     TextView location;
     Button btnCreateEvent;
+    private CurrentUser CU;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,8 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         setContentView(R.layout.activity_create_event);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Bundle extras = getIntent().getExtras();
+        CU = extras.getParcelable("CurrentUser");
 
         Spinner spinnerFilter = (Spinner) findViewById(R.id.spinnerLocation);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.spinner_housing_options, android.R.layout.simple_spinner_item);
@@ -51,8 +56,7 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         time = (EditText) findViewById(R.id.txtTime);
         date = (EditText) findViewById(R.id.txtDate);
 
-        Bundle extras = getIntent().getExtras();   //extras will be the event ID if coming from edit event function
-        if (extras == null) {
+        if (!extras.containsKey("event_id")) {
             edit=false;
         } else {
             edit = true;
@@ -91,15 +95,18 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         if (v == findViewById(R.id.btnConfirm)) {
             if(edit==false) {
                 try {
-
                     Log.d("insertEvent", event.getDescription() + " " + event.getLocation() + "  " + event.getBuilding() + "  " + event.getTitle() + "  " + event.getDate() + "  " + event.getTime());
-                    isInserted = datCon.insertEvent(event);
+                    isInserted = datCon.insertEvent(event, CU);
                 } catch (Exception e) {
                     Log.d("insertEvent", "so whats the problem");
                     Log.d("insertEvent", e.getMessage());
                 }
-                if (isInserted)
+                if (isInserted) {
                     Toast.makeText(CreateEvent.this, "Event created successfully", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), EventManager.class);
+                    intent.putExtra("CurrentUser", CU);
+                    startActivity(intent);
+                }
                 else
                     Toast.makeText(CreateEvent.this, "Event was not created", Toast.LENGTH_LONG).show();
             }
@@ -122,4 +129,11 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {    }
+
+    @Override
+    public void onBackPressed() {
+        Intent e = new Intent(getApplicationContext(), EventManager.class);
+        e.putExtra("CurrentUser", CU);
+        startActivity(e);
+    }
 }

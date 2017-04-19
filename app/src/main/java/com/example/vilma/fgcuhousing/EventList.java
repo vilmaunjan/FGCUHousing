@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,8 +57,10 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
         setSupportActionBar(toolbar);
 
         //Setsup Current User
-       // Bundle data = getIntent().getExtras();
-        //CU = data.getParcelable("CurrentUser");
+        Bundle data = getIntent().getExtras();
+        CU = data.getParcelable("CurrentUser");
+
+        Log.d("CurrentUser", "Name : " + CU.getName()+ " Password: " +CU.getPassword()+ " Account type :" + CU.getAccountType() );
 
         Spinner spinnerFilter = (Spinner) findViewById(R.id.spinnerFilter);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.spinner_housing_options, android.R.layout.simple_spinner_item);
@@ -69,7 +72,9 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(view.getContext(), Awards.class));
+                Intent awards = new Intent(getApplicationContext(), Awards.class);
+                awards.putExtra("CurrentUser", CU);
+                startActivity(awards);
             }
         });
 
@@ -108,7 +113,10 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
                 String event_id = ((TextView) view.findViewById(R.id.tv_id)).getText().toString();
                 Toast.makeText(EventList.this, event_id, Toast.LENGTH_SHORT).show();
 
-                startActivity(new Intent(getApplicationContext(), EventPage.class).putExtra("event_id", event_id));
+                Intent event = new Intent(getApplicationContext(), EventPage.class);
+                event.putExtra("CurrentUser", CU);
+                event.putExtra("event_id", event_id);
+                startActivity(event);
             }
         });
 
@@ -175,6 +183,20 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
         }
     }
 
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        MenuItem EventManager = menu.findItem(R.id.event_manager);
+        if(CU.getAccountType().equals("R"))
+        {
+            EventManager.setVisible(false);
+        }
+        else
+        {
+            EventManager.setVisible(true);
+        }
+        return true;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -189,12 +211,18 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        Log.d("Menu",item.getTitle().toString());
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            startActivity(new Intent(getApplicationContext(), ResidentAccount.class));
+            Intent Account = new Intent(getApplicationContext(), ResidentAccount.class);
+            Account.putExtra("CurrentUser", CU);
+            startActivity(Account);
         } else if (id == R.id.event_manager){
-            startActivity(new Intent(getApplicationContext(), EventManager.class));
+
+            Intent Account = new Intent(getApplicationContext(), EventManager.class);
+            Account.putExtra("CurrentUser", CU);
+            startActivity(Account);
         }
 
         return super.onOptionsItemSelected(item);
@@ -209,7 +237,7 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface arg0, int arg1) {
-                        EventList.super.onBackPressed();
+
                     }
                 })
                 .create()

@@ -15,11 +15,13 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.example.vilma.fgcuhousing.data.CurrentUser;
 import com.example.vilma.fgcuhousing.data.DbHandler;
 
 
 public class Awards extends AppCompatActivity {
 
+    private CurrentUser CU;
     //Need these whenever Connecting to database
     private SQLiteDatabase sqlDb;
     private DbHandler datCon;
@@ -32,11 +34,8 @@ public class Awards extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        datCon = new DbHandler(getApplicationContext());
-        sqlDb = datCon.getReadableDatabase();
-
-        //Getting all awards data from database
-        cursor = datCon.getAwardsInfo();
+        Bundle data = getIntent().getExtras();
+        CU = data.getParcelable("CurrentUser");
 
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new ImageAdapter(this));
@@ -52,26 +51,11 @@ public class Awards extends AppCompatActivity {
                 }
         });
 
-//        while(cursor.moveToNext()){
-//            String s = "awards";
-//            // String id = cursor.getString(0);
-//            String name = cursor.getString(1);
-//            String description = cursor.getString(2);
-//            String image = cursor.getString(3);
-//
-//            //    Button currentButton = new Button(name);
-//
-//            Log.d(s," name: " + name
-//                    + " description : "+ description +" image : "+ image );
-//
-//            //    currentButton.setText(name);
-//        }
 
-
-
-
-        //Closes database connection
-        datCon.close();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

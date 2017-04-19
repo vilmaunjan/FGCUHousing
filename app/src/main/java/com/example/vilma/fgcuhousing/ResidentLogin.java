@@ -50,9 +50,9 @@ public class ResidentLogin extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), EventList.class);
 
                 //Use to create current user
-               // CurrentUser usr = LogIN(emailEntry);
+                CurrentUser usr = LogIN(getApplication(),emailEntry);
                 //Adds the Current user data to be passed
-                //i.putExtra("CurrentUser", usr);
+                i.putExtra("CurrentUser", usr);
                 //Go to the next activity
                 startActivity(i);
                 Log.d("Caleb", " password");

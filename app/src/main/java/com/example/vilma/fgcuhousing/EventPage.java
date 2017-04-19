@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.vilma.fgcuhousing.data.CurrentUser;
 import com.example.vilma.fgcuhousing.data.DbHandler;
 import com.example.vilma.fgcuhousing.data.Event;
 import com.example.vilma.fgcuhousing.data.HousingContract;
@@ -23,7 +24,8 @@ public class EventPage extends AppCompatActivity {
     //Need these whenever Connecting to database
     private SQLiteDatabase mDb;
     private DbHandler datCon;
-    private boolean CheckedIN;
+    private CurrentUser CU;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,9 @@ public class EventPage extends AppCompatActivity {
         setContentView(R.layout.activity_event_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Bundle data = getIntent().getExtras();
+        CU = data.getParcelable("CurrentUser");
 
         //load database
         datCon = new DbHandler(this);
@@ -87,10 +92,13 @@ public class EventPage extends AppCompatActivity {
             checkOut.setVisibility(View.VISIBLE);
             checkOut.setEnabled(true);
 
+
             //timer should start and should stop when check out button is pressed
         }
         else if (v == findViewById(R.id.btnCheckout)){ //when 'checkout' button is pressed
-            startActivity(new Intent(getApplicationContext(), RatingPage.class));
+            Intent Account = new Intent(getApplicationContext(), EventPage.class);
+            Account.putExtra("CurrentUser", CU);
+            startActivity(Account);
         }
     }
 

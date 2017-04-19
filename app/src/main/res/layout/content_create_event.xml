@@ -36,19 +36,6 @@
         tools:layout_editor_absoluteY="306dp" />
 
     <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtEventName"
-        android:layout_alignLeft="@+id/textView19"
-        android:layout_alignStart="@+id/textView19"
-        android:text="id:"
-        android:textSize="18sp"
-        app:layout_constraintRight_toLeftOf="@+id/txtId"
-        tools:ignore="HardcodedText"
-        tools:layout_editor_absoluteY="53dp" />
-
-    <TextView
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -116,19 +103,6 @@
         tools:layout_editor_absoluteY="207dp" />
 
     <TextView
-        android:id="@+id/txtId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView16"
-        android:layout_alignBottom="@+id/textView16"
-        android:layout_alignLeft="@+id/txtEventName"
-        android:layout_alignStart="@+id/txtEventName"
-        android:text="@string/_1"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="53dp" />
-
-    <TextView
         android:id="@+id/textView26"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -160,11 +134,9 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView16"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView16"
         android:text="Enter information to create an event (all fields are required):"
         tools:ignore="HardcodedText" />
 

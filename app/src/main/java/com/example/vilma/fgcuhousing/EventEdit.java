@@ -55,8 +55,9 @@ public class EventEdit extends AppCompatActivity implements AdapterView.OnItemSe
         setSupportActionBar(toolbar);
 
         //Setup Current User
-        // Bundle data = getIntent().getExtras();
-        //CU = data.getParcelable("CurrentUser");
+        Bundle data = getIntent().getExtras();
+        CU = data.getParcelable("CurrentUser");
+
 
         Spinner spinnerFilter = (Spinner) findViewById(R.id.spinnerFilter);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.spinner_housing_options, android.R.layout.simple_spinner_item);
@@ -102,7 +103,7 @@ public class EventEdit extends AppCompatActivity implements AdapterView.OnItemSe
                 String event_id = ((TextView) view.findViewById(R.id.tv_id)).getText().toString();
 
                 if(function.equals("edit")){
-                    startActivity(new Intent(getApplicationContext(), CreateEvent.class).putExtra("event_id", event_id));
+                    startActivity(new Intent(getApplicationContext(), CreateEvent.class).putExtra("event_id", event_id).putExtra("CurrentUser", CU));
                 }
                 else if(function.equals("delete")){
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EventEdit.this);
@@ -118,7 +119,7 @@ public class EventEdit extends AppCompatActivity implements AdapterView.OnItemSe
                                     //use the String event_id to select correct item to delete
                                     //***********************************
                                     finish();
-                                    startActivity(getIntent().putExtra("function", "delete"));
+                                    startActivity(getIntent().putExtra("function", "delete").putExtra("CurrentUser", CU));
 
                                 }
                             });
@@ -215,9 +216,13 @@ public class EventEdit extends AppCompatActivity implements AdapterView.OnItemSe
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            startActivity(new Intent(getApplicationContext(), ResidentAccount.class));
+            Intent Account = new Intent(getApplicationContext(), ResidentAccount.class);
+            Account.putExtra("CurrentUser", CU);
+            startActivity(Account);
         } else if (id == R.id.event_manager){
-            startActivity(new Intent(getApplicationContext(), EventManager.class));
+            Intent Account = new Intent(getApplicationContext(), EventManager.class);
+            Account.putExtra("CurrentUser", CU);
+            startActivity(Account);
         }
 
         return super.onOptionsItemSelected(item);
@@ -232,7 +237,9 @@ public class EventEdit extends AppCompatActivity implements AdapterView.OnItemSe
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface arg0, int arg1) {
-                        EventEdit.super.onBackPressed();
+                        Intent Account = new Intent(getApplicationContext(), EventManager.class);
+                        Account.putExtra("CurrentUser", CU);
+                        startActivity(Account);
                     }
                 }).create().show();
     }

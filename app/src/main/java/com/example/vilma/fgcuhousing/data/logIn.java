@@ -1,5 +1,6 @@
 package com.example.vilma.fgcuhousing.data;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -21,29 +22,35 @@ public class logIn {
     }
 
 
-    public static CurrentUser LogIN(String e){
+    public static CurrentUser LogIN(Context x, String e){
+        db= new DbHandler(x);
         String Tt = "Tager";
+        String id = "";
         String name ="";
         String email="";
         String password="";
         String building="";
-        String query = "Select * from "+ UserEntry.TABLE_NAME +" where " + UserEntry.Email +" = " + e;
+
+        String query = "Select * from "+ UserEntry.TABLE_NAME +" where " + UserEntry.Email +" = \"" + e + "\";";
        find = db.QueryData(query);
-        if(find.moveToFirst()){
-            do{
-                name = find.getString(0);
-                email = find.getString(1);
-                password = find.getString(2);
-                building = find.getString(3);
 
-                Log.d(Tt, "The name is :" + name + " The email is : " + email
-                + " the password is : " + password + " building is : " + building);
+            if (find.moveToFirst()) {
+                do {
+                    id = find.getString(0);
+                    name = find.getString(1);
+                    email = find.getString(2);
+                    password = find.getString(3);
+                    building = find.getString(5);
+
+                    Log.d(Tt, "The name is :" + name + " The email is : " + email
+                            + " the password is : " + password + " building is : " + building);
+                }
+                while (find.moveToNext());
+
+
             }
-            while(find.moveToNext());
-        }
-
-
         CurrentUser enter = new CurrentUser(name, email, password, building);
+        enter.setID(id);
         return enter;
     }
 

@@ -3,18 +3,30 @@ package com.example.vilma.fgcuhousing.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.vilma.fgcuhousing.R;
+
+
 /**
  * Created by Vilma on 4/6/2017.
  */
 
-public class Event implements Parcelable {
+public class Event {
 
     private String title, description, location, building, time, date, image;
+    private int id;
     private boolean validInput;
 
     //Getters and setters
     public String getTitle() {
         return title;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setTitle(String title) {
@@ -62,6 +74,9 @@ public class Event implements Parcelable {
     }
 
     public String getImage() {
+        if(image == null){
+            setImage(String.valueOf((R.drawable.defaulposter)));
+        }
         return image;
     }
 
@@ -77,13 +92,4 @@ public class Event implements Parcelable {
         this.validInput = validInput;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-    }
 }

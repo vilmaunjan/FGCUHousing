@@ -6,8 +6,25 @@ package com.example.vilma.fgcuhousing.data;
  */
 
 public class User {
-    private String name, email, password, building;
+    private String name;
+    private String email;
+    private String password;
+    private String building;
+    private String Type;
     private boolean validInput;
+
+    public String getType() {
+            if(email.endsWith("@eagle.fgcu.edu")){
+                Type = "R";
+            }else if(email.endsWith("@fgcu.edu")){
+                Type = "RA";
+            }
+        return Type;
+    }
+
+    public void setType(String type) {
+        Type = type;
+    }
 
     public boolean isValidInput() {
         return validInput;
