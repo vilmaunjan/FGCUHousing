@@ -30,10 +30,12 @@ public class EventManager extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), CreateEvent.class));
         }
         else if (v == findViewById(R.id.btnEdit)) { //go to EventEdit page
-            startActivity(new Intent(getApplicationContext(), EventEdit.class));
+            String function = "edit";
+            startActivity(new Intent(getApplicationContext(), EventEdit.class).putExtra("function", function));
         }
         else if (v == findViewById(R.id.btnDelete)) { //go to EventPage
-           // startActivity(new Intent(getApplicationContext(), CreateEvent.class));
+            String function = "delete";
+            startActivity(new Intent(getApplicationContext(), EventEdit.class).putExtra("function", function));
         }
         else if (v == findViewById(R.id.btnFeedback)) { //go to EventPage
            // startActivity(new Intent(getApplicationContext(), CreateEvent.class));
