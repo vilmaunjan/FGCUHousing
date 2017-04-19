@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void imageOnClick(View i){
         if(i == findViewById(R.id.StarMode)) {
-            startActivity(new Intent(getApplicationContext(), Awards.class));
+            startActivity(new Intent(getApplicationContext(), EventManager.class));
         }
     }
 

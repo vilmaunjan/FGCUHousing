@@ -34,6 +34,7 @@
     <string name="event_name">Event name</string>
     <string name="_1">1</string>
     <string name="create_event">Create event</string>
+    <string name="confirm">Confirm</string>
     <string name="create_new_event">Create new event</string>
     <string name="event_building">Event building</string>
     <string name="event_date">Event date</string>
@@ -57,4 +58,5 @@
     <string name="building">Building:</string>
     <string name="enter_building">Enter Building</string>
     <string name="submit">Submit</string>
+    <string name="title_activity_event_edit">event_edit</string>
 </resources>

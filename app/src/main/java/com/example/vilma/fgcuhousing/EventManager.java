@@ -29,8 +29,8 @@ public class EventManager extends AppCompatActivity {
         if (v == findViewById(R.id.btnCreate)) { //go to EventPage
             startActivity(new Intent(getApplicationContext(), CreateEvent.class));
         }
-        else if (v == findViewById(R.id.btnEdit)) { //go to EventPage
-           // startActivity(new Intent(getApplicationContext(), CreateEvent.class));
+        else if (v == findViewById(R.id.btnEdit)) { //go to EventEdit page
+            startActivity(new Intent(getApplicationContext(), EventEdit.class));
         }
         else if (v == findViewById(R.id.btnDelete)) { //go to EventPage
            // startActivity(new Intent(getApplicationContext(), CreateEvent.class));
