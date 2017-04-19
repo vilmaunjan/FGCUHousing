@@ -91,7 +91,9 @@ public class EventEdit extends AppCompatActivity implements AdapterView.OnItemSe
         listView.setAdapter(eventAdapter);
         eventAdapter.notifyDataSetChanged();
 
-        //When clicking on an events, leads to the event info page
+        Bundle extras = getIntent().getExtras();
+        final String function = getIntent().getStringExtra("function");
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -99,12 +101,38 @@ public class EventEdit extends AppCompatActivity implements AdapterView.OnItemSe
 
                 String event_id = ((TextView) view.findViewById(R.id.tv_id)).getText().toString();
 
+                if(function.equals("edit")){
+                    startActivity(new Intent(getApplicationContext(), CreateEvent.class).putExtra("event_id", event_id));
+                }
+                else if(function.equals("delete")){
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EventEdit.this);
+                    alertDialogBuilder.setTitle("Really Delete?");
+                    alertDialogBuilder.setMessage("Are you sure you want to delete this event?");
+                    alertDialogBuilder.setNegativeButton(android.R.string.no, null);
+                    alertDialogBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-                startActivity(new Intent(getApplicationContext(), CreateEvent.class).putExtra("event_id", event_id));
+                                 @Override
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                    //*************************
+                                    //here the event will be deleted from the database
+                                    //use the String event_id to select correct item to delete
+                                    //***********************************
+                                    finish();
+                                    startActivity(getIntent().putExtra("function", "delete"));
+
+                                }
+                            });
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                }
             }
         });
 
+        eventAdapter.notifyDataSetChanged();
+        Toast.makeText(this, "Deleted",Toast.LENGTH_SHORT).show();
+
     }
+
 
     //protected Adapter initializedAdapter=null;
     // This method is used for dropdown spinner when it filters by housing options(north, south, west)
@@ -112,7 +140,7 @@ public class EventEdit extends AppCompatActivity implements AdapterView.OnItemSe
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         TextView spinnerDialogText = (TextView) view;
         String building = "";
-        Toast.makeText(this, "You selected " + spinnerDialogText.getText(), Toast.LENGTH_SHORT).show();
+
 
         String selected = parent.getItemAtPosition(position).toString();
 
@@ -120,10 +148,13 @@ public class EventEdit extends AppCompatActivity implements AdapterView.OnItemSe
         ArrayList<EventItem> newArrayList=new ArrayList<>();
         if(spinnerDialogText.getText().equals("South Lake Village")){
             building = "South Village";
+            Toast.makeText(this, "You selected " + spinnerDialogText.getText(), Toast.LENGTH_SHORT).show();
         } else if(spinnerDialogText.getText().equals("North Lake Village")){
             building = "North Village";
+            Toast.makeText(this, "You selected " + spinnerDialogText.getText(), Toast.LENGTH_SHORT).show();
         } else if(spinnerDialogText.getText().equals("West Lake Village")){
             building = "West Village";
+            Toast.makeText(this, "You selected " + spinnerDialogText.getText(), Toast.LENGTH_SHORT).show();
         }
 
         if(!building.equals("")) {

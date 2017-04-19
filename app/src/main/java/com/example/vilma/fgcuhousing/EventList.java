@@ -211,7 +211,9 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
                     public void onClick(DialogInterface arg0, int arg1) {
                         EventList.super.onBackPressed();
                     }
-                }).create().show();
+                })
+                .create()
+                .show();
     }
 
 }

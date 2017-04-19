@@ -51,13 +51,12 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         time = (EditText) findViewById(R.id.txtTime);
         date = (EditText) findViewById(R.id.txtDate);
 
-        Bundle extras = getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();   //extras will be the event ID if coming from edit event function
         if (extras == null) {
             edit=false;
         } else {
             edit = true;
-            //btnCreateEvent.setText("Edit Event");  doesnt work, find way to change text maybe
-            String event_id = getIntent().getStringExtra("event_id");
+            String event_id = getIntent().getStringExtra("event_id");  //look for the event by id and pull values from it to text feilds.
             Cursor cursorEventInfo = datCon.QueryData("select * from "
                     + HousingContract.EventEntry.TABLE_NAME + " where "
                     + HousingContract.EventEntry.Event_ID + " = " + event_id);
