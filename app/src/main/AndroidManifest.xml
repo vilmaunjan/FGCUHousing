@@ -57,11 +57,20 @@
         <activity
             android:name=".CreateEvent"
             android:label="@string/title_activity_create_event"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AwardInfo"
             android:label="AwardInfo"
             android:theme="@style/AppTheme.AwardTheme" />
+        <activity
+            android:name=".EventEdit"
+            android:label="@string/title_activity_event_edit"
+            android:parentActivityName=".EventManager"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.vilma.fgcuhousing.EventManager" />
+        </activity>
     </application>
 
 </manifest>

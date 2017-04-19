@@ -169,7 +169,7 @@
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/btnCreateEvent"
+        android:id="@+id/btnConfirm"
         android:layout_width="160dp"
         android:layout_height="40dp"
         android:layout_alignEnd="@+id/btnPoster"
@@ -179,7 +179,7 @@
         android:layout_alignStart="@+id/textView26"
         android:layout_marginBottom="11dp"
         android:onClick="buttonOnClick"
-        android:text="@string/create_event"
+        android:text="@string/confirm"
         tools:layout_editor_absoluteX="89dp"
         tools:layout_editor_absoluteY="472dp" />
 
@@ -190,7 +190,7 @@
         android:text="Insert Poster"
         tools:layout_editor_absoluteX="153dp"
         tools:layout_editor_absoluteY="406dp"
-        android:layout_above="@+id/btnCreateEvent"
+        android:layout_above="@+id/btnConfirm"
         android:layout_alignLeft="@+id/spinnerLocation"
         android:layout_alignStart="@+id/spinnerLocation"
         android:layout_marginBottom="9dp" />
