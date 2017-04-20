@@ -44,7 +44,7 @@ public class EventManager extends AppCompatActivity {
             event.putExtra("function", function);
             startActivity(event);
         }
-        else if (v == findViewById(R.id.btnDelete)) { //go to EventPage
+        else if (v == findViewById(R.id.btnDelete)) { //go to EventEditPage
             String function = "delete";
             Intent event = new Intent(getApplicationContext(), EventEdit.class);
             event.putExtra("CurrentUser", CU);

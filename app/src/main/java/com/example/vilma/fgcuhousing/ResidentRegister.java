@@ -28,7 +28,6 @@ public class ResidentRegister extends AppCompatActivity {
 
     DbHandler db = new DbHandler(this);
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +36,11 @@ public class ResidentRegister extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Adapter for building list drop down on autocomplete
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line,BUILDINGS);
 
+        //Assigning inputted values
         Name = (EditText) findViewById(R.id.txtName);
         Email = (EditText) findViewById(R.id.txtEmail);
         Password = (EditText) findViewById(R.id.txtPassword);
@@ -50,6 +51,9 @@ public class ResidentRegister extends AppCompatActivity {
 
     }
 
+    /**
+     * Building List
+     */
     private static final String[] BUILDINGS = new String[] {
             //All buildings need to be added
             "Eagle", "Osprey", "Palmetto", "Biscayne", "Everglades", //South Village
@@ -71,9 +75,12 @@ public class ResidentRegister extends AppCompatActivity {
             String passwordVerify = PasswordVerify.getText().toString();
             String buildingEntry = Building.getText().toString();
 
-
+            /**
+             * code to verify registration parameters
+             */
             Verify ver = new Verify(getApplicationContext(), nameEntry, emailEntry, passwordEntry, passwordVerify);
 
+            //if verified
             if(ver.Verifier() && !db.emailCheck(emailEntry)) {
 
                 //Inserts user information into user class.

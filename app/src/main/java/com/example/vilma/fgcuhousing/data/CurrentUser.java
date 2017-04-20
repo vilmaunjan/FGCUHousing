@@ -10,21 +10,64 @@ import java.util.HashMap;
 
 /**
  * Created by Andrew on 4/17/2017.
+ * Parcelable class that can be passed through activities
  */
 
 public class CurrentUser implements Parcelable {
 
-    private String ID;
-    private String name;
-    private String email;
-    private String password;
-    private String building;
-    private String AccountType;
-    private HashMap<String, Integer> Events;
+
+    private int ID;//Gets the users ID in database when added
+    private String name;//user name
+    private String email;//email
+    private String password;//password
+    private String building;//building
+    private String AccountType;//account Type
+    //This hash map holds the title of the event and a class of infromation needed
+    private HashMap<String, UserEvents> Events = new HashMap<>();
+    //Working on the awards still but this is here for now
     private ArrayList<String> awarded = new ArrayList<>();
 
+    //Anything passed here is getter and setters
+    //as well as the parcelable default required methods
+    public int getID() {
+        return ID;
+    }
 
+    public void setID(int ID) {
+        this.ID = ID;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(String building) {
+        this.building = building;
+    }
 
     public String getAccountType() {
         return AccountType;
@@ -34,13 +77,20 @@ public class CurrentUser implements Parcelable {
         AccountType = accountType;
     }
 
-
-    public HashMap<String, Integer> getEvents() {
+    public HashMap<String, UserEvents> getEvents() {
         return Events;
     }
 
-    public void setEvents(HashMap<String, Integer> events) {
+    public void setEvents(HashMap<String, UserEvents> events) {
         Events = events;
+    }
+
+    public ArrayList<String> getAwarded() {
+        return awarded;
+    }
+
+    public void setAwarded(ArrayList<String> awarded) {
+        this.awarded = awarded;
     }
 
     public CurrentUser(){
@@ -52,80 +102,6 @@ public class CurrentUser implements Parcelable {
         this.email = Email;
         this.password = pass;
         this.building = Building;
-        Account();
-    }
-
-    public String getID() {
-        return ID;
-    }
-
-    public String getBuilding() {
-        return building;
-    }
-
-    public void setBuilding(String building) {
-        this.building = building;
-    }
-
-    public String getPassword() {
-
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getName() {
-
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setID(String ID) {
-
-        this.ID = ID;
-    }
-
-
-
-    /**
-     * Gets the rating score for the current event if rated already
-     * @param RatingId
-     * @return
-     */
-    public int getRating(int RatingId){
-
-        return 0;
-    }
-
-    /**
-     * sets the rating in the database
-     * @param Rating
-     */
-
-    public void setRating(int Rating){
-
-    }
-
-    private void Account(){
-        if(email.endsWith("@eagle.fgcu.edu")){
-            AccountType = "R";
-        }else if(email.endsWith("@fgcu.edu")){
-            AccountType = "RA";
-        }
     }
 
 
@@ -136,24 +112,24 @@ public class CurrentUser implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.ID);
+        dest.writeInt(this.ID);
         dest.writeString(this.name);
         dest.writeString(this.email);
         dest.writeString(this.password);
         dest.writeString(this.building);
         dest.writeString(this.AccountType);
-        dest.writeSerializable(this.Events);
+        dest.writeMap(this.Events);
         dest.writeStringList(this.awarded);
     }
 
     protected CurrentUser(Parcel in) {
-        this.ID = in.readString();
+        this.ID = in.readInt();
         this.name = in.readString();
         this.email = in.readString();
         this.password = in.readString();
         this.building = in.readString();
         this.AccountType = in.readString();
-        this.Events = (HashMap<String, Integer>) in.readSerializable();
+        in.readMap(Events, UserEvents.class.getClassLoader());
         this.awarded = in.createStringArrayList();
     }
 

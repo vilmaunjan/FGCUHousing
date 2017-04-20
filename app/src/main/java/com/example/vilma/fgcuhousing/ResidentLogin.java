@@ -28,14 +28,16 @@ public class ResidentLogin extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
     }
 
-    //Still needs work on this code --Andrew
+
     public void buttonOnClick(View v) {
         Button button = (Button)v;
         if (v == findViewById(R.id.btnLoginResidentLogin)) {
 
+            /**
+             * get's the values in the email and password fields
+             */
             EditText Email = (EditText) findViewById(R.id.resEmail);
             EditText Password = (EditText) findViewById(R.id.resPassword);
 
@@ -47,14 +49,15 @@ public class ResidentLogin extends AppCompatActivity {
             String password = db.searchPassword(emailEntry);
             //If what the user entered is the correct password then move to EventList
             if(passwordEntry.equals(password)) {
-                Intent i = new Intent(getApplicationContext(), EventList.class);
 
+                Intent i = new Intent(getApplicationContext(), EventList.class);
                 //Use to create current user
-                CurrentUser usr = LogIN(getApplication(),emailEntry);
+                CurrentUser usr = LogIN(getApplicationContext(),emailEntry);
                 //Adds the Current user data to be passed
                 i.putExtra("CurrentUser", usr);
                 //Go to the next activity
                 startActivity(i);
+
                 Log.d("Caleb", " password");
             } else {
                 Toast.makeText(getApplicationContext(), "Incorrect Password or EmailAddress",

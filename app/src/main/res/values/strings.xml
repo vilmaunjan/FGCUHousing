@@ -59,4 +59,6 @@
     <string name="enter_building">Enter Building</string>
     <string name="submit">Submit</string>
     <string name="title_activity_event_edit">event_edit</string>
+    <string name="on_ward">On Ward</string>
+    <string name="rate_event">Rate Event</string>
 </resources>

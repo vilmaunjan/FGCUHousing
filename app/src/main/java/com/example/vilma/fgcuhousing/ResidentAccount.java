@@ -23,6 +23,9 @@ public class ResidentAccount extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /**
+         * Holds all the user information in CU
+         */
         Bundle data = getIntent().getExtras();
         CU = data.getParcelable("CurrentUser");
 
@@ -39,6 +42,8 @@ public class ResidentAccount extends AppCompatActivity {
             startActivity(awards);
         }
     }
+
+
 
     @Override
     public void onBackPressed() {

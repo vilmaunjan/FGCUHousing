@@ -7,7 +7,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,11 +14,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,14 +24,11 @@ import android.widget.Toast;
 
 import com.example.vilma.fgcuhousing.data.CurrentUser;
 import com.example.vilma.fgcuhousing.data.DbHandler;
-import com.example.vilma.fgcuhousing.data.Event;
 import com.example.vilma.fgcuhousing.data.EventAdapter;
 import com.example.vilma.fgcuhousing.data.EventItem;
 import com.example.vilma.fgcuhousing.data.HousingContract;
 
 import java.util.ArrayList;
-
-import static com.example.vilma.fgcuhousing.R.id.spinnerFilter;
 
 public class EventList extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -44,9 +38,9 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
     private CurrentUser CU;
 
     //variables declaration
-    ListView listView;
-    ArrayList<EventItem> arrayList=new ArrayList<>();
-    EventAdapter eventAdapter;
+    private ListView listView;
+    private ArrayList<EventItem> arrayList=new ArrayList<>();
+    private EventAdapter eventAdapter;
 
 
     @Override
@@ -56,7 +50,7 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Setsup Current User
+        //Setups Current User
         Bundle data = getIntent().getExtras();
         CU = data.getParcelable("CurrentUser");
 
@@ -68,6 +62,7 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
         spinnerFilter.setAdapter(adapter);
         spinnerFilter.setOnItemSelectedListener(this);
 
+        //Code for the award button on bottom
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floatingActionAwards);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,11 +103,14 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Not sure if this is used
                 Object listItem = listView.getItemAtPosition(position);
 
+                //gets the event id
                 String event_id = ((TextView) view.findViewById(R.id.tv_id)).getText().toString();
                 Toast.makeText(EventList.this, event_id, Toast.LENGTH_SHORT).show();
 
+                //Passes it onto event page where even id is used to bring up the event
                 Intent event = new Intent(getApplicationContext(), EventPage.class);
                 event.putExtra("CurrentUser", CU);
                 event.putExtra("event_id", event_id);
@@ -185,6 +183,9 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
 
     public boolean onPrepareOptionsMenu(Menu menu)
     {
+        /**
+         * If user is a Resident, Can not see event manager
+         */
         MenuItem EventManager = menu.findItem(R.id.event_manager);
         if(CU.getAccountType().equals("R"))
         {
@@ -215,6 +216,7 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
             Intent Account = new Intent(getApplicationContext(), ResidentAccount.class);
             Account.putExtra("CurrentUser", CU);
             startActivity(Account);
@@ -228,8 +230,15 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * prompt user to make sure they want to log out
+     *
+     */
     @Override
     public void onBackPressed() {
+        /**
+         * Pop up Dialog
+         */
         new AlertDialog.Builder(this)
                 .setTitle("Really Exit?")
                 .setMessage("Are you sure you want to exit?")
@@ -237,7 +246,8 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface arg0, int arg1) {
-
+                        Intent goback = new Intent(getApplicationContext(), ResidentLogin.class);
+                        startActivity(goback);
                     }
                 })
                 .create()

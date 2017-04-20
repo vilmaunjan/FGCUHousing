@@ -126,9 +126,10 @@
         android:layout_marginBottom="13dp"
         android:layout_marginEnd="39dp"
         android:layout_marginRight="39dp"
-        android:text="@string/event_building"
+        android:hint="@string/event_building"
         tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="360dp" />
+        tools:layout_editor_absoluteY="360dp"
+        android:completionThreshold="1"/>
 
     <TextView
         android:id="@+id/textView18"

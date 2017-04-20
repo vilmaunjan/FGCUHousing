@@ -2,7 +2,6 @@ package com.example.vilma.fgcuhousing.data;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.AbstractCursor;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,7 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.vilma.fgcuhousing.data.HousingContract.*;
+import com.example.vilma.fgcuhousing.data.HousingContract.AttendedEventEntry;
+import com.example.vilma.fgcuhousing.data.HousingContract.AwardObtained;
+import com.example.vilma.fgcuhousing.data.HousingContract.Awards;
+import com.example.vilma.fgcuhousing.data.HousingContract.EventEntry;
+import com.example.vilma.fgcuhousing.data.HousingContract.OrganizedEvents;
+import com.example.vilma.fgcuhousing.data.HousingContract.UserEntry;
 
 
 /**
@@ -78,11 +82,12 @@ public class DbHandler extends SQLiteOpenHelper {
             final String CreateAttendedEvent = "CREATE TABLE " +
                     AttendedEventEntry.TABLE_NAME + "( " +
                     AttendedEventEntry.Rating_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    AttendedEventEntry.Resident_ID + " INTEGER, " +
-                    AttendedEventEntry.Event_ID + " INTEGER, " +
-                    AttendedEventEntry.Time_Stayed + " TEXT NOT NULL, " +
-                    AttendedEventEntry.Rating_Score + " TEXT NOT NULL, " +
-                    AttendedEventEntry.Rating_FeedBack + " TEXT NOT NULL, " +
+                    AttendedEventEntry.Resident_ID + " INTEGER NOT NULL, " +
+                    AttendedEventEntry.Event_ID + " INTEGER NOT NULL, " +
+                    AttendedEventEntry.Checked_IN + " DATETIME DEFAULT CURRENT_TIMESTAMP, " +
+                    AttendedEventEntry.Time_Stayed + " TEXT, " +
+                    AttendedEventEntry.Rating_Score + " INTEGER, " +
+                    AttendedEventEntry.Rating_FeedBack + " TEXT, " +
                     " FOREIGN KEY (" +
                     AttendedEventEntry.Resident_ID +
                     ") REFERENCES " + UserEntry.TABLE_NAME + "(" + UserEntry._ID + ")," +
@@ -119,6 +124,7 @@ public class DbHandler extends SQLiteOpenHelper {
         insertDaFakes(db);
     }
 
+    //Inserts the fake data into the database
     private void insertDaFakes(SQLiteDatabase db) {
         DbTest.insertFakeData(db);
     }
@@ -147,39 +153,65 @@ public class DbHandler extends SQLiteOpenHelper {
     //planning on working on more of these for now to make it easier later
     //Should be able to get started with using the database right now though
 
-    public Cursor getData(){
+    //Gets all data from a table, not sure if we need this just yet
+    public Cursor getData(String table){
         //use getReadableDatabase whenever you just want to read valuse
         //from database
         SQLiteDatabase db = this.getReadableDatabase();
         //String for Query
         String query = "select *" +
-                "From " + UserEntry.TABLE_NAME;
+                "From " + table;
         //inputs query and the return is always a cursor
         Cursor data = db.rawQuery(query, null);
         //returns the data
         return data;
     }
 
+
     //Used to insert a user into the database
     public void insertUser(Context c, User usr){
         Log.d("insertUser", usr.getEmail());
-        SQLiteDatabase homebase = this.getWritableDatabase();
+         db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(UserEntry.Name, usr.getName());
         values.put(UserEntry.Email, usr.getEmail());
         values.put(UserEntry.Password, usr.getPassword());
         values.put(UserEntry.Type, usr.getType());
         values.put(UserEntry.Building, usr.getBuilding());
-        long result = homebase.insert(UserEntry.TABLE_NAME, null, values);
+        long result = db.insert(UserEntry.TABLE_NAME, null, values);
+        db.close();
     }
 
+    //This returns a CurrentUser with information from database based on email
+    public CurrentUser loginAS(String email){
+        CurrentUser admin = new CurrentUser();
+        String query = "Select * from "+ UserEntry.TABLE_NAME +" where " + UserEntry.Email +" = \"" + email + "\";";
+        Cursor find = QueryData(query);
+
+        if (find.moveToFirst()) {
+            do {
+               admin.setID(find.getInt(0));
+                admin.setName(find.getString(1));
+                admin.setEmail(find.getString(2));
+                admin.setPassword(find.getString(3));
+                admin.setAccountType(find.getString(4));
+                admin.setBuilding(find.getString(5));
+            }
+            while (find.moveToNext());
+        }
+
+        db.close();
+        return admin;
+    }
+
+    //Creates Event in database
     public boolean insertEvent(Event evt, CurrentUser creator) {
-        boolean TheReturner = false;
+        boolean TheReturner;
         //If event does not exist
         if(!Eventcheck(evt.getTitle())) {
             Log.d("insertEvent", evt.getTitle());
 
-            SQLiteDatabase sb = this.getWritableDatabase();
+             db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put(EventEntry.Event_Title, evt.getTitle());
             values.put(EventEntry.Description, evt.getDescription());
@@ -189,7 +221,7 @@ public class DbHandler extends SQLiteOpenHelper {
             values.put(EventEntry.BUILDING, evt.getBuilding());
             values.put(EventEntry.IMAGE, evt.getImage());
 
-            long result = sb.insert(EventEntry.TABLE_NAME, null, values);
+            long result = db.insert(EventEntry.TABLE_NAME, null, values);
             TheReturner = result != -1;
             AddCreator(evt, creator);
         }else{
@@ -198,6 +230,7 @@ public class DbHandler extends SQLiteOpenHelper {
         return TheReturner;
     }
 
+    //Adds the user who created the event
     private void AddCreator(Event evt, CurrentUser creator) {
 
         String query = "Select * from "+ EventEntry.TABLE_NAME +" where " + EventEntry.Event_Title +" = \"" + evt.getTitle() + "\";";
@@ -230,6 +263,7 @@ public class DbHandler extends SQLiteOpenHelper {
         }
     }
 
+    //Checks if the event was created already
     public boolean Eventcheck(String EventTitle){
         db = this.getReadableDatabase();
         boolean Here= false;
@@ -251,6 +285,7 @@ public class DbHandler extends SQLiteOpenHelper {
         return Here;
     }
 
+    //Updates the Event with new values
     public boolean updateEvent(int id, ContentValues cv){
 
         /*
@@ -269,8 +304,9 @@ public class DbHandler extends SQLiteOpenHelper {
         return update != -1;
     }
 
+    //Simple method to pass a query string
     public Cursor QueryData(String query) throws SQLException{
-        SQLiteDatabase db = this.getReadableDatabase();
+        db = this.getReadableDatabase();
         Cursor data = db.rawQuery(query, null);
         return data;
     }
@@ -348,5 +384,87 @@ public class DbHandler extends SQLiteOpenHelper {
 
         return cursor;
     }
+
+    //Used to set the id when creating the row for attended events
+    private boolean setEventid(CurrentUser attendee, Event evt) {
+        db = this.getReadableDatabase();
+        boolean Here= false;
+        //The usual sql stuff
+        String query = "Select * from "+ AttendedEventEntry.TABLE_NAME +" where " +
+                AttendedEventEntry.Resident_ID +" = \"" + attendee.getID() + "\" " +
+                " AND "+ AttendedEventEntry.Event_ID +" = " + attendee.getEvents().get(evt.getTitle()).getEventID() +
+                " ;";
+        try {
+        Cursor find = QueryData(query);
+
+            if (find.moveToFirst()) {
+                do {
+                    attendee.getEvents().get(evt.getTitle()).setAttendedId(find.getInt(0));
+                    Here = true;
+                    Log.d("CreatingEvent", "The Resident ID is :" + find.getInt(1) + " The ID  for this is : " + find.getInt(0));
+                }
+                while (find.moveToNext());
+            }
+        }catch (Exception e){
+            Log.d("CreatingattendedEvent", "Somethign went wong");
+            Log.d("CreatingAttendedEvent", e.getMessage());
+        }
+        db.close();
+        return Here;
+
+    }
+    //Used to insert the rest of the values in EventAttended Table when they Check Out
+    public void EventCheckOut(String evt,int evtId, CurrentUser attendee){
+
+        db = this.getWritableDatabase();
+        try {
+            db.execSQL("UPDATE " + AttendedEventEntry.TABLE_NAME + " SET " + AttendedEventEntry.Time_Stayed
+                    + " = datetime()  WHERE " + AttendedEventEntry.Event_ID + " = " + evtId + " AND " +
+                    AttendedEventEntry.Resident_ID + " = " + attendee.getID());
+            Log.d("Updating", "Is it even making it over here?");
+            ContentValues cv = new ContentValues();
+            cv.put(AttendedEventEntry.Rating_Score, attendee.getEvents().get(evt).getRating());
+            cv.put(AttendedEventEntry.Rating_FeedBack, attendee.getEvents().get(evt).getFeedBack());
+
+            db.update(AttendedEventEntry.TABLE_NAME, cv, AttendedEventEntry.Event_ID + " = ? AND " + AttendedEventEntry.Resident_ID + " = ? ",
+                    new String[]{String.valueOf(evtId), String.valueOf(attendee.getID())});
+        }catch (SQLException s){
+            Log.d("UPDATE", s.getMessage());
+        }
+
+    }
+    //Inserts a row in AttendedTable of events
+    public boolean insertEventAttended(Event evt, CurrentUser creator) {
+        boolean TheReturner;
+            //If they have not attended the event
+        if(!(creator.getEvents().containsKey(evt.getTitle()))) {
+            Log.d("insertEvent", evt.getTitle());
+            //Create a instance of UserEvents and inserts the ID's of the event and Ra for now
+            //Another method add's the rest
+            UserEvents Up = new UserEvents();
+            Up.setTitle(evt.getTitle());
+            Up.setEventID(evt.getId());
+            creator.getEvents().put(evt.getTitle(), Up);//Sets it in the hashmap
+
+            //This inputs it into the attended database
+            db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(AttendedEventEntry.Event_ID, evt.getId());
+            values.put(AttendedEventEntry.Resident_ID, creator.getID());
+
+            long result = db.insert(AttendedEventEntry.TABLE_NAME, null, values);
+            //This sets the id in the event it was called from in the current user id
+            setEventid(creator, evt);
+            Log.d("CreatingAttendedEvent", "The id of the attended event is : " +
+                    creator.getEvents().get(evt.getTitle()).getAttendedId());
+            TheReturner = result != -1;
+        } else {
+            TheReturner = false;
+        }
+
+
+        return TheReturner;
+    }
+
 
 }

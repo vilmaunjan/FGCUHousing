@@ -5,15 +5,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.vilma.fgcuhousing.data.CurrentUser;
 import com.example.vilma.fgcuhousing.data.DbHandler;
 
 
 public class MainActivity extends AppCompatActivity {
+    /**
+     * Needed to make sure the database is created and the fake values
+     * inserted
+     */
+    DbHandler db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +31,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Creates a connection to database and creates database
-        DbHandler db = new DbHandler(getApplicationContext());
+        /**
+         * Database Created with Fake Info
+         */
+        db = new DbHandler(getApplicationContext());
 
     }
 
@@ -33,13 +44,28 @@ public class MainActivity extends AppCompatActivity {
         if (v == findViewById(R.id.btnResident)) { //go to residentAccess
             startActivity(new Intent(getApplicationContext(), ResidentAccess.class));
         } else if(v == findViewById(R.id.btnStaff)) { //go to staffAccess
-            startActivity(new Intent(getApplicationContext(), EventList.class));
+            //Current Staff login not up so this sends you to event list with an auto login feature
+            CurrentUser admin = db.loginAS("cooper@fgcu.edu");
+            Intent supa = new Intent(getApplicationContext(), EventList.class);
+            supa.putExtra("CurrentUser", admin);
+            startActivity(supa);
         }
     }
 
+
     public void imageOnClick(View i){
         if(i == findViewById(R.id.StarMode)) {
-            startActivity(new Intent(getApplicationContext(), EventManager.class));
+            try {
+                /**
+                 * Currently being used by me just to get awards up and running
+                 */
+                CurrentUser admin = db.loginAS("cooper@fgcu.edu");
+                Intent supa = new Intent(getApplicationContext(), Awards.class);
+                supa.putExtra("CurrentUser", admin);
+                startActivity(supa);
+            }catch (Exception e){
+                Log.d("Admin", e.getMessage());
+            }
         }
     }
 

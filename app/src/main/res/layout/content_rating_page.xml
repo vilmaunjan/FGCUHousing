@@ -46,22 +46,34 @@
         android:layout_centerHorizontal="true" />
 
     <EditText
+        android:id="@+id/txtEventComments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:layout_marginTop="17dp"
-        android:id="@+id/txtEventComments"
-        android:hint="Please add any optional comments about the event"
-        android:layout_below="@+id/textView9"
-        android:layout_alignLeft="@+id/textView8"
-        android:layout_alignStart="@+id/textView8"
-        android:layout_alignRight="@+id/textView8"
         android:layout_alignEnd="@+id/textView8"
+        android:layout_alignLeft="@+id/textView8"
+        android:layout_alignRight="@+id/textView8"
+        android:layout_alignStart="@+id/textView8"
+        android:layout_below="@+id/textView9"
+        android:layout_marginTop="17dp"
+        android:ems="10"
+        android:hint="Please add any optional comments about the event"
+        android:inputType="textMultiLine"
+        android:textSize="12sp"
         tools:ignore="HardcodedText" />
 
     <Button
-        android:text="Rate Event"
+        android:id="@+id/btnOnward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp"
+        android:onClick="buttonOnClick"
+        android:text="@string/on_ward"
+        android:visibility="invisible" />
+
+    <Button
+        android:text="@string/rate_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnRate"
@@ -69,4 +81,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:onClick="buttonOnClick" />
+
+
 </RelativeLayout>

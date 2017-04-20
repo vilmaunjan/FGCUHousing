@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -26,7 +27,8 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
     private SQLiteDatabase mDb;
     private DbHandler datCon;
     private boolean edit = false;
-    EditText title, description, building, time, date;
+    EditText title, description, time, date;
+    AutoCompleteTextView building;
     TextView location;
     Button btnCreateEvent;
     private CurrentUser CU;
@@ -43,6 +45,9 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         Spinner spinnerFilter = (Spinner) findViewById(R.id.spinnerLocation);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.spinner_housing_options, android.R.layout.simple_spinner_item);
 
+        ArrayAdapter<String> buildinglist = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line,BUILDINGS);
+
         spinnerFilter.setAdapter(adapter);
         spinnerFilter.setOnItemSelectedListener(this);
 
@@ -52,9 +57,11 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         mDb = datCon.getWritableDatabase();
         title = (EditText) findViewById(R.id.txtEventName);
         description = (EditText) findViewById(R.id.txtEventDescription);
-        building = (EditText) findViewById(R.id.txtBuilding);
+        building = (AutoCompleteTextView) findViewById(R.id.txtBuilding);
         time = (EditText) findViewById(R.id.txtTime);
         date = (EditText) findViewById(R.id.txtDate);
+
+        building.setAdapter(buildinglist);
 
         if (!extras.containsKey("event_id")) {
             edit=false;
@@ -81,6 +88,16 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
             }
         }
     }
+
+    private static final String[] BUILDINGS = new String[] {
+            //All buildings need to be added
+            "Eagle", "Osprey", "Palmetto", "Biscayne", "Everglades", //South Village
+            "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", //North Lake
+            "M", "N", "O", "P", "Q", "R", "S", "T", "Cypress", "Falcon",
+            "Honors", "Pelican", "Oak", "Sandpiper", "Egret", "Mangrove",
+            "Flamingo", "Manatee", "Pompano", "Marlin", "Panther", "Tarpon" //West Lake
+
+    };
 
     public void buttonOnClick(View v){
         Button button = (Button) v;

@@ -11,10 +11,6 @@ import android.widget.Button;
 import com.example.vilma.fgcuhousing.data.DbHandler;
 
 public class ResidentAccess extends AppCompatActivity {
-    //Need this for Database
-    DbHandler resi;
-    SQLiteDatabase mm;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,20 +19,6 @@ public class ResidentAccess extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Start's database
-        resi = new DbHandler(this);
-        //get's and editable database to add parameters
-        mm = resi.getWritableDatabase();
-
-        //Inserts some fake data
-        //testing for adding to database a different way
-        //from a different screen
-        //This also sends a toast message whenever a data is added
-//        resi.addToUsers(this,"Pepe", "Lepu", 812964812,
-//                "Lepu@gmail.com", "passpass", "RD", "North Village");
-
-        //closes database connection
-        resi.close();
     }
 
     public void buttonOnClick(View v) {
