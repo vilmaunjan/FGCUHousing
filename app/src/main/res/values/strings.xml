@@ -7,7 +7,7 @@
     <string name="title_activity_evest_list">EvestList</string>
 
     <string-array name="spinner_housing_options">
-        <item name="no_filter"></item>
+        <item name="no_filter">All</item>
         <item name="south_lake">South Lake Village</item>
         <item name="north_lake">North Lake Village</item>
         <item name="west_lake">West Lake Village</item>

@@ -39,8 +39,8 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
 
     //variables declaration
     private ListView listView;
-    private ArrayList<EventItem> arrayList=new ArrayList<>();
     private EventAdapter eventAdapter;
+    private ArrayList<EventItem> arrayList=new ArrayList<>();
 
 
     @Override
@@ -140,32 +140,36 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
             building = "West Village";
         }
 
+        eventAdapter.clear(); //cleans adapter so that new data can be loaded
+        Cursor cursor = datCon.QueryData("select * from " +
+                HousingContract.EventEntry.TABLE_NAME );
         if(!building.equals("")) {
-            eventAdapter.clear(); //cleans adapter so that new data can be loaded
+
             try {
-                Cursor cursor = datCon.QueryData("select * from " +
+                cursor = datCon.QueryData("select * from " +
                         HousingContract.EventEntry.TABLE_NAME + " where " +
                         HousingContract.EventEntry.BUILDING + " = '" + building + "'");
-                if (cursor != null) {
-                    newArrayList.clear();
-                    if (cursor.moveToFirst()) {
-                        do {
-                            EventItem newItem = new EventItem();
-                            newItem.setId(cursor.getString(0));
-                            newItem.setTitle(cursor.getString(1));
-                            newItem.setTime(cursor.getString(5));
-                            newItem.setDate(cursor.getString(4));
-                            newItem.setPoster(cursor.getString(7));
-                            newArrayList.add(newItem);
-                        } while (cursor.moveToNext());
-                    }
-                }
             } catch (SQLException e) {
             }
-
-            eventAdapter.addAll(newArrayList); //adds new arrayList of events
-            eventAdapter.notifyDataSetChanged(); //notify changes to the adapter
         }
+
+        if (cursor != null) {
+            newArrayList.clear();
+            if (cursor.moveToFirst()) {
+                do {
+                    EventItem newItem = new EventItem();
+                    newItem.setId(cursor.getString(0));
+                    newItem.setTitle(cursor.getString(1));
+                    newItem.setTime(cursor.getString(5));
+                    newItem.setDate(cursor.getString(4));
+                    newItem.setPoster(cursor.getString(7));
+                    newArrayList.add(newItem);
+                } while (cursor.moveToNext());
+            }
+        }
+
+        eventAdapter.addAll(newArrayList); //adds new arrayList of events
+        eventAdapter.notifyDataSetChanged(); //notify changes to the adapter
     }
 
     //Does nothing but required by implementing interface
