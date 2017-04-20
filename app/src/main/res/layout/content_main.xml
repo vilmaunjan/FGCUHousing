@@ -23,19 +23,20 @@
         android:layout_centerHorizontal="true" />
 
     <ImageView
+        android:id="@+id/logoImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/logo"
         android:layout_above="@+id/btnResident"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_marginBottom="47dp"
         android:layout_marginLeft="27dp"
         android:layout_marginStart="27dp"
-        android:layout_marginBottom="47dp"
-        android:id="@+id/logoImg"
-        tools:background="@android:color/transparent"
         android:background="@android:color/transparent"
-        android:backgroundTint="@android:color/transparent" />
+        android:backgroundTint="@android:color/transparent"
+        android:contentDescription="FgcuLogo"
+        app:srcCompat="@drawable/logo"
+        tools:background="@android:color/transparent" />
 
     <Button
         android:text="Staff"

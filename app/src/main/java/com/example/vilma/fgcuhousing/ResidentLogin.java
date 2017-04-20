@@ -38,17 +38,19 @@ public class ResidentLogin extends AppCompatActivity {
             /**
              * get's the values in the email and password fields
              */
+
             EditText Email = (EditText) findViewById(R.id.resEmail);
             EditText Password = (EditText) findViewById(R.id.resPassword);
 
             //gets the paramater from the android screen and convert to string
-            String emailEntry = Email.getText().toString();
-            String passwordEntry = Password.getText().toString();
+            String emailEntry = (Email.getText().toString()).trim();
+            String passwordEntry = (Password.getText().toString()).replaceAll("[\\s]+$", "") ;
+            Log.d("regexPlayground", passwordEntry);
 
             //Will be the value of the password stored in the database
-            String password = db.searchPassword(emailEntry);
+            boolean password = db.searchPassword(emailEntry,passwordEntry);
             //If what the user entered is the correct password then move to EventList
-            if(passwordEntry.equals(password)) {
+            if(password) {
 
                 Intent i = new Intent(getApplicationContext(), EventList.class);
                 //Use to create current user

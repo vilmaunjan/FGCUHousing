@@ -174,11 +174,6 @@ public class DbTest {
 
         awards.add(cv);
 
-        ArrayList<String> tables = new ArrayList();
-        tables.add(UserEntry.TABLE_NAME);
-        tables.add(EventEntry.TABLE_NAME);
-        tables.add(Awards.TABLE_NAME);
-
         //insert all guests in one transaction
         try
         {

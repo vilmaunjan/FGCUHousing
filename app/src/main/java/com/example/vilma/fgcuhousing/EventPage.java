@@ -92,7 +92,7 @@ public class EventPage extends AppCompatActivity {
                 }
             }
         }catch (SQLException e){}
-        Toast.makeText(this, "You have successfully checked in", Toast.LENGTH_SHORT).show();
+
         alreadyAttending();
     }
 
@@ -106,8 +106,6 @@ public class EventPage extends AppCompatActivity {
                     Button checkOut = (Button) findViewById(R.id.btnCheckout);
                     checkOut.setVisibility(View.VISIBLE);
                     checkOut.setEnabled(true);
-
-
                 }
             }
 
@@ -122,6 +120,7 @@ public class EventPage extends AppCompatActivity {
             checkOut.setVisibility(View.VISIBLE);
             checkOut.setEnabled(true);
             datCon.insertEventAttended(event, CU);
+            Toast.makeText(this, "You have successfully checked in", Toast.LENGTH_SHORT).show();
             //timer should start and should stop when check out button is pressed
         }
         else if (v == findViewById(R.id.btnCheckout)){ //when 'checkout' button is pressed

@@ -264,7 +264,7 @@ public class DbHandler extends SQLiteOpenHelper {
     }
 
     //Checks if the event was created already
-    public boolean Eventcheck(String EventTitle){
+    private boolean Eventcheck(String EventTitle){
         db = this.getReadableDatabase();
         boolean Here= false;
         String query = "Select * from "+ EventEntry.TABLE_NAME +" where " + EventEntry.Event_Title +" = \"" + EventTitle + "\";";
@@ -351,23 +351,23 @@ public class DbHandler extends SQLiteOpenHelper {
     }
 
     //Search for email and return corresponding password.
-    public String searchPassword(String emailEntry){
-        Log.d("696969", "Reached set password");
-        String password = "";
-        String email = "";
-        db = this.getReadableDatabase();
-        String query = "select " + UserEntry.Email + ", " + UserEntry.Password + " from "
-                + UserEntry.TABLE_NAME + ";";
+    public boolean searchPassword(String emailEntry, String pass){
+        boolean Match=false;
+        String email;
+        String password;
+        String query = "Select * from "+ UserEntry.TABLE_NAME +" where " +
+                UserEntry.Email +" = \"" + emailEntry + "\";";
         try {
-            Cursor cursor = db.rawQuery(query, null);
+            Cursor cursor = QueryData(query);
             if (cursor.moveToFirst()) {
                 do {
-                    email = cursor.getString(0);
-                    Log.d("searchPassword", email);
+                    email = cursor.getString(2);
+                    password = cursor.getString(3);
+                    Log.d("AccountSetUp", "The given email is : " + email);
                     if (email.equals(emailEntry)) {
-                        password = cursor.getString(1);
-                        Log.d("searchPassword", password);
-                        break;
+                        if(password.equals(pass)){
+                            Match = true;
+                        }
                     }
                 }
                 while (cursor.moveToNext());
@@ -377,7 +377,7 @@ public class DbHandler extends SQLiteOpenHelper {
         }catch (Exception e){
             Log.d("DataBase", e.getMessage());
         }
-        return password;
+        return Match;
     }
 
     //Get awards info
@@ -510,5 +510,37 @@ public class DbHandler extends SQLiteOpenHelper {
             TheReturner = false;
         }
         return TheReturner;
+    }
+
+    public Cursor UserEvents(int id) {
+
+        db = this.getReadableDatabase();
+        Cursor UserSpecificEvents = null;
+        String table = EventEntry.TABLE_NAME +" e  inner join " + OrganizedEvents.TABLE_NAME +" o"+
+                " on e. "+ EventEntry.Event_ID +" = o." + OrganizedEvents.Event_ID +";";
+
+        String [] columns = {"e." + EventEntry.Event_ID, "e." + EventEntry.Event_Title, "e." +
+                EventEntry.Description, "e." + EventEntry.Location, "e." +
+                EventEntry.Event_Date, "e."+ EventEntry.Event_Time, "e." +
+                EventEntry.BUILDING, "e." + EventEntry.IMAGE};
+
+/*
+        Select all the events created by a user
+
+        Select e.Event_ID, e.Title, e.Description, e.Location, e.Created, e.Time, e.Building, e.Image
+
+        FROM Event e  inner join OrganizedEvent o
+        on e.Event_ID = o.RA_ID*/
+
+        try {
+            UserSpecificEvents = db.query(table, columns, OrganizedEvents.RA_ID + " = " + id,
+                    null, null, null, null);
+
+        }catch (Exception e){
+            Log.d("FindingUserEvents", "There was a error here's the message");
+            e.getMessage();
+        }
+
+        return UserSpecificEvents;
     }
 }

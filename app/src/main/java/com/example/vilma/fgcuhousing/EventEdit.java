@@ -71,8 +71,9 @@ public class EventEdit extends AppCompatActivity implements AdapterView.OnItemSe
 
         //this try catch queries all the events in the database and displays it in EventList page
         try {
-            Cursor cursor = datCon.QueryData("select * from " + HousingContract.EventEntry.TABLE_NAME);
+            Cursor cursor = datCon.UserEvents(CU.getID());//Returns the event the user created
             if (cursor != null) {
+
                 if (cursor.moveToFirst()) {
                     do {
                         EventItem item = new EventItem();
