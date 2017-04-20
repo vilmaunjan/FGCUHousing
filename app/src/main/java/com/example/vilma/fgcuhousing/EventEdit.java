@@ -100,7 +100,7 @@ public class EventEdit extends AppCompatActivity implements AdapterView.OnItemSe
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object listItem = listView.getItemAtPosition(position);
 
-                String event_id = ((TextView) view.findViewById(R.id.tv_id)).getText().toString();
+                final String event_id = ((TextView) view.findViewById(R.id.tv_id)).getText().toString();
 
                 if(function.equals("edit")){
                     startActivity(new Intent(getApplicationContext(), CreateEvent.class).putExtra("event_id", event_id).putExtra("CurrentUser", CU));
@@ -118,9 +118,9 @@ public class EventEdit extends AppCompatActivity implements AdapterView.OnItemSe
                                     //here the event will be deleted from the database
                                     //use the String event_id to select correct item to delete
                                     //***********************************
+                                     datCon.deleteEvent(event_id);
                                     finish();
                                     startActivity(getIntent().putExtra("function", "delete").putExtra("CurrentUser", CU));
-
                                 }
                             });
                     AlertDialog alertDialog = alertDialogBuilder.create();

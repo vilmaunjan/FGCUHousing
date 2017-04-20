@@ -97,13 +97,17 @@ public class EventPage extends AppCompatActivity {
 
     private void alreadyAttending() {
         Button button = (Button) findViewById(R.id.btnCheckIn);
-        if(CU.getEvents().containsKey(event.getTitle()) || CU.getEvents().get(event.getTitle()).isCheckedin()){
-            button.setVisibility(View.GONE); //changes text to check out
-            button.setEnabled(false); //changes text to check out
-            Button checkOut = (Button) findViewById(R.id.btnCheckout);
-            checkOut.setVisibility(View.VISIBLE);
-            checkOut.setEnabled(true);
-        }
+
+            if (CU.getEvents().containsKey(event.getTitle())) {
+                if(CU.getEvents().get(event.getTitle()).isCheckedin()) {
+                    button.setVisibility(View.GONE); //changes text to check out
+                    button.setEnabled(false); //changes text to check out
+                    Button checkOut = (Button) findViewById(R.id.btnCheckout);
+                    checkOut.setVisibility(View.VISIBLE);
+                    checkOut.setEnabled(true);
+                }
+            }
+
     }
 
     public void buttonOnClick(View v) {
@@ -114,10 +118,7 @@ public class EventPage extends AppCompatActivity {
             Button checkOut = (Button) findViewById(R.id.btnCheckout);
             checkOut.setVisibility(View.VISIBLE);
             checkOut.setEnabled(true);
-
             datCon.insertEventAttended(event, CU);
-
-
             //timer should start and should stop when check out button is pressed
         }
         else if (v == findViewById(R.id.btnCheckout)){ //when 'checkout' button is pressed

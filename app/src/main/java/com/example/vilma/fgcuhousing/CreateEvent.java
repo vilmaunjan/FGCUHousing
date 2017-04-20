@@ -27,7 +27,9 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
     private SQLiteDatabase mDb;
     private DbHandler datCon;
     private boolean edit = false;
+    private String eveID;
     EditText title, description, time, date;
+    String image;
     AutoCompleteTextView building;
     TextView location;
     Button btnCreateEvent;
@@ -74,12 +76,14 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
             if (cursorEventInfo != null) {
                 if (cursorEventInfo.moveToFirst()) {
                     do {
+                        eveID = event_id;
                         title.setText(cursorEventInfo.getString(1));
                         description.setText(cursorEventInfo.getString(2));
                         //location.setText(cursorEventInfo.getString(3));   going to leave like this, correct spinner value low priority.
                         building.setText(cursorEventInfo.getString(6));
                         time.setText(cursorEventInfo.getString(5));
                         date.setText(cursorEventInfo.getString(4));
+                        image = cursorEventInfo.getString(7);
                         //****************************
                         //here the poster image would be loaded
                         //*****************************
@@ -108,6 +112,7 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         event.setTime(time.getText().toString());
         event.setDate(date.getText().toString());
         event.setLocation(location.getText().toString());
+        event.setImage(image);
         boolean isInserted = false;
         if (v == findViewById(R.id.btnConfirm)) {
             if(edit==false) {
@@ -133,6 +138,15 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
                 // edit event in database instead of creating event
 
                 //*************************************************
+
+                boolean upToDate = datCon.updateEvent(eveID, event);
+                if(upToDate){
+
+                    Toast.makeText(CreateEvent.this, "Event was Updated", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(CreateEvent.this, "Event was not Updated", Toast.LENGTH_SHORT).show();
+                }
+
             }
         }
     }

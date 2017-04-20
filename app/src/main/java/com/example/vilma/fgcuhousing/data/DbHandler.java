@@ -286,22 +286,29 @@ public class DbHandler extends SQLiteOpenHelper {
     }
 
     //Updates the Event with new values
-    public boolean updateEvent(int id, ContentValues cv){
-
-        /*
+    public boolean updateEvent(String id, Event event){
+        boolean TheReturner;
+        db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(EventEntry.Event_Title,"Bob"); //These Fields should be your String values of actual column names
-        cv.put(EventEntry.Description,"19");
-        cv.put(EventEntry.Location,"Male");
-        cv.put(EventEntry.BUILDING,"19");
-        cv.put(EventEntry.Event_Time,"Male");
-        cv.put(EventEntry.Event_Date,"19");
-        cv.put(EventEntry.IMAGE,"Male");
-        */
+        try {
+            cv.put(EventEntry.Event_Title, event.getTitle()); //These Fields should be
+            // your String values of actual column names
+            cv.put(EventEntry.Description, event.getDescription());
+            cv.put(EventEntry.Location, event.getLocation());
+            cv.put(EventEntry.BUILDING, event.getBuilding());
+            cv.put(EventEntry.Event_Time, event.getTime());
+            cv.put(EventEntry.Event_Date, event.getDate());
+            //cv.put(EventEntry.IMAGE, event.getImage()); //Commented out untill we have
+            // importing images up and running
 
-
-        int update = db.update(EventEntry.TABLE_NAME, cv,"where " + EventEntry.Event_ID +" = " + id, null);
-        return update != -1;
+            int update = db.update(EventEntry.TABLE_NAME, cv, EventEntry.Event_ID +
+                    " = ? ", new String[]{id});
+            TheReturner = update != -1;
+        }catch (Exception e){
+            Log.d("UpdateEvent", "The event failed to update its settings oh no!");
+            TheReturner = false;
+        }
+        return TheReturner;
     }
 
     //Simple method to pass a query string
@@ -444,6 +451,7 @@ public class DbHandler extends SQLiteOpenHelper {
             UserEvents Up = new UserEvents();
             Up.setTitle(evt.getTitle());
             Up.setEventID(evt.getId());
+            Up.setCheckedin(true);
             creator.getEvents().put(evt.getTitle(), Up);//Sets it in the hashmap
 
             //This inputs it into the attended database
@@ -466,5 +474,41 @@ public class DbHandler extends SQLiteOpenHelper {
         return TheReturner;
     }
 
+    //Deletes an Event from database
+    public void deleteEvent(String event_id) {
+        //Have to delete from Event, OrganizedEvent, and AttendedEvent Tables
+        //Which ever has this event ID, also have to make sure any user that previously
+        // had this event. attended Also has this value removed or not accessible
+        //Delete order All entries from AttendedEvent, all entry from OrganizedEvent
+        // and then the event entry itself
+        db = this.getWritableDatabase();
+        try {
+            db.delete(AttendedEventEntry.TABLE_NAME, AttendedEventEntry.Event_ID + " = ?", new String[]{event_id});
+            db.delete(OrganizedEvents.TABLE_NAME, OrganizedEvents.Event_ID + " = ?", new String[]{event_id});
+            db.delete(EventEntry.TABLE_NAME, EventEntry.Event_ID + " = ?", new String[]{event_id});
+        }catch (Exception e){
+            Log.d("DeleteOperation", "If you see this then there is an error in deleting");
+        }
 
+    }
+
+    public Boolean updateProfile(CurrentUser CU) {
+        db = this.getWritableDatabase();
+        boolean TheReturner;
+        ContentValues cv = new ContentValues();
+        try {
+            cv.put(UserEntry.Name, CU.getName());
+            cv.put(UserEntry.Email, CU.getEmail());
+            cv.put(UserEntry.Password, CU.getPassword());
+            cv.put(UserEntry.Building, CU.getBuilding());
+
+            int update = db.update(UserEntry.TABLE_NAME, cv, UserEntry._ID + " = ? ",
+                    new String[]{String.valueOf(CU.getID())});
+            TheReturner = update != -1;
+        }catch (Exception e){
+            Log.d("UpdateUser", "Oh No The user file wasnt updated ErrorError");
+            TheReturner = false;
+        }
+        return TheReturner;
+    }
 }
