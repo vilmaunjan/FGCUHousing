@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.vilma.fgcuhousing.data.CurrentUser;
 import com.example.vilma.fgcuhousing.data.DbHandler;
@@ -91,7 +92,7 @@ public class EventPage extends AppCompatActivity {
                 }
             }
         }catch (SQLException e){}
-
+        Toast.makeText(this, "You have successfully checked in", Toast.LENGTH_SHORT).show();
         alreadyAttending();
     }
 
@@ -105,6 +106,8 @@ public class EventPage extends AppCompatActivity {
                     Button checkOut = (Button) findViewById(R.id.btnCheckout);
                     checkOut.setVisibility(View.VISIBLE);
                     checkOut.setEnabled(true);
+
+
                 }
             }
 
