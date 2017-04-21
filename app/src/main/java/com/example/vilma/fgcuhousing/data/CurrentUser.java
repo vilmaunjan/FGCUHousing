@@ -22,6 +22,7 @@ public class CurrentUser implements Parcelable {
     private String password;//password
     private String building;//building
     private String AccountType;//account Type
+    private int EventCounter=0;
     //This hash map holds the title of the event and a class of infromation needed
     private HashMap<String, UserEvents> Events = new HashMap<>();
     //Working on the awards still but this is here for now
@@ -35,6 +36,14 @@ public class CurrentUser implements Parcelable {
 
     public void setID(int ID) {
         this.ID = ID;
+    }
+
+    public int getEventCounter() {
+        return EventCounter;
+    }
+
+    public void setEventCounter(int eventCounter) {
+        EventCounter = eventCounter;
     }
 
     public String getName() {
@@ -118,6 +127,7 @@ public class CurrentUser implements Parcelable {
         dest.writeString(this.password);
         dest.writeString(this.building);
         dest.writeString(this.AccountType);
+        dest.writeInt(this.EventCounter);
         dest.writeMap(this.Events);
         dest.writeStringList(this.awarded);
     }
@@ -129,6 +139,7 @@ public class CurrentUser implements Parcelable {
         this.password = in.readString();
         this.building = in.readString();
         this.AccountType = in.readString();
+        this.EventCounter = in.readInt();
         in.readMap(Events, UserEvents.class.getClassLoader());
         this.awarded = in.createStringArrayList();
     }

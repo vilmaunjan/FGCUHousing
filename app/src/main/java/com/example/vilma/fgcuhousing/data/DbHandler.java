@@ -25,7 +25,7 @@ import com.example.vilma.fgcuhousing.data.HousingContract.UserEntry;
 public class DbHandler extends SQLiteOpenHelper {
     //Used for the name ad database version whenever updating schema
     private static final String DATABASE_NAME = "HousingDB";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     private static final String Tag = "DataBaseHelper";
     private static SQLiteDatabase db = null;
 
@@ -159,10 +159,12 @@ public class DbHandler extends SQLiteOpenHelper {
         Cursor UserSpecificEvents = null;
 
 
-        String table = EventEntry.TABLE_NAME +" e  inner join " + AttendedEventEntry.TABLE_NAME +" a"+
+        String table = EventEntry.TABLE_NAME +" e  inner join " + AttendedEventEntry.TABLE_NAME +
+                " a"+
                 " on e. "+ EventEntry.Event_ID +" = a." + AttendedEventEntry.Event_ID +";";
 
-        String [] columns = {"e." + EventEntry.Event_Title, "a." + AttendedEventEntry.Rating_FeedBack, "a." +
+        String [] columns = {"e." + EventEntry.Event_Title, "a." +
+                AttendedEventEntry.Rating_FeedBack, "a." +
                 AttendedEventEntry.Checked_IN, "a." + AttendedEventEntry.Time_Stayed, "a." +
                 AttendedEventEntry.Event_ID, "a."+ AttendedEventEntry.Rating_ID, "a." +
                 AttendedEventEntry.Rating_Score};
@@ -207,9 +209,11 @@ public class DbHandler extends SQLiteOpenHelper {
     }
 
     //This returns a CurrentUser with information from database based on email
+    //Depreciated
     public CurrentUser loginAS(String email){
         CurrentUser admin = new CurrentUser();
-        String query = "Select * from "+ UserEntry.TABLE_NAME +" where " + UserEntry.Email +" = \"" + email + "\";";
+        String query = "Select * from "+ UserEntry.TABLE_NAME +" where " +
+                UserEntry.Email +" = \"" + email + "\";";
         Cursor find = QueryData(query);
 
         if (find.moveToFirst()) {
@@ -257,13 +261,15 @@ public class DbHandler extends SQLiteOpenHelper {
     //Adds the user who created the event
     private void AddCreator(Event evt, CurrentUser creator) {
 
-        String query = "Select * from "+ EventEntry.TABLE_NAME +" where " + EventEntry.Event_Title +" = \"" + evt.getTitle() + "\";";
+        String query = "Select * from "+ EventEntry.TABLE_NAME +" where " +
+                EventEntry.Event_Title +" = \"" + evt.getTitle() + "\";";
         Cursor find = QueryData(query);
         try {
             if (find.moveToFirst()) {
                 do {
                     evt.setId(find.getInt(0));
-                    Log.d("CreatingEvent", "The name is :" + find.getString(1) + " The id for this is : " + evt.getId());
+                    Log.d("CreatingEvent", "The name is :" + find.getString(1) +
+                            " The id for this is : " + evt.getId());
                 }
                 while (find.moveToNext());
             }
@@ -291,14 +297,16 @@ public class DbHandler extends SQLiteOpenHelper {
     private boolean Eventcheck(String EventTitle){
         db = this.getReadableDatabase();
         boolean Here= false;
-        String query = "Select * from "+ EventEntry.TABLE_NAME +" where " + EventEntry.Event_Title +" = \"" + EventTitle + "\";";
+        String query = "Select * from "+ EventEntry.TABLE_NAME +" where " +
+                EventEntry.Event_Title +" = \"" + EventTitle + "\";";
         Cursor find = QueryData(query);
         try {
             if (find.moveToFirst()) {
                 do {
                     find.getString(1);
                     Here = true;
-                    Log.d("CreatingEvent", "The name is :" + find.getString(1) + " The id for this is : " + find.getInt(0));
+                    Log.d("CreatingEvent", "The name is :" + find.getString(1) +
+                            " The id for this is : " + find.getInt(0));
                 }
                 while (find.moveToNext());
             }
@@ -423,7 +431,8 @@ public class DbHandler extends SQLiteOpenHelper {
         //The usual sql stuff
         String query = "Select * from "+ AttendedEventEntry.TABLE_NAME +" where " +
                 AttendedEventEntry.Resident_ID +" = \"" + attendee.getID() + "\" " +
-                " AND "+ AttendedEventEntry.Event_ID +" = " + attendee.getEvents().get(evt.getTitle()).getEventID() +
+                " AND "+ AttendedEventEntry.Event_ID +" = " +
+                attendee.getEvents().get(evt.getTitle()).getEventID() +
                 " ;";
         try {
         Cursor find = QueryData(query);
@@ -432,7 +441,8 @@ public class DbHandler extends SQLiteOpenHelper {
                 do {
                     attendee.getEvents().get(evt.getTitle()).setAttendedId(find.getInt(0));
                     Here = true;
-                    Log.d("CreatingEvent", "The Resident ID is :" + find.getInt(1) + " The ID  for this is : " + find.getInt(0));
+                    Log.d("CreatingEvent", "The Resident ID is :" + find.getInt(1) +
+                            " The ID  for this is : " + find.getInt(0));
                 }
                 while (find.moveToNext());
             }
@@ -449,15 +459,18 @@ public class DbHandler extends SQLiteOpenHelper {
 
         db = this.getWritableDatabase();
         try {
-            db.execSQL("UPDATE " + AttendedEventEntry.TABLE_NAME + " SET " + AttendedEventEntry.Time_Stayed
-                    + " = datetime()  WHERE " + AttendedEventEntry.Event_ID + " = " + evtId + " AND " +
+            db.execSQL("UPDATE " + AttendedEventEntry.TABLE_NAME + " SET " +
+                    AttendedEventEntry.Time_Stayed
+                    + " = datetime()  WHERE " + AttendedEventEntry.Event_ID + " = " +
+                    evtId + " AND " +
                     AttendedEventEntry.Resident_ID + " = " + attendee.getID());
             Log.d("Updating", "Is it even making it over here?");
             ContentValues cv = new ContentValues();
             cv.put(AttendedEventEntry.Rating_Score, attendee.getEvents().get(evt).getRating());
             cv.put(AttendedEventEntry.Rating_FeedBack, attendee.getEvents().get(evt).getFeedBack());
 
-            db.update(AttendedEventEntry.TABLE_NAME, cv, AttendedEventEntry.Event_ID + " = ? AND " + AttendedEventEntry.Resident_ID + " = ? ",
+            db.update(AttendedEventEntry.TABLE_NAME, cv, AttendedEventEntry.Event_ID +
+                            " = ? AND " + AttendedEventEntry.Resident_ID + " = ? ",
                     new String[]{String.valueOf(evtId), String.valueOf(attendee.getID())});
         }catch (SQLException s){
             Log.d("UPDATE", s.getMessage());
@@ -509,8 +522,10 @@ public class DbHandler extends SQLiteOpenHelper {
         // and then the event entry itself
         db = this.getWritableDatabase();
         try {
-            db.delete(AttendedEventEntry.TABLE_NAME, AttendedEventEntry.Event_ID + " = ?", new String[]{event_id});
-            db.delete(OrganizedEvents.TABLE_NAME, OrganizedEvents.Event_ID + " = ?", new String[]{event_id});
+            db.delete(AttendedEventEntry.TABLE_NAME, AttendedEventEntry.Event_ID +
+                    " = ?", new String[]{event_id});
+            db.delete(OrganizedEvents.TABLE_NAME, OrganizedEvents.Event_ID + " = ?",
+                    new String[]{event_id});
             db.delete(EventEntry.TABLE_NAME, EventEntry.Event_ID + " = ?", new String[]{event_id});
         }catch (Exception e){
             Log.d("DeleteOperation", "If you see this then there is an error in deleting");
@@ -538,6 +553,7 @@ public class DbHandler extends SQLiteOpenHelper {
         return TheReturner;
     }
 
+
     public Cursor UserEvents(int id) {
 
         db = this.getReadableDatabase();
@@ -553,7 +569,8 @@ public class DbHandler extends SQLiteOpenHelper {
 /*
         Select all the events created by a user
 
-        Select e.Event_ID, e.Title, e.Description, e.Location, e.Created, e.Time, e.Building, e.Image
+        Select e.Event_ID, e.Title, e.Description, e.Location, e.Created, e.Time,
+        e.Building, e.Image
 
         FROM Event e  inner join OrganizedEvent o
         on e.Event_ID = o.RA_ID*/

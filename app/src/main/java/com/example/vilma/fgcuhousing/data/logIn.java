@@ -71,6 +71,8 @@ public class logIn {
         //Add's them to there current user object so
         //We know events they have attended already in the past after logging
         //Out
+        ep.setEventCounter(find.getCount());//Sets the number of events user has gone too
+        Log.d("LogIn", "the number of Events this user attended is: "  + find.getCount());
         if (find.moveToFirst()) {
             do {
 

@@ -29,24 +29,25 @@ public class Awards extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_awards);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        super.onCreate(savedInstanceState);//creates
+        setContentView(R.layout.activity_awards);//sets view
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);//shows tool bar
+        setSupportActionBar(toolbar);//sets the action bar
 
-        Bundle data = getIntent().getExtras();
-        CU = data.getParcelable("CurrentUser");
+        Bundle data = getIntent().getExtras();//gets the bundle of information
+        CU = data.getParcelable("CurrentUser");//Aka usually the CurrentUser
 
-        GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ImageAdapter(this));
+        GridView gridview = (GridView) findViewById(R.id.gridview);//Conencts Grid View
+        gridview.setAdapter(new ImageAdapter(this));//sets the image adapter class
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                 int position, long id) {
 
-                startActivity(new Intent(getApplicationContext(), AwardInfo.class));
+                startActivity(new Intent(getApplicationContext(), AwardInfo.class)
+                        .putExtra("logoid", id));
 
-                  Toast.makeText(Awards.this, "" + position +"id is " +id,
+                  Toast.makeText(Awards.this, "" + position +"id is " + id,
                         Toast.LENGTH_SHORT).show();
                 }
         });
@@ -56,6 +57,6 @@ public class Awards extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), EventList.class).putExtra("CurrentUser", CU));
     }
 }

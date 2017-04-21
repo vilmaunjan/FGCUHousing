@@ -14,7 +14,7 @@ import com.example.vilma.fgcuhousing.R;
 import com.example.vilma.fgcuhousing.data.HousingContract.*;
 /**
  * Created by Andrew on 3/10/2017.
- * Used this to inser Fake data and test the database to make sure
+ * Used this to insertFake data and test the database to make sure
  * a connection is able to be made and modified.
  */
 
@@ -162,16 +162,72 @@ public class DbTest {
 
         //create a list of fake awards
         cv = new ContentValues();
-        cv.put(Awards.COLUMN_Award_Name, "MasteredKungFu");//AwardName
-        cv.put(Awards.COLUMN_Award_Description, "Attended an FGCU Martial arts event");//description
-        cv.put(Awards.COLUMN_Image, "FGCU Martial Arts Logo");//image
+        cv.put(Awards.COLUMN_Award_Name, "FirstTime");//AwardName
+        cv.put(Awards.COLUMN_Award_Description, "Horray on checking into your first" +
+                "Event!");//description
+        cv.put(Awards.COLUMN_Image, R.drawable.award1);//image
 
         awards.add(cv);
 
         cv = new ContentValues();
-        cv.put(Awards.COLUMN_Award_Name, "Left The Coop");//awardName
-        cv.put(Awards.COLUMN_Award_Description, "Left the room");//description
-        cv.put(Awards.COLUMN_Image, "FGCU Martial Arts Logo");//image
+        cv.put(Awards.COLUMN_Award_Name, "ThirdTimer");//awardName
+        cv.put(Awards.COLUMN_Award_Description, "Wow already joining your 3rd event!");//description
+        cv.put(Awards.COLUMN_Image, R.drawable.award2);//image
+
+        awards.add(cv);
+
+        cv = new ContentValues();
+        cv.put(Awards.COLUMN_Award_Name, "Lucky Seven");//awardName
+        cv.put(Awards.COLUMN_Award_Description, "Seven Events, Someone like to go out!");//description
+        cv.put(Awards.COLUMN_Image,  R.drawable.award3);//image
+
+        awards.add(cv);
+
+        cv = new ContentValues();//went to 10 events
+        cv.put(Awards.COLUMN_Award_Name, "Out Going");//awardName
+        cv.put(Awards.COLUMN_Award_Description, "Much Sociable, Much talk, Much 10 Events, " +
+                "Much WoW");//description
+        cv.put(Awards.COLUMN_Image, R.drawable.award4);//image
+
+        awards.add(cv);
+
+        cv = new ContentValues();
+        cv.put(Awards.COLUMN_Award_Name, "MakeLifesimple");//AwardName
+        cv.put(Awards.COLUMN_Award_Description, "Joined an Event App!");//description
+        cv.put(Awards.COLUMN_Image, R.drawable.award5);//image
+
+        awards.add(cv);
+
+        cv = new ContentValues();
+        cv.put(Awards.COLUMN_Award_Name, "The Hall Patrol");//awardName
+        cv.put(Awards.COLUMN_Award_Description, "Joined an Elite group of Hall Security" +
+                "in the majestic halls of the dorms");//description
+        cv.put(Awards.COLUMN_Image, R.drawable.award6);//image
+
+        awards.add(cv);
+
+        cv = new ContentValues();
+        cv.put(Awards.COLUMN_Award_Name, "The KingPin");//awardName
+        cv.put(Awards.COLUMN_Award_Description, "Formed an Elite troop do there " +
+                "bidding");//description
+        cv.put(Awards.COLUMN_Image, R.drawable.award7);//image
+
+        awards.add(cv);
+
+        cv = new ContentValues();
+        cv.put(Awards.COLUMN_Award_Name, "Complicated");//awardName
+        cv.put(Awards.COLUMN_Award_Description, "Checked into another Event without" +
+                "Clocking Out");//description
+        cv.put(Awards.COLUMN_Image, R.drawable.award8);//image
+
+        awards.add(cv);
+
+
+        cv = new ContentValues();
+        cv.put(Awards.COLUMN_Award_Name, "BetaTester");//awardName
+        cv.put(Awards.COLUMN_Award_Description, "One of the very few who decided to go out " +
+                "on a limb and joined this app for testing");//description
+        cv.put(Awards.COLUMN_Image, R.drawable.award9);//image
 
         awards.add(cv);
 

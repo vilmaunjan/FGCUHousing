@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), ResidentAccess.class));
         } else if(v == findViewById(R.id.btnStaff)) { //go to staffAccess
             //Current Staff login not up so this sends you to event list with an auto login feature
-            //CurrentUser admin = db.loginAS("cooper@fgcu.edu");
             CurrentUser admin = LogIN(getApplicationContext(),"cooper@fgcu.edu");
             Intent supa = new Intent(getApplicationContext(), EventList.class);
             supa.putExtra("CurrentUser", admin);
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 /**
                  * Currently being used by me just to get awards up and running
                  */
-                CurrentUser admin = db.loginAS("cooper@fgcu.edu");
+                CurrentUser admin = LogIN(getApplicationContext(),"cooper@fgcu.edu");
                 Intent supa = new Intent(getApplicationContext(), Awards.class);
                 supa.putExtra("CurrentUser", admin);
                 startActivity(supa);
