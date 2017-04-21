@@ -58,6 +58,7 @@ public class logIn {
 
     //Still working on This but will populate all the information a person has in the database
     //At login
+    //Things to populate, EventsAttended
     public void setEvents(CurrentUser ep){
         //ratingid 0, residentid 1, eventid 2, checkin 3, timestayed 4
         //rating score 5, rating feedback 6

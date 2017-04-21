@@ -69,5 +69,11 @@ public class ResidentLogin extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent residentChoice = new Intent(getApplicationContext(), ResidentAccess.class);
+        startActivity(residentChoice);
+    }
+
 
 }

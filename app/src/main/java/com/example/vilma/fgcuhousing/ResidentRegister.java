@@ -64,6 +64,12 @@ public class ResidentRegister extends AppCompatActivity {
 
     };
 
+    @Override
+    public void onBackPressed() {
+        Intent residentChoice = new Intent(getApplicationContext(), ResidentAccess.class);
+        startActivity(residentChoice);
+    }
+
     public void buttonOnClick(View v) {
         Button button = (Button)v;
         if (v == findViewById(R.id.btnSubmit)) {

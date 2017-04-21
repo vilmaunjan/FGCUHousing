@@ -137,4 +137,8 @@ public class EventPage extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), EventList.class).putExtra("CurrentUser", CU));
+    }
 }

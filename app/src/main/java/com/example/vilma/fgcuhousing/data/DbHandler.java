@@ -444,6 +444,7 @@ public class DbHandler extends SQLiteOpenHelper {
     public boolean insertEventAttended(Event evt, CurrentUser creator) {
         boolean TheReturner;
             //If they have not attended the event
+
         if(!(creator.getEvents().containsKey(evt.getTitle()))) {
             Log.d("insertEvent", evt.getTitle());
             //Create a instance of UserEvents and inserts the ID's of the event and Ra for now
@@ -463,6 +464,7 @@ public class DbHandler extends SQLiteOpenHelper {
             long result = db.insert(AttendedEventEntry.TABLE_NAME, null, values);
             //This sets the id in the event it was called from in the current user id
             setEventid(creator, evt);
+            creator.getEvents().get(evt.getTitle()).setCheckedin(true);
             Log.d("CreatingAttendedEvent", "The id of the attended event is : " +
                     creator.getEvents().get(evt.getTitle()).getAttendedId());
             TheReturner = result != -1;

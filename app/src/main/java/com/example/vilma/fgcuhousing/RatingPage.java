@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.vilma.fgcuhousing.data.CurrentUser;
 import com.example.vilma.fgcuhousing.data.DbHandler;
 
-public class RatingPage extends AppCompatActivity {
+public class  RatingPage extends AppCompatActivity {
     private CurrentUser CU;
     private int eventid;
     private String eveTitle;

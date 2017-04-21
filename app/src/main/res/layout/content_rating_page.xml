@@ -58,7 +58,7 @@
         android:ems="10"
         android:hint="Please add any optional comments about the event"
         android:inputType="textMultiLine"
-        android:textSize="12sp"
+        android:textSize="18sp"
         tools:ignore="HardcodedText" />
 
     <Button
