@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.vilma.fgcuhousing.data.CurrentUser;
 import com.example.vilma.fgcuhousing.data.DbHandler;
+import static com.example.vilma.fgcuhousing.data.logIn.LogIN;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -45,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), ResidentAccess.class));
         } else if(v == findViewById(R.id.btnStaff)) { //go to staffAccess
             //Current Staff login not up so this sends you to event list with an auto login feature
-            CurrentUser admin = db.loginAS("cooper@fgcu.edu");
+            //CurrentUser admin = db.loginAS("cooper@fgcu.edu");
+            CurrentUser admin = LogIN(getApplicationContext(),"cooper@fgcu.edu");
             Intent supa = new Intent(getApplicationContext(), EventList.class);
             supa.putExtra("CurrentUser", admin);
             startActivity(supa);

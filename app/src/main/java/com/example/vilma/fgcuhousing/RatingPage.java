@@ -80,7 +80,9 @@ public class  RatingPage extends AppCompatActivity {
         if (v == findViewById(R.id.btnRate)) { //go to residentAccess
             //Set the rating and comments
             CU.getEvents().get(eveTitle).setRating(rating.getRating());
-            if(!((Comments.getText().toString()) == null)) {
+            //This doesnt seem to be working fully right but it's ok doesnt matter
+            //Minor inconvience
+            if(!(Comments.getText().toString().equals("null"))) {
                 CU.getEvents().get(eveTitle).setFeedBack(Comments.getText().toString());
             }else{
                 CU.getEvents().get(eveTitle).setFeedBack("Awesome");

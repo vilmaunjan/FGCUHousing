@@ -27,6 +27,7 @@ public class DbTest {
         List<ContentValues> User = new ArrayList<>();
         List<ContentValues> Event = new ArrayList<>();
         List<ContentValues> awards = new ArrayList<>();
+        List<ContentValues> OrgEvents = new ArrayList<>();
 
 
 
@@ -174,6 +175,13 @@ public class DbTest {
 
         awards.add(cv);
 
+       for(int i=1;i<=7; i++ ) {
+           cv = new ContentValues();
+           cv.put(OrganizedEvents.RA_ID, 5);
+           cv.put(OrganizedEvents.Event_ID, i);
+           OrgEvents.add(cv);
+       }
+
         //insert all guests in one transaction
         try
         {
@@ -192,6 +200,10 @@ public class DbTest {
             //go through the list and add one by one
             for(ContentValues c:awards){
                 db.insert(Awards.TABLE_NAME, null, c);
+            }
+
+            for(ContentValues c:OrgEvents){
+                db.insert(OrganizedEvents.TABLE_NAME, null, c);
             }
 
 

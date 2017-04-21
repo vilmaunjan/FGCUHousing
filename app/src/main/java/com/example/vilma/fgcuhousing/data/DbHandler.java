@@ -25,7 +25,7 @@ import com.example.vilma.fgcuhousing.data.HousingContract.UserEntry;
 public class DbHandler extends SQLiteOpenHelper {
     //Used for the name ad database version whenever updating schema
     private static final String DATABASE_NAME = "HousingDB";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
     private static final String Tag = "DataBaseHelper";
     private static SQLiteDatabase db = null;
 
@@ -154,17 +154,41 @@ public class DbHandler extends SQLiteOpenHelper {
     //Should be able to get started with using the database right now though
 
     //Gets all data from a table, not sure if we need this just yet
-    public Cursor getData(String table){
-        //use getReadableDatabase whenever you just want to read valuse
-        //from database
-        SQLiteDatabase db = this.getReadableDatabase();
-        //String for Query
-        String query = "select *" +
-                "From " + table;
-        //inputs query and the return is always a cursor
-        Cursor data = db.rawQuery(query, null);
-        //returns the data
-        return data;
+    public Cursor getEvents(CurrentUser ep){
+        db = this.getReadableDatabase();
+        Cursor UserSpecificEvents = null;
+
+
+        String table = EventEntry.TABLE_NAME +" e  inner join " + AttendedEventEntry.TABLE_NAME +" a"+
+                " on e. "+ EventEntry.Event_ID +" = a." + AttendedEventEntry.Event_ID +";";
+
+        String [] columns = {"e." + EventEntry.Event_Title, "a." + AttendedEventEntry.Rating_FeedBack, "a." +
+                AttendedEventEntry.Checked_IN, "a." + AttendedEventEntry.Time_Stayed, "a." +
+                AttendedEventEntry.Event_ID, "a."+ AttendedEventEntry.Rating_ID, "a." +
+                AttendedEventEntry.Rating_Score};
+
+        String where = AttendedEventEntry.Resident_ID + " = " + ep.getID();
+
+//                SELECT e.Title, a.RatingFeedBack, a.CheckedIn, a.TimeStayed,
+//                a.Event_ID, a.Rating_ID, a.RatingScore
+//                   FROM AttendedEvents a inner join Event e
+//                   on a.Event_ID = e.Event_ID
+//                  Where a.Resident_ID = 5
+
+        try {
+            //table is the inner join clause
+            //colums is which colums to select
+            //after that is the where claus
+            // null for the rest which is order by group by, etc
+            UserSpecificEvents = db.query(table, columns, where,
+                    null, null, null, null);
+
+        }catch (Exception e){
+            Log.d("LogIn", "There was a error here's the message");
+            e.getMessage();
+        }
+
+        return UserSpecificEvents;
     }
 
 
@@ -535,6 +559,10 @@ public class DbHandler extends SQLiteOpenHelper {
         on e.Event_ID = o.RA_ID*/
 
         try {
+            //table is the inner join clause
+            //colums is which colums to select
+            //after that is the where claus
+            // null for the rest which is order by group by, etc
             UserSpecificEvents = db.query(table, columns, OrganizedEvents.RA_ID + " = " + id,
                     null, null, null, null);
 

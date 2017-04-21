@@ -13,7 +13,7 @@ public class UserEvents implements Parcelable {
     private boolean Attended = false;//if there attending the event
     private boolean checkedin = false;//if they hit check in
     //Event title, feedback from user, time they checked in and out
-    private String title, feedBack = " ", CheckIn, CheckOut;
+    private String title, feedBack, CheckIn, CheckOut;
     //Id generated from when they attended the event
     private int EventID, AttendedId;//Contain the event id and attended id
     private float rating;//what rating they put for the event
@@ -67,6 +67,9 @@ public class UserEvents implements Parcelable {
     }
 
     public String getFeedBack() {
+        if(feedBack == null){
+            setFeedBack("Awesome");
+        }
         return feedBack;
     }
 

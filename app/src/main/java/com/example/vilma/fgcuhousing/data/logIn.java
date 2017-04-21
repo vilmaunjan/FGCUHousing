@@ -4,8 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.example.vilma.fgcuhousing.data.HousingContract.AttendedEventEntry;
-import com.example.vilma.fgcuhousing.data.HousingContract.UserEntry;
+import com.example.vilma.fgcuhousing.data.HousingContract.*;
 
 /**
  * Created by Andre on 4/18/2017.
@@ -53,38 +52,44 @@ public class logIn {
             CurrentUser enter = new CurrentUser(name, email, password, building);
             enter.setID(id);
             enter.setAccountType(account);
+            setEvents(enter);
             return enter;
     }
 
     //Still working on This but will populate all the information a person has in the database
     //At login
     //Things to populate, EventsAttended
-    public void setEvents(CurrentUser ep){
-        //ratingid 0, residentid 1, eventid 2, checkin 3, timestayed 4
-        //rating score 5, rating feedback 6
-        String   CheckIN, CheckOut, feedback;
+    public static void setEvents(CurrentUser ep){
+        //Title 0, feedback 1, checkin 2, check out 3, event 4
+        //attended_id 5, ratingscore 6
+        //Rating_id is Attended Id
+        String   CheckIN, CheckOut, feedback, title;
         String Tt = "LogIn";
-        int RatingID, ResidentID, EventID, ratingScore;
-        String query = "Select * from "+ AttendedEventEntry.TABLE_NAME +" where " +
-                AttendedEventEntry.Resident_ID +" = \"" + ep.getID() + "\";";
-        find = db.QueryData(query);
-
+        int RatingID, EventID, ratingScore;
+        //returns cursor with all the events a user attended
+        find = db.getEvents(ep);
+        //Add's them to there current user object so
+        //We know events they have attended already in the past after logging
+        //Out
         if (find.moveToFirst()) {
             do {
 
-                RatingID = find.getInt(0);
-                ResidentID = find.getInt(1);
-                EventID = find.getInt(2);
-                CheckIN = find.getString(3);
-                CheckOut = find.getString(4);
-                ratingScore = find.getInt(5);
-                feedback = find.getString(6);
+                title = find.getString(0);
+                feedback = find.getString(1);
+                CheckIN = find.getString(2);
+                CheckOut = find.getString(3);
+                EventID = find.getInt(4);
+                RatingID = find.getInt(5);
+                ratingScore = find.getInt(6);
 
-//                UserEvents pop = new UserEvents(RatingID, ResidentID, EventID,
-//                      CheckIN, CheckOut, ratingScore,
-//                        feedback);
+                UserEvents pop = new UserEvents(title, feedback, CheckIN,
+                      CheckOut, EventID, RatingID,
+                       ratingScore);
+                ep.getEvents().put(title, pop);
+                ep.getEvents().get(title).setAttended(true);
+                ep.getEvents().get(title).setCheckedin(true);
 
-                Log.d(Tt, "Rating Id is : " + RatingID + " Resident Id is : " + ResidentID +
+                Log.d(Tt, "Rating Id is : " + RatingID + " Title of event is : " + title +
                         " Event ID is : " + EventID + " Check in time is : " + CheckIN +
                         " Check out time is : " + CheckOut +
                         "The rating score for said event is : +" + ratingScore +

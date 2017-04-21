@@ -51,7 +51,7 @@ public class HousingContract {
         public static final String Resident_ID = "Resident_ID";
         public static final String Event_ID = "Event_ID";
         public static final String Checked_IN = "CheckedIn";
-        public static final String Time_Stayed = "TimeStayed";
+        public static final String Time_Stayed = "CheckOut";
         public static final String Rating_Score = "RatingScore";
         public static final String Rating_FeedBack = "RatingFeedBack";
     }
