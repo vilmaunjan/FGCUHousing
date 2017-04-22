@@ -177,14 +177,14 @@ public class DbTest {
         awards.add(cv);
 
         cv = new ContentValues();
-        cv.put(Awards.COLUMN_Award_Name, "Lucky Seven");//awardName
+        cv.put(Awards.COLUMN_Award_Name, "LuckySeven");//awardName
         cv.put(Awards.COLUMN_Award_Description, "Seven Events, Someone like to go out!");//description
         cv.put(Awards.COLUMN_Image,  R.drawable.award3);//image
 
         awards.add(cv);
 
         cv = new ContentValues();//went to 10 events
-        cv.put(Awards.COLUMN_Award_Name, "Out Going");//awardName
+        cv.put(Awards.COLUMN_Award_Name, "OutGoing");//awardName
         cv.put(Awards.COLUMN_Award_Description, "Much Sociable, Much talk, Much 10 Events, " +
                 "Much WoW");//description
         cv.put(Awards.COLUMN_Image, R.drawable.award4);//image
@@ -192,14 +192,14 @@ public class DbTest {
         awards.add(cv);
 
         cv = new ContentValues();
-        cv.put(Awards.COLUMN_Award_Name, "MakeLifesimple");//AwardName
+        cv.put(Awards.COLUMN_Award_Name, "MakeLifeSimple");//AwardName
         cv.put(Awards.COLUMN_Award_Description, "Joined an Event App!");//description
         cv.put(Awards.COLUMN_Image, R.drawable.award5);//image
 
         awards.add(cv);
 
         cv = new ContentValues();
-        cv.put(Awards.COLUMN_Award_Name, "The Hall Patrol");//awardName
+        cv.put(Awards.COLUMN_Award_Name, "TheHallPatrol");//awardName
         cv.put(Awards.COLUMN_Award_Description, "Joined an Elite group of Hall Security" +
                 "in the majestic halls of the dorms");//description
         cv.put(Awards.COLUMN_Image, R.drawable.award6);//image
@@ -207,7 +207,7 @@ public class DbTest {
         awards.add(cv);
 
         cv = new ContentValues();
-        cv.put(Awards.COLUMN_Award_Name, "The KingPin");//awardName
+        cv.put(Awards.COLUMN_Award_Name, "KingPin");//awardName
         cv.put(Awards.COLUMN_Award_Description, "Formed an Elite troop do there " +
                 "bidding");//description
         cv.put(Awards.COLUMN_Image, R.drawable.award7);//image

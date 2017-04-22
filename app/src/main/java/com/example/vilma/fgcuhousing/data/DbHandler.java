@@ -193,6 +193,38 @@ public class DbHandler extends SQLiteOpenHelper {
         return UserSpecificEvents;
     }
 
+    public boolean betaTester(CurrentUser us){
+        Cursor find;
+        boolean truth = false;
+
+        String where =  AwardObtained.Resident_ID + " = " + us.getID() +
+                " AND " + AwardObtained.AwardID + " =" + getAwardID("BetaTester");//9 Should be
+        //Beta tester award
+        find = db.query(AwardObtained.TABLE_NAME, new String[]{AwardObtained.AwardID},
+                where, null,null, null, null);
+
+        if (find.moveToFirst()) {
+            do {
+                truth = true;
+            }
+            while (find.moveToNext());
+        }
+        find.close();
+
+        return  truth;
+    }
+
+    public boolean insertAward(CurrentUser pewpew, int AwardID){
+            db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(AwardObtained.AwardID, AwardID);
+            values.put(AwardObtained.Resident_ID, pewpew.getID());
+
+            long result = db.insert(AwardObtained.TABLE_NAME, null, values);
+
+        return result != -1;
+    }
+
 
     //Used to insert a user into the database
     public void insertUser(Context c, User usr){
@@ -413,15 +445,22 @@ public class DbHandler extends SQLiteOpenHelper {
     }
 
     //Get awards info
-    public Cursor getAwardsInfo(){
+    public int getAwardID(String Award){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor;
-        String [] projections = {Awards.COLUMN_Award_ID, Awards.COLUMN_Award_Description,
-                Awards.COLUMN_Award_Name, Awards.COLUMN_Image};
+        int exists = 0;
+        String [] projections = {Awards.COLUMN_Award_ID};
 
-        cursor = db.query(Awards.TABLE_NAME, projections, null, null, null, null, null);
+        String where = Awards.COLUMN_Award_Name +" = " + Award;
 
-        return cursor;
+        cursor = db.query(Awards.TABLE_NAME, projections, where, null, null, null, null);
+        if(cursor.moveToFirst()){
+            do{
+                exists = cursor.getInt(0);
+            }while(cursor.moveToNext());
+        }
+
+        return exists;
     }
 
     //Used to set the id when creating the row for attended events
@@ -577,7 +616,7 @@ public class DbHandler extends SQLiteOpenHelper {
 
         try {
             //table is the inner join clause
-            //colums is which colums to select
+            //columns is which columns to select
             //after that is the where claus
             // null for the rest which is order by group by, etc
             UserSpecificEvents = db.query(table, columns, OrganizedEvents.RA_ID + " = " + id,
@@ -589,5 +628,26 @@ public class DbHandler extends SQLiteOpenHelper {
         }
 
         return UserSpecificEvents;
+    }
+
+    public boolean complicated(CurrentUser ep) {
+        Cursor find;
+        boolean truth = false;
+
+        String where =  AwardObtained.Resident_ID + " = " + ep.getID() +
+                " AND " + AwardObtained.AwardID + " = " + getAwardID("Complicated");
+        //Beta tester award
+        find = db.query(AwardObtained.TABLE_NAME, new String[]{AwardObtained.AwardID},
+                where, null,null, null, null);
+
+        if (find.moveToFirst()) {
+            do {
+                truth = true;
+            }
+            while (find.moveToNext());
+        }
+        find.close();
+
+        return  truth;
     }
 }

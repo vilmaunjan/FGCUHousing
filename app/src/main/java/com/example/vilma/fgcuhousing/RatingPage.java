@@ -71,9 +71,6 @@ public class  RatingPage extends AppCompatActivity {
         });
     }
 
-
-
-
     public void buttonOnClick(View v) {
         Button button = (Button)v;
 
@@ -104,8 +101,6 @@ public class  RatingPage extends AppCompatActivity {
 
 
     }
-
-
 
     @Override
     public void onBackPressed() {

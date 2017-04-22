@@ -50,12 +50,35 @@ public class logIn {
                 }
                 find.close();
             CurrentUser enter = new CurrentUser(name, email, password, building);
-            enter.setID(id);
-            enter.setAccountType(account);
-            setEvents(enter);
+            enter.setID(id);//Sets there id
+            enter.setAccountType(account);//Sets there accountType
+            setEvents(enter);//Sets the events they previously attended
+            awardChecker trophies = new awardChecker(enter.getEventCounter(),account);//Passes
+            //Number of Events and the account type
+            enter.setMyawards(trophies);//Puts in for current user
             return enter;
     }
 
+    //Sets the Awards they Obtained
+    public static void setAwards(CurrentUser ep, awardChecker tp) {
+        //If they don't have the beta Tester Title
+        if(!db.betaTester(ep)){
+            //check if they qualify
+            //logic might be flawed for local reasons but thinking in terms of
+            //having a sql database on the net later
+            if(ep.getID() < 100) {
+                tp.setBetaTester(true);
+                db.insertAward(ep, db.getAwardID("BetaTester"));
+            }
+        }
+        //Populates all the awards Obtained Such As Complicated
+        //Only award that can't be auto populated at the moment
+        if(db.complicated(ep)){
+            //If they got the complicated Award set true on login
+                tp.setComplicated(true);
+        }
+
+    }
     //Still working on This but will populate all the information a person has in the database
     //At login
     //Things to populate, EventsAttended

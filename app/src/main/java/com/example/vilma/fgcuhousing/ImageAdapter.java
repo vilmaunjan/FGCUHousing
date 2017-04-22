@@ -7,14 +7,21 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.example.vilma.fgcuhousing.data.CurrentUser;
+
 /**
  * Created by Vilma on 3/31/2017.
  */
 
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
+    private CurrentUser p;
 
     public ImageAdapter(Context c){
+        mContext = c;
+    }
+
+    public ImageAdapter(Context c, CurrentUser p){
         mContext = c;
     }
 
@@ -45,8 +52,7 @@ public class ImageAdapter extends BaseAdapter {
         } else {
             imageView = (ImageView) convertView;;
         }
-
-        imageView.setImageResource(mThumbIds[position]);
+            imageView.setImageResource(mThumbIds[position]);
         return imageView;
     }
 

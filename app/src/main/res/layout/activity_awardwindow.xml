@@ -13,6 +13,7 @@
     android:paddingRight="0dp"
     android:paddingStart="0dp"
     android:paddingTop="0dp"
+    android:theme="@android:style/Theme.Dialog"
     android:visibility="visible">
 
     <include

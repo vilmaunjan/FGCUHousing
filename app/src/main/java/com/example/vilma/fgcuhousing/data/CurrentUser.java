@@ -23,10 +23,9 @@ public class CurrentUser implements Parcelable {
     private String building;//building
     private String AccountType;//account Type
     private int EventCounter=0;
+    private awardChecker myawards;
     //This hash map holds the title of the event and a class of infromation needed
     private HashMap<String, UserEvents> Events = new HashMap<>();
-    //Working on the awards still but this is here for now
-    private ArrayList<String> awarded = new ArrayList<>();
 
     //Anything passed here is getter and setters
     //as well as the parcelable default required methods
@@ -34,6 +33,13 @@ public class CurrentUser implements Parcelable {
         return ID;
     }
 
+    public awardChecker getMyawards() {
+        return myawards;
+    }
+
+    public void setMyawards(awardChecker myawards) {
+        this.myawards = myawards;
+    }
     public void setID(int ID) {
         this.ID = ID;
     }
@@ -94,14 +100,6 @@ public class CurrentUser implements Parcelable {
         Events = events;
     }
 
-    public ArrayList<String> getAwarded() {
-        return awarded;
-    }
-
-    public void setAwarded(ArrayList<String> awarded) {
-        this.awarded = awarded;
-    }
-
     public CurrentUser(){
         super();
     }
@@ -111,6 +109,7 @@ public class CurrentUser implements Parcelable {
         this.email = Email;
         this.password = pass;
         this.building = Building;
+
     }
 
 
@@ -128,8 +127,8 @@ public class CurrentUser implements Parcelable {
         dest.writeString(this.building);
         dest.writeString(this.AccountType);
         dest.writeInt(this.EventCounter);
+        dest.writeParcelable(this.myawards, flags);
         dest.writeMap(this.Events);
-        dest.writeStringList(this.awarded);
     }
 
     protected CurrentUser(Parcel in) {
@@ -140,8 +139,8 @@ public class CurrentUser implements Parcelable {
         this.building = in.readString();
         this.AccountType = in.readString();
         this.EventCounter = in.readInt();
+        this.myawards = in.readParcelable(awardChecker.class.getClassLoader());
         in.readMap(Events, UserEvents.class.getClassLoader());
-        this.awarded = in.createStringArrayList();
     }
 
     public static final Creator<CurrentUser> CREATOR = new Creator<CurrentUser>() {
