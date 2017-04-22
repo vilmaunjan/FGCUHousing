@@ -3,6 +3,7 @@ package com.example.vilma.fgcuhousing.data;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.vilma.fgcuhousing.data.HousingContract.*;
 
@@ -49,26 +50,28 @@ public class logIn {
                     while (find.moveToNext());
                 }
                 find.close();
+            //Creates CurrentUser object
             CurrentUser enter = new CurrentUser(name, email, password, building);
             enter.setID(id);//Sets there id
             enter.setAccountType(account);//Sets there accountType
             setEvents(enter);//Sets the events they previously attended
             awardChecker trophies = new awardChecker(enter.getEventCounter(),account);//Passes
             //Number of Events and the account type
-            setAwards(enter, trophies);
+            setAwards(enter, trophies, x);
             enter.setMyawards(trophies);//Puts in for current user
 
             return enter;
     }
 
     //Sets the Awards they Obtained
-    public static void setAwards(CurrentUser ep, awardChecker tp) {
+    public static void setAwards(CurrentUser ep, awardChecker tp, Context x) {
         //If they don't have the beta Tester Title
         if(!db.betaTester(ep)){
             //check if they qualify
             //logic might be flawed for local reasons but thinking in terms of
             //having a sql database on the net later
             if(ep.getID() < 100) {
+                Toast.makeText(x, "Obtained the BetaTester", Toast.LENGTH_SHORT).show();
                 tp.setBetaTester(true);
                 db.insertAward(ep, db.getAwardID("BetaTester"));
             }

@@ -203,7 +203,7 @@ public class DbHandler extends SQLiteOpenHelper {
         db = this.getReadableDatabase();
         find = db.query(AwardObtained.TABLE_NAME, new String[]{AwardObtained.AwardID},
                 where, null,null, null, null);
-        db.close();
+        //db.close();
         if (find.moveToFirst()) {
             do {
                 truth = true;
@@ -454,7 +454,7 @@ public class DbHandler extends SQLiteOpenHelper {
         String where = Awards.COLUMN_Award_Name +" = \"" + Award + "\"";
 
         cursor = ab.query(Awards.TABLE_NAME, projections, where, null, null, null, null);
-        ab.close();
+
         if(cursor.moveToFirst()){
             do{
                 exists = cursor.getInt(0);

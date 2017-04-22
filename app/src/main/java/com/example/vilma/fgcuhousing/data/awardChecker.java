@@ -1,7 +1,9 @@
 package com.example.vilma.fgcuhousing.data;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.Toast;
 
 /**
  * Created by Andrew on 4/21/2017.
@@ -71,15 +73,19 @@ public class awardChecker implements Parcelable {
 
     }
 
-    public void checkEvent(int Number){
+    public void checkEvent(int Number, Context c){
         //Sets event awards
         if(Number > 0){
             setFirstTime(true);
+            Toast.makeText(c, "You Obtained First Time award!", Toast.LENGTH_SHORT).show();
         }else if(Number > 2){
+            Toast.makeText(c, "You Obtained Third Time award!", Toast.LENGTH_SHORT).show();
             setThirdTimer(true);
         } else if(Number > 6){
+            Toast.makeText(c, "You Obtained Lucky Seven award!", Toast.LENGTH_SHORT).show();
             setLuckySeven(true);
         }else if(Number > 10){
+            Toast.makeText(c, "You Obtained OutGoing award!", Toast.LENGTH_SHORT).show();
             setOutGoing(true);
         }
     }

@@ -130,6 +130,10 @@ public class EventPage extends AppCompatActivity {
                             checkOut.setVisibility(View.VISIBLE);
                             checkOut.setEnabled(true);
                             datCon.insertEventAttended(event, CU);
+                            int eventCounter = CU.getEventCounter()+1;
+                            CU.setEventCounter(eventCounter);
+                            //Checks if they qualify for any events
+                            CU.getMyawards().checkEvent(CU.getEventCounter(), getApplicationContext());
                             //Checks if there able to get the complicated award
                             if(datCon.checkifComplicated(CU)){
                                 //maybe toast or something saying there received the complicated award
