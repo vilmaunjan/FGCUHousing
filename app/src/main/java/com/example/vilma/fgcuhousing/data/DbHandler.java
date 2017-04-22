@@ -200,9 +200,10 @@ public class DbHandler extends SQLiteOpenHelper {
         String where =  AwardObtained.Resident_ID + " = " + us.getID() +
                 " AND " + AwardObtained.AwardID + " =" + getAwardID("BetaTester");//9 Should be
         //Beta tester award
+        db = this.getReadableDatabase();
         find = db.query(AwardObtained.TABLE_NAME, new String[]{AwardObtained.AwardID},
                 where, null,null, null, null);
-
+        db.close();
         if (find.moveToFirst()) {
             do {
                 truth = true;
@@ -224,7 +225,6 @@ public class DbHandler extends SQLiteOpenHelper {
 
         return result != -1;
     }
-
 
     //Used to insert a user into the database
     public void insertUser(Context c, User usr){
@@ -446,14 +446,15 @@ public class DbHandler extends SQLiteOpenHelper {
 
     //Get awards info
     public int getAwardID(String Award){
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase ab = this.getReadableDatabase();
         Cursor cursor;
         int exists = 0;
         String [] projections = {Awards.COLUMN_Award_ID};
 
-        String where = Awards.COLUMN_Award_Name +" = " + Award;
+        String where = Awards.COLUMN_Award_Name +" = \"" + Award + "\"";
 
-        cursor = db.query(Awards.TABLE_NAME, projections, where, null, null, null, null);
+        cursor = ab.query(Awards.TABLE_NAME, projections, where, null, null, null, null);
+        ab.close();
         if(cursor.moveToFirst()){
             do{
                 exists = cursor.getInt(0);
@@ -592,7 +593,6 @@ public class DbHandler extends SQLiteOpenHelper {
         return TheReturner;
     }
 
-
     public Cursor UserEvents(int id) {
 
         db = this.getReadableDatabase();
@@ -630,23 +630,51 @@ public class DbHandler extends SQLiteOpenHelper {
         return UserSpecificEvents;
     }
 
+    public boolean checkifComplicated(CurrentUser ep){
+
+        boolean Here= false;
+        if(!complicated(ep)){
+            //if they dont have complicated already
+            //check if they qualify and insert into database
+            String table = AttendedEventEntry.TABLE_NAME;
+
+            String [] columns = {AttendedEventEntry.Time_Stayed};
+
+            String where = AttendedEventEntry.Resident_ID+" = "+ ep.getID() + " AND "
+                    + AttendedEventEntry.Time_Stayed + " is null";
+            try{
+                db = this.getWritableDatabase();
+                //returns all the events they attended and have not checked out of
+                Cursor find = db.query(table, columns, where, null, null, null, null);
+                if(find.getCount() >1){
+                    Here =true;
+                    ep.getMyawards().setComplicated(true);
+                    insertAward(ep, getAwardID("Complicated"));
+                }
+                db.close();
+            }catch (Exception e){
+                Log.d("CreatingEvent", "Something went wong");
+            }
+        }
+        return Here;
+    }
+
+    //Checks if they have teh complicated Award
     public boolean complicated(CurrentUser ep) {
         Cursor find;
         boolean truth = false;
-
+        db = this.getReadableDatabase();
         String where =  AwardObtained.Resident_ID + " = " + ep.getID() +
                 " AND " + AwardObtained.AwardID + " = " + getAwardID("Complicated");
         //Beta tester award
         find = db.query(AwardObtained.TABLE_NAME, new String[]{AwardObtained.AwardID},
                 where, null,null, null, null);
 
-        if (find.moveToFirst()) {
-            do {
+        if (find.getCount() > 0) {//if it returns that means they do
                 truth = true;
-            }
-            while (find.moveToNext());
         }
         find.close();
+        db.close();
 
         return  truth;
     }

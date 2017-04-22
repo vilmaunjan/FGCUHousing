@@ -1,5 +1,6 @@
 package com.example.vilma.fgcuhousing;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -112,16 +114,33 @@ public class EventPage extends AppCompatActivity {
     }
 
     public void buttonOnClick(View v) {
-        Button button = (Button)v;
+        final Button button = (Button)v;
         if (v == findViewById(R.id.btnCheckIn)) { //when check in button is pressed
-            button.setVisibility(View.GONE); //changes text to check out
-            button.setEnabled(false); //changes text to check out
-            Button checkOut = (Button) findViewById(R.id.btnCheckout);
-            checkOut.setVisibility(View.VISIBLE);
-            checkOut.setEnabled(true);
-            datCon.insertEventAttended(event, CU);
-            Toast.makeText(this, "You have successfully checked in", Toast.LENGTH_SHORT).show();
-            //timer should start and should stop when check out button is pressed
+
+             new AlertDialog.Builder(this)
+                    .setTitle("Check in")
+                    .setMessage("Ready to join fun")
+                    .setNegativeButton(android.R.string.no, null)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            Button button = (Button) findViewById(R.id.btnCheckIn);
+                            button.setVisibility(View.GONE); //changes text to check out
+                            button.setEnabled(false); //changes text to check out
+                            Button checkOut = (Button) findViewById(R.id.btnCheckout);
+                            checkOut.setVisibility(View.VISIBLE);
+                            checkOut.setEnabled(true);
+                            datCon.insertEventAttended(event, CU);
+                            //Checks if there able to get the complicated award
+                            if(datCon.checkifComplicated(CU)){
+                                //maybe toast or something saying there received the complicated award
+                                Toast.makeText(getApplicationContext(), "You have Obtained the Complicated Award!",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    })
+                    .create()
+                    .show();
+
         }
         else if (v == findViewById(R.id.btnCheckout)){ //when 'checkout' button is pressed
             try {

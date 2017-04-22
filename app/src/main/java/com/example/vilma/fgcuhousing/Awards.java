@@ -38,7 +38,7 @@ public class Awards extends AppCompatActivity {
         CU = data.getParcelable("CurrentUser");//Aka usually the CurrentUser
 
         GridView gridview = (GridView) findViewById(R.id.gridview);//Conencts Grid View
-        gridview.setAdapter(new ImageAdapter(this));//sets the image adapter class
+        gridview.setAdapter(new ImageAdapter(this, CU));//sets the image adapter class
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,

@@ -55,7 +55,9 @@ public class logIn {
             setEvents(enter);//Sets the events they previously attended
             awardChecker trophies = new awardChecker(enter.getEventCounter(),account);//Passes
             //Number of Events and the account type
+            setAwards(enter, trophies);
             enter.setMyawards(trophies);//Puts in for current user
+
             return enter;
     }
 

@@ -27,15 +27,15 @@ public class awardChecker implements Parcelable {
      *  First Time register's whether RA or RD or R
      *      will be awarded on successful registration
      */
-    private boolean FirstTime;
-    private boolean ThirdTimer;
-    private boolean LuckySeven;
-    private boolean OutGoing;
-    private boolean MakeLifeSimple;
-    private boolean TheHallPatrol;
-    private boolean KingPin;
-    private boolean Complicated;
-    private boolean BetaTester;
+    private boolean FirstTime=false;
+    private boolean ThirdTimer=false;
+    private boolean LuckySeven=false;
+    private boolean OutGoing=false;
+    private boolean MakeLifeSimple=false;
+    private boolean TheHallPatrol=false;
+    private boolean KingPin=false;
+    private boolean Complicated=false;
+    private boolean BetaTester=false;
 
     public awardChecker() {
 
@@ -58,11 +58,11 @@ public class awardChecker implements Parcelable {
 
 
         //sets Award for account creation
-        if(ActType == "R"){
+        if(ActType.equals("R")){
             setMakeLifeSimple(true);
-        }else if(ActType == "RA"){
+        }else if(ActType.equals("RA")){
             setTheHallPatrol(true);
-        }else if(ActType =="RD"){
+        }else if(ActType.equals("RD")){
             setKingPin(true);
         }
 
@@ -70,6 +70,20 @@ public class awardChecker implements Parcelable {
         //Same for Complicated
 
     }
+
+    public void checkEvent(int Number){
+        //Sets event awards
+        if(Number > 0){
+            setFirstTime(true);
+        }else if(Number > 2){
+            setThirdTimer(true);
+        } else if(Number > 6){
+            setLuckySeven(true);
+        }else if(Number > 10){
+            setOutGoing(true);
+        }
+    }
+
 
     public boolean isFirstTime() {
         return FirstTime;
@@ -173,7 +187,7 @@ public class awardChecker implements Parcelable {
         this.BetaTester = in.readByte() != 0;
     }
 
-    public static final Parcelable.Creator<awardChecker> CREATOR = new Parcelable.Creator<awardChecker>() {
+    public static final Creator<awardChecker> CREATOR = new Creator<awardChecker>() {
         @Override
         public awardChecker createFromParcel(Parcel source) {
             return new awardChecker(source);

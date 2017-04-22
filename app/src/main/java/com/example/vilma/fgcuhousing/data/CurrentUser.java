@@ -23,7 +23,7 @@ public class CurrentUser implements Parcelable {
     private String building;//building
     private String AccountType;//account Type
     private int EventCounter=0;
-    private awardChecker myawards;
+    private awardChecker myawards = new awardChecker();
     //This hash map holds the title of the event and a class of infromation needed
     private HashMap<String, UserEvents> Events = new HashMap<>();
 
