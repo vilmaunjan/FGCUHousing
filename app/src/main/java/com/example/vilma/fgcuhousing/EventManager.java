@@ -52,7 +52,9 @@ public class EventManager extends AppCompatActivity {
             startActivity(event);
         }
         else if (v == findViewById(R.id.btnFeedback)) { //go to EventPage
-            startActivity(new Intent(getApplicationContext(), EventFeedback.class));
+            Intent event = new Intent(getApplicationContext(), EventFeedback.class);
+            event.putExtra("CurrentUser", CU);
+            startActivity(event);
         }
     }
 
