@@ -71,6 +71,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.vilma.fgcuhousing.EventManager" />
         </activity>
+        <activity
+            android:name=".EventFeedback"
+            android:label="@string/title_activity_event_feedback"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

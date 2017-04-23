@@ -28,6 +28,7 @@ public class DbTest {
         List<ContentValues> Event = new ArrayList<>();
         List<ContentValues> awards = new ArrayList<>();
         List<ContentValues> OrgEvents = new ArrayList<>();
+        List<ContentValues> AttEvents = new ArrayList<>();
 
 
 
@@ -231,12 +232,84 @@ public class DbTest {
 
         awards.add(cv);
 
-       for(int i=1;i<=7; i++ ) {
-           cv = new ContentValues();
-           cv.put(OrganizedEvents.RA_ID, 5);
-           cv.put(OrganizedEvents.Event_ID, i);
-           OrgEvents.add(cv);
-       }
+        //Create a list of organized events
+        cv = new ContentValues();
+        cv.put(OrganizedEvents.RA_ID, 2);
+        cv.put(OrganizedEvents.Event_ID, 1);
+        cv.put(OrganizedEvents.Date, "01/03/2017");
+        OrgEvents.add(cv);
+
+        cv = new ContentValues();
+        cv.put(OrganizedEvents.RA_ID, 2);
+        cv.put(OrganizedEvents.Event_ID, 2);
+        cv.put(OrganizedEvents.Date, "02/11/2017");
+        OrgEvents.add(cv);
+
+        cv = new ContentValues();
+        cv.put(OrganizedEvents.RA_ID, 3);
+        cv.put(OrganizedEvents.Event_ID, 3);
+        cv.put(OrganizedEvents.Date, "02/23/2017");
+        OrgEvents.add(cv);
+
+        cv = new ContentValues();
+        cv.put(OrganizedEvents.RA_ID, 3);
+        cv.put(OrganizedEvents.Event_ID, 4);
+        cv.put(OrganizedEvents.Date, "02/11/2017");
+        OrgEvents.add(cv);
+
+        cv = new ContentValues();
+        cv.put(OrganizedEvents.RA_ID, 5);
+        cv.put(OrganizedEvents.Event_ID, 5);
+        cv.put(OrganizedEvents.Date, "03/12/2017");
+        OrgEvents.add(cv);
+
+        cv = new ContentValues();
+        cv.put(OrganizedEvents.RA_ID, 3);
+        cv.put(OrganizedEvents.Event_ID, 6);
+        cv.put(OrganizedEvents.Date, "02/11/2017");
+        OrgEvents.add(cv);
+
+        cv = new ContentValues();
+        cv.put(OrganizedEvents.RA_ID, 2);
+        cv.put(OrganizedEvents.Event_ID, 7);
+        cv.put(OrganizedEvents.Date, "02/11/2017");
+        OrgEvents.add(cv);
+
+        //Create a list of attended events
+        cv = new ContentValues();
+        cv.put(AttendedEventEntry.Resident_ID, 2);
+        cv.put(AttendedEventEntry.Event_ID, 1);
+        cv.put(AttendedEventEntry.Rating_Score, 3);
+        cv.put(AttendedEventEntry.Rating_FeedBack,"Awesome event");
+        AttEvents.add(cv);
+
+        cv = new ContentValues();
+        cv.put(AttendedEventEntry.Resident_ID, 1);
+        cv.put(AttendedEventEntry.Event_ID, 1);
+        cv.put(AttendedEventEntry.Rating_Score, 4);
+        cv.put(AttendedEventEntry.Rating_FeedBack,"Good food");
+        AttEvents.add(cv);
+
+        cv = new ContentValues();
+        cv.put(AttendedEventEntry.Resident_ID, 4);
+        cv.put(AttendedEventEntry.Event_ID, 1);
+        cv.put(AttendedEventEntry.Rating_Score, 2);
+        cv.put(AttendedEventEntry.Rating_FeedBack,"It was ok");
+        AttEvents.add(cv);
+
+        cv = new ContentValues();
+        cv.put(AttendedEventEntry.Resident_ID, 3);
+        cv.put(AttendedEventEntry.Event_ID, 2);
+        cv.put(AttendedEventEntry.Rating_Score, 5);
+        cv.put(AttendedEventEntry.Rating_FeedBack,"Cool event");
+        AttEvents.add(cv);
+
+        cv = new ContentValues();
+        cv.put(AttendedEventEntry.Resident_ID, 4);
+        cv.put(AttendedEventEntry.Event_ID, 2);
+        cv.put(AttendedEventEntry.Rating_Score, 4);
+        cv.put(AttendedEventEntry.Rating_FeedBack,"Event was cool");
+        AttEvents.add(cv);
 
         //insert all guests in one transaction
         try
@@ -262,6 +335,9 @@ public class DbTest {
                 db.insert(OrganizedEvents.TABLE_NAME, null, c);
             }
 
+            for(ContentValues c:AttEvents){
+                db.insert(AttendedEventEntry.TABLE_NAME, null, c);
+            }
 
 
             db.setTransactionSuccessful();
