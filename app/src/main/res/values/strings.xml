@@ -62,4 +62,6 @@
     <string name="on_ward">On Ward</string>
     <string name="rate_event">Rate Event</string>
     <string name="title_activity_event_feedback">EventFeedback</string>
+    <string name="statistics">Statistics</string>
+    <string name="title_activity_stats">Stats</string>
 </resources>

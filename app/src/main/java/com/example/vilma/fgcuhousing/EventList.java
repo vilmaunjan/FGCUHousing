@@ -183,7 +183,6 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
         ArrayList<EventItem> newArrayList=new ArrayList<>();
         //use if statement if you want to open something when clicking a button
         if (v == findViewById(R.id.btnSearch)) { //go to EventPage
-            //startActivity(new Intent(getApplicationContext(), EventPage.class));
             SearchView eventTitle = (SearchView) findViewById(R.id.searchView);
             String word = eventTitle.getQuery().toString();
 
@@ -222,13 +221,19 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
          * If user is a Resident, Can not see event manager
          */
         MenuItem EventManager = menu.findItem(R.id.event_manager);
+        MenuItem Stats = menu.findItem(R.id.stats);
         if(CU.getAccountType().equals("R"))
         {
             EventManager.setVisible(false);
+            Stats.setVisible(false);
         }
-        else
+        else if (CU.getAccountType().equals("RA"))
         {
             EventManager.setVisible(true);
+            Stats.setVisible(false);
+        } else {
+            EventManager.setVisible(true);
+            Stats.setVisible(true);
         }
         return true;
     }
@@ -258,6 +263,11 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
         } else if (id == R.id.event_manager){
 
             Intent Account = new Intent(getApplicationContext(), EventManager.class);
+            Account.putExtra("CurrentUser", CU);
+            startActivity(Account);
+        } else if (id == R.id.stats){
+
+            Intent Account = new Intent(getApplicationContext(), Stats.class);
             Account.putExtra("CurrentUser", CU);
             startActivity(Account);
         }

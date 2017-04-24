@@ -53,20 +53,28 @@ public class EventFeedback extends AppCompatActivity {
 
         Bundle data = getIntent().getExtras();
         CU = data.getParcelable("CurrentUser"); //this is the line that gives me problem
-/*      -------------------------------------This is that part that doesnt work----------------------
-        datCon.insertEventAttended(event, CU);
+
+        //load database
+        datCon = new DbHandler(this);
+      //-------------------------------------This is that part that doesnt work----------------------
+        //datCon.insertEventAttended(event, CU);
         try{
             //finds event in database
-            Cursor cursorFeedback = datCon.QueryData("select avg(" +
-                    HousingContract.AttendedEventEntry.Rating_Score +
-                    "), "+ HousingContract.AttendedEventEntry.Event_ID +
-                    " from " + HousingContract.AttendedEventEntry.TABLE_NAME +
-                    " where " + HousingContract.AttendedEventEntry.Event_ID +
-                    " in (select " + HousingContract.OrganizedEvents.Event_ID +
-                    " from " + HousingContract.OrganizedEvents.TABLE_NAME +
-                    " where " + HousingContract.OrganizedEvents.RA_ID  + " = " +
-                    CU.getID() + ")");
+            Cursor cursorFeedback = datCon.QueryData("SELECT e."+HousingContract.EventEntry.Event_Title+
+                    ", AVG(a."+HousingContract.AttendedEventEntry.Rating_Score+") FROM "+
+                    HousingContract.AttendedEventEntry.TABLE_NAME+" a INNER JOIN "+
+                    HousingContract.OrganizedEvents.TABLE_NAME+ "o ON a."+
+                    HousingContract.AttendedEventEntry.Event_ID+" = o."+
+                    HousingContract.OrganizedEvents.Event_ID+" INNER JOIN "+
+                    HousingContract.EventEntry.TABLE_NAME+" e on e."+
+                    HousingContract.EventEntry.Event_ID+" = o."+
+                    HousingContract.OrganizedEvents.Event_ID+
+                    " where o."+HousingContract.OrganizedEvents.RA_ID+
+                    " = "+2+" GROUP BY o."+
+                    HousingContract.OrganizedEvents.Event_ID);
 
+
+     //       Cursor cursorFeedback = datCon.QueryData("SELECT * FROM "+HousingContract.EventEntry.TABLE_NAME);
             if(cursorFeedback !=null){
                 //if event found
                 if(cursorFeedback.moveToFirst()){
@@ -74,7 +82,6 @@ public class EventFeedback extends AppCompatActivity {
                     do{
                         listDataHeader.add(cursorFeedback.getString(0) + " Avg rating: " +
                                 cursorFeedback.getString(1));
-
                         List<String> androidStudio = new ArrayList<>();
                         androidStudio.add("Expandible list view");
                         androidStudio.add("Google map");
@@ -86,7 +93,7 @@ public class EventFeedback extends AppCompatActivity {
                 }
             }
         }catch (SQLException e){}
-*/
+/*
         //This was part of a tutorial that i was following, it works
         listDataHeader.add("Dev");
         listDataHeader.add("Android");
@@ -118,7 +125,7 @@ public class EventFeedback extends AppCompatActivity {
         listHash.put(listDataHeader.get(1),androidStudio);
         listHash.put(listDataHeader.get(2),xamarin);
         listHash.put(listDataHeader.get(3),ump);
-
+*/
     }
 
 }
