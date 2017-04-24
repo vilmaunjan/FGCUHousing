@@ -52,14 +52,23 @@ public class ResidentLogin extends AppCompatActivity {
             //If what the user entered is the correct password then move to EventList
             if(password) {
 
-                Intent i = new Intent(getApplicationContext(), EventList.class);
-                //Use to create current user
-                CurrentUser usr = LogIN(getApplicationContext(),emailEntry);
-                //Adds the Current user data to be passed
-                i.putExtra("CurrentUser", usr);
-                //Go to the next activity
-                startActivity(i);
-
+                if(emailEntry.endsWith("@eagle.fgcu.edu")) {
+                    Intent i = new Intent(getApplicationContext(), EventList.class);
+                    //Use to create current user
+                    CurrentUser usr = LogIN(getApplicationContext(), emailEntry);
+                    //Adds the Current user data to be passed
+                    i.putExtra("CurrentUser", usr);
+                    //Go to the next activity
+                    startActivity(i);
+                }else if(emailEntry.endsWith("@fgcu.edu")){
+                    Intent i = new Intent(getApplicationContext(), EventManager.class);
+                    //Use to create current user
+                    CurrentUser usr = LogIN(getApplicationContext(), emailEntry);
+                    //Adds the Current user data to be passed
+                    i.putExtra("CurrentUser", usr);
+                    //Go to the next activity
+                    startActivity(i);
+                }
                 Log.d("Caleb", " password");
             } else {
                 Toast.makeText(getApplicationContext(), "Incorrect Password or EmailAddress",

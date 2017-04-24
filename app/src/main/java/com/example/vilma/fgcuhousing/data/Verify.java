@@ -43,7 +43,7 @@ public class Verify {
     }
 
     private boolean emailVeri(){
-        if(email.endsWith("@eagle.fgcu.edu")){
+        if(email.endsWith("@eagle.fgcu.edu") || email.endsWith("@fgcu.edu")){
             Log.d(ETag, "Did my email pass");
             return true;
         }else{
