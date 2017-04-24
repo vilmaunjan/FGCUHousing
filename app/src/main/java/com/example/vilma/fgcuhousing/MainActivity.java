@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         } else if(v == findViewById(R.id.btnStaff)) { //go to staffAccess
             //Current Staff login not up so this sends you to event list with an auto login feature
             CurrentUser admin = LogIN(getApplicationContext(),"cooper@fgcu.edu");
-            Intent supa = new Intent(getApplicationContext(), EventList.class);
+            Intent supa = new Intent(getApplicationContext(), ResidentAccess.class);
             supa.putExtra("CurrentUser", admin);
             startActivity(supa);
         }
