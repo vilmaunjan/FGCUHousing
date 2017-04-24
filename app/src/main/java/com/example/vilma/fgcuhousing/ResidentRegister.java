@@ -88,24 +88,28 @@ public class ResidentRegister extends AppCompatActivity {
 
             //if verified
             if(ver.Verifier() && !db.emailCheck(emailEntry)) {
+                if(passwordEntry.length() > 6 && passwordEntry.length() < 14) {
+                    //Inserts user information into user class.
+                    User usr = new User();
+                    usr.setName(nameEntry);
+                    usr.setEmail(emailEntry);
+                    usr.setPassword(passwordEntry);
+                    usr.setBuilding(buildingEntry);
 
-                //Inserts user information into user class.
-                User usr = new User();
-                usr.setName(nameEntry);
-                usr.setEmail(emailEntry);
-                usr.setPassword(passwordEntry);
-                usr.setBuilding(buildingEntry);
-
-                //Inserts New User into the database
-                db.insertUser(this, usr);
-                //Creates intent to go to next activity
-                Intent CU = new Intent(getApplicationContext(), EventList.class);
-                CurrentUser Current = LogIN(getApplicationContext(), emailEntry);
-                //add's a new Current user to be passed
-                CU.putExtra("CurrentUser", Current);
-
-                //Moves to next Activity
-                startActivity(CU);
+                    //Inserts New User into the database
+                    db.insertUser(this, usr);
+                    //Creates intent to go to next activity
+                    Intent CU = new Intent(getApplicationContext(), ResidentLogin.class);
+                    CurrentUser Current = LogIN(getApplicationContext(), emailEntry);
+                    //add's a new Current user to be passed
+                    CU.putExtra("CurrentUser", Current);
+                    //Moves to next Activity
+                    startActivity(CU);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Password should be between 6-14 " +
+                                    "characters",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
             else{
                 //popup with "'feild' is invalid"
