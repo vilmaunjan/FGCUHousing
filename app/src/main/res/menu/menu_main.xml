@@ -3,6 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.vilma.fgcuhousing.EventList">
     <item
+        android:id="@+id/event_manager"
+        android:enabled="true"
+        android:orderInCategory="101"
+        android:title="@string/event_manager"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_settings"
         android:checkable="false"
         android:enabled="true"
@@ -11,10 +18,10 @@
         android:visible="true"
         app:showAsAction="never" />
     <item
-        android:id="@+id/event_manager"
+        android:id="@+id/stats"
         android:enabled="true"
         android:orderInCategory="101"
-        android:title="@string/event_manager"
+        android:title="@string/statistics"
         android:visible="true"
         app:showAsAction="never" />
 </menu>

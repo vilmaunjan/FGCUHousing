@@ -74,6 +74,10 @@
         <activity
             android:name=".EventFeedback"
             android:label="@string/title_activity_event_feedback"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Stats"
+            android:label="@string/title_activity_stats"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
