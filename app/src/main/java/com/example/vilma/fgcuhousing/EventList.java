@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -179,9 +180,39 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
     //Method used when clicking on buttons
     public void buttonOnClick(View v) {
         Button button = (Button)v;
+        ArrayList<EventItem> newArrayList=new ArrayList<>();
         //use if statement if you want to open something when clicking a button
         if (v == findViewById(R.id.btnSearch)) { //go to EventPage
             //startActivity(new Intent(getApplicationContext(), EventPage.class));
+            SearchView eventTitle = (SearchView) findViewById(R.id.searchView);
+            String word = eventTitle.getQuery().toString();
+
+            eventAdapter.clear(); //cleans adapter so that new data can be loaded
+
+            Cursor cursor = datCon.QueryData("select * from " +
+                    HousingContract.EventEntry.TABLE_NAME +
+                    " where " + HousingContract.EventEntry.Event_Title +
+                    " like '%"+ word + "%'");
+
+            if (cursor != null) {
+                newArrayList.clear();
+                if (cursor.moveToFirst()) {
+                    do {
+                        EventItem newItem = new EventItem();
+                        newItem.setId(cursor.getString(0));
+                        newItem.setTitle(cursor.getString(1));
+                        newItem.setTime(cursor.getString(5));
+                        newItem.setDate(cursor.getString(4));
+                        newItem.setPoster(cursor.getString(7));
+                        newArrayList.add(newItem);
+                    } while (cursor.moveToNext());
+                }
+            } else {
+                Toast.makeText(this, "No events found with this title", Toast.LENGTH_SHORT).show();
+            }
+
+            eventAdapter.addAll(newArrayList); //adds new arrayList of events
+            eventAdapter.notifyDataSetChanged(); //notify changes to the adapter
         }
     }
 
