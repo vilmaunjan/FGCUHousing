@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.example.vilma.fgcuhousing.data.HousingContract.*;
+import com.example.vilma.fgcuhousing.data.HousingContract.UserEntry;
 
 /**
  * Created by Andre on 4/18/2017.

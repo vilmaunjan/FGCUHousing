@@ -1,24 +1,16 @@
 package com.example.vilma.fgcuhousing;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.vilma.fgcuhousing.data.CurrentUser;
 import com.example.vilma.fgcuhousing.data.DbHandler;
-import com.example.vilma.fgcuhousing.data.EventAdapter;
-import com.example.vilma.fgcuhousing.data.EventItem;
 import com.example.vilma.fgcuhousing.data.HousingContract;
 import com.example.vilma.fgcuhousing.data.RAItem;
 import com.example.vilma.fgcuhousing.data.RaAdapter;
@@ -32,9 +24,6 @@ public class Stats extends AppCompatActivity {
     private DbHandler datCon = new DbHandler(this); //load database
     private CurrentUser CU;
 
-    //variables declaration
-    private ListView listView;
-    private RaAdapter raAdapter;
     private ArrayList<RAItem> arrayList=new ArrayList<>();
 
     @Override
@@ -77,8 +66,8 @@ public class Stats extends AppCompatActivity {
             }
         }catch (SQLException e){}
 
-        raAdapter = new RaAdapter(this, R.layout.stats_list_item, arrayList);
-        listView = (ListView) findViewById(R.id.list_ra_item);
+        RaAdapter raAdapter = new RaAdapter(this, R.layout.stats_list_item, arrayList);
+        ListView listView = (ListView) findViewById(R.id.list_ra_item);
         listView.setAdapter(raAdapter);
         raAdapter.notifyDataSetChanged();
     }

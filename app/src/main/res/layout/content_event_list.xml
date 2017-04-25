@@ -19,7 +19,8 @@
         android:layout_height="35dp"
         android:layout_alignBottom="@+id/btnSearch"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        >
 
     </SearchView>
 

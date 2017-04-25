@@ -1,17 +1,18 @@
 package com.example.vilma.fgcuhousing.data;
 
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.SQLException;
-import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+
+import com.example.vilma.fgcuhousing.R;
+import com.example.vilma.fgcuhousing.data.HousingContract.AttendedEventEntry;
+import com.example.vilma.fgcuhousing.data.HousingContract.Awards;
+import com.example.vilma.fgcuhousing.data.HousingContract.EventEntry;
+import com.example.vilma.fgcuhousing.data.HousingContract.OrganizedEvents;
+import com.example.vilma.fgcuhousing.data.HousingContract.UserEntry;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.example.vilma.fgcuhousing.R;
-import com.example.vilma.fgcuhousing.data.HousingContract.*;
 /**
  * Created by Andrew on 3/10/2017.
  * Used this to insertFake data and test the database to make sure

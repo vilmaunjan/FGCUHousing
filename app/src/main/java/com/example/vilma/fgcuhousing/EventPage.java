@@ -3,12 +3,7 @@ package com.example.vilma.fgcuhousing;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.media.Rating;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -22,7 +17,6 @@ import com.example.vilma.fgcuhousing.data.CurrentUser;
 import com.example.vilma.fgcuhousing.data.DbHandler;
 import com.example.vilma.fgcuhousing.data.Event;
 import com.example.vilma.fgcuhousing.data.HousingContract;
-import com.example.vilma.fgcuhousing.data.UserEvents;
 
 public class EventPage extends AppCompatActivity {
 

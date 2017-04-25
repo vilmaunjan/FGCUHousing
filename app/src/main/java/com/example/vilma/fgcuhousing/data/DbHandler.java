@@ -346,8 +346,8 @@ public class DbHandler extends SQLiteOpenHelper {
     //Simple method to pass a query string
     public Cursor QueryData(String query) throws SQLException{
         db = this.getReadableDatabase();
-        Cursor data = db.rawQuery(query, null);
-        return data;
+        Cursor pata = db.rawQuery(query, null);
+        return pata;
     }
 
     //Search for email and return corresponding password.

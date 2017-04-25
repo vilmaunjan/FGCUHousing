@@ -1,13 +1,9 @@
 package com.example.vilma.fgcuhousing.data;
 
 import android.app.Activity;
-import android.content.ClipData;
-import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +14,6 @@ import android.widget.TextView;
 import com.example.vilma.fgcuhousing.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Vilma on 4/14/2017.
