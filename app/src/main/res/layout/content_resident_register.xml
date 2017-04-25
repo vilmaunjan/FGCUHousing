@@ -141,13 +141,14 @@
         android:completionThreshold="1" />
 
     <Button
-        android:text="@string/submit"
+        android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnSubmit"
-        android:onClick="buttonOnClick"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="22dp" />
+        android:layout_marginBottom="22dp"
+        android:background="@color/colorPrimary"
+        android:onClick="buttonOnClick"
+        android:text="@string/submit" />
 
 </RelativeLayout>

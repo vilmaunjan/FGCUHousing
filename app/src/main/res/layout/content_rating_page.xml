@@ -38,12 +38,12 @@
         tools:ignore="HardcodedText" />
 
     <RatingBar
+        android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ratingBar"
-        android:layout_marginTop="39dp"
         android:layout_below="@+id/textView8"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp" />
 
     <EditText
         android:id="@+id/txtEventComments"
@@ -73,14 +73,15 @@
         android:visibility="invisible" />
 
     <Button
-        android:text="@string/rate_event"
+        android:id="@+id/btnRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnRate"
-        android:layout_marginBottom="18dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="buttonOnClick" />
+        android:layout_marginBottom="18dp"
+        android:background="@color/colorPrimary"
+        android:onClick="buttonOnClick"
+        android:text="@string/rate_event" />
 
 
 </RelativeLayout>

@@ -10,20 +10,15 @@
         android:id="@+id/lblListHeader"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1.04"
+        android:paddingBottom="8dp"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:paddingTop="8dp"
         android:textColor="@android:color/black"
         android:textSize="16dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="0dp"
-        tools:text="Item header"
-        android:layout_weight="1.04" />
-
-    <TextView
-        android:id="@+id/lblAvgRating"
-        android:layout_width="123dp"
-        android:layout_height="wrap_content"
-        android:text="Rating"
-        android:textSize="16dp" />
+        tools:text="Item header" />
 
 
 </LinearLayout>

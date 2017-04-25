@@ -126,14 +126,15 @@
         android:id="@+id/btnUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/btnAwards"
+        android:layout_alignEnd="@+id/btnAwards"
+        android:layout_alignRight="@+id/btnAwards"
+        android:layout_marginBottom="18dp"
+        android:background="@color/colorPrimary"
         android:onClick="buttonOnClick"
         android:text="Update Changes"
         tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="240dp"
-        android:layout_marginBottom="18dp"
-        android:layout_above="@+id/btnAwards"
-        android:layout_alignRight="@+id/btnAwards"
-        android:layout_alignEnd="@+id/btnAwards" />
+        tools:layout_editor_absoluteY="240dp" />
 
     <Button
         android:id="@+id/btnAwards"

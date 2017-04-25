@@ -113,7 +113,7 @@ public class Stats extends AppCompatActivity {
     public void eventOfMonth() {
         try{
             //finds event in database
-            Cursor bestEvent = datCon.QueryData("select e.+" +
+            Cursor bestEvent = datCon.QueryData("select e." +
                     HousingContract.EventEntry.Event_Title+", AVG(a."+
                     HousingContract.AttendedEventEntry.Rating_Score+") rtg FROM "+
                     HousingContract.EventEntry.TABLE_NAME+" e INNER JOIN "+

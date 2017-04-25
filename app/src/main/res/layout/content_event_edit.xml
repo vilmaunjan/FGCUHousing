@@ -27,12 +27,13 @@
         android:id="@+id/btnSearch"
         android:layout_width="wrap_content"
         android:layout_height="38dp"
-        android:layout_weight="1"
-        android:text="Search Event"
-        tools:ignore="HardcodedText"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentTop="true"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:text="Search Event"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/textView7"

@@ -33,9 +33,10 @@ public class DbTest {
 
 
         //create a list of fake guests
+        //RESIDENTS
         ContentValues cv = new ContentValues();
         cv.put(UserEntry.Name, "John");
-        cv.put(UserEntry.Email, "JohnBou@eagle.fgcu.edu");
+        cv.put(UserEntry.Email, "john@eagle.fgcu.edu");
         cv.put(UserEntry.Password, "north");
         cv.put(UserEntry.Type, "R");
         cv.put(UserEntry.Building, "North Village");
@@ -44,34 +45,99 @@ public class DbTest {
 
         cv = new ContentValues();
         cv.put(UserEntry.Name, "Kim");
-        cv.put(UserEntry.Email, "KimBou@eagle.fgcu.edu");
+        cv.put(UserEntry.Email, "kim@eagle.fgcu.edu");
         cv.put(UserEntry.Password, "north");
-        cv.put(UserEntry.Type, "RA");
+        cv.put(UserEntry.Type, "R");
         cv.put(UserEntry.Building, "South Village");
 
         User.add(cv);
 
         cv = new ContentValues();
         cv.put(UserEntry.Name, "Johnny");
-        cv.put(UserEntry.Email, "JohnDep@fgcu.edu");
+        cv.put(UserEntry.Email, "johnny@fgcu.edu");
         cv.put(UserEntry.Password, "north");
-        cv.put(UserEntry.Type, "RA");
+        cv.put(UserEntry.Type, "R");
         cv.put(UserEntry.Building, "South Village");
 
         User.add(cv);
 
         cv = new ContentValues();
         cv.put(UserEntry.Name, "Bonnie");
-        cv.put(UserEntry.Email, "Bonnie@eagle.fgcu.edu");
+        cv.put(UserEntry.Email, "bonnie@eagle.fgcu.edu");
         cv.put(UserEntry.Password, "north");
         cv.put(UserEntry.Type, "R");
         cv.put(UserEntry.Building, "North Village");
 
         User.add(cv);
 
+        //RAs
         cv = new ContentValues();
-        cv.put(UserEntry.Name, "Belly");
-        cv.put(UserEntry.Email, "cooper@fgcu.edu");
+        cv.put(UserEntry.Name, "Bella");
+        cv.put(UserEntry.Email, "bella@fgcu.edu");
+        cv.put(UserEntry.Password, "north");
+        cv.put(UserEntry.Type, "RA");
+        cv.put(UserEntry.Building, "North Village");
+
+        User.add(cv);
+
+        cv = new ContentValues();
+        cv.put(UserEntry.Name, "Ryan");
+        cv.put(UserEntry.Email, "ryan@fgcu.edu");
+        cv.put(UserEntry.Password, "north");
+        cv.put(UserEntry.Type, "RA");
+        cv.put(UserEntry.Building, "North Village");
+
+        User.add(cv);
+
+        cv = new ContentValues();
+        cv.put(UserEntry.Name, "Andrea");
+        cv.put(UserEntry.Email, "andrea@fgcu.edu");
+        cv.put(UserEntry.Password, "north");
+        cv.put(UserEntry.Type, "RA");
+        cv.put(UserEntry.Building, "North Village");
+
+        User.add(cv);
+
+        cv = new ContentValues();
+        cv.put(UserEntry.Name, "Chad");
+        cv.put(UserEntry.Email, "chad@fgcu.edu");
+        cv.put(UserEntry.Password, "north");
+        cv.put(UserEntry.Type, "RA");
+        cv.put(UserEntry.Building, "North Village");
+
+        User.add(cv);
+
+        //RDs
+        cv = new ContentValues();
+        cv.put(UserEntry.Name, "Connor");
+        cv.put(UserEntry.Email, "connor@fgcu.edu");
+        cv.put(UserEntry.Password, "north");
+        cv.put(UserEntry.Type, "RD");
+        cv.put(UserEntry.Building, "North Village");
+
+        User.add(cv);
+
+        cv = new ContentValues();
+        cv.put(UserEntry.Name, "Lexie");
+        cv.put(UserEntry.Email, "lexie@fgcu.edu");
+        cv.put(UserEntry.Password, "north");
+        cv.put(UserEntry.Type, "RD");
+        cv.put(UserEntry.Building, "North Village");
+
+        User.add(cv);
+
+        cv = new ContentValues();
+        cv.put(UserEntry.Name, "Ron");
+        cv.put(UserEntry.Email, "ron@fgcu.edu");
+        cv.put(UserEntry.Password, "north");
+        cv.put(UserEntry.Type, "RD");
+        cv.put(UserEntry.Building, "North Village");
+
+        User.add(cv);
+
+        cv = new ContentValues();
+        cv.put(UserEntry.Name, "Casey");
+        cv.put(UserEntry.Email, "casey@fgcu.edu");
         cv.put(UserEntry.Password, "north");
         cv.put(UserEntry.Type, "RD");
         cv.put(UserEntry.Building, "North Village");
@@ -234,81 +300,123 @@ public class DbTest {
 
         //Create a list of organized events
         cv = new ContentValues();
-        cv.put(OrganizedEvents.RA_ID, 2);
+        cv.put(OrganizedEvents.RA_ID, 5);
         cv.put(OrganizedEvents.Event_ID, 1);
         cv.put(OrganizedEvents.Date, "01/03/2017");
         OrgEvents.add(cv);
 
         cv = new ContentValues();
-        cv.put(OrganizedEvents.RA_ID, 2);
+        cv.put(OrganizedEvents.RA_ID, 5);
         cv.put(OrganizedEvents.Event_ID, 2);
         cv.put(OrganizedEvents.Date, "02/11/2017");
         OrgEvents.add(cv);
 
         cv = new ContentValues();
-        cv.put(OrganizedEvents.RA_ID, 3);
+        cv.put(OrganizedEvents.RA_ID, 5);
         cv.put(OrganizedEvents.Event_ID, 3);
         cv.put(OrganizedEvents.Date, "02/23/2017");
         OrgEvents.add(cv);
 
         cv = new ContentValues();
-        cv.put(OrganizedEvents.RA_ID, 3);
+        cv.put(OrganizedEvents.RA_ID, 6);
         cv.put(OrganizedEvents.Event_ID, 4);
         cv.put(OrganizedEvents.Date, "02/11/2017");
         OrgEvents.add(cv);
 
         cv = new ContentValues();
-        cv.put(OrganizedEvents.RA_ID, 5);
+        cv.put(OrganizedEvents.RA_ID, 6);
         cv.put(OrganizedEvents.Event_ID, 5);
         cv.put(OrganizedEvents.Date, "03/12/2017");
         OrgEvents.add(cv);
 
         cv = new ContentValues();
-        cv.put(OrganizedEvents.RA_ID, 3);
+        cv.put(OrganizedEvents.RA_ID, 7);
         cv.put(OrganizedEvents.Event_ID, 6);
         cv.put(OrganizedEvents.Date, "02/11/2017");
         OrgEvents.add(cv);
 
         cv = new ContentValues();
-        cv.put(OrganizedEvents.RA_ID, 2);
+        cv.put(OrganizedEvents.RA_ID, 8);
         cv.put(OrganizedEvents.Event_ID, 7);
         cv.put(OrganizedEvents.Date, "02/11/2017");
         OrgEvents.add(cv);
 
         //Create a list of attended events
         cv = new ContentValues();
-        cv.put(AttendedEventEntry.Resident_ID, 2);
+        cv.put(AttendedEventEntry.Resident_ID, 1);
         cv.put(AttendedEventEntry.Event_ID, 1);
-        cv.put(AttendedEventEntry.Rating_Score, 3);
+        cv.put(AttendedEventEntry.Rating_Score, 5);
         cv.put(AttendedEventEntry.Rating_FeedBack,"Awesome event");
         AttEvents.add(cv);
 
         cv = new ContentValues();
         cv.put(AttendedEventEntry.Resident_ID, 1);
-        cv.put(AttendedEventEntry.Event_ID, 1);
-        cv.put(AttendedEventEntry.Rating_Score, 4);
+        cv.put(AttendedEventEntry.Event_ID, 2);
+        cv.put(AttendedEventEntry.Rating_Score, 5);
         cv.put(AttendedEventEntry.Rating_FeedBack,"Good food");
         AttEvents.add(cv);
 
         cv = new ContentValues();
-        cv.put(AttendedEventEntry.Resident_ID, 4);
-        cv.put(AttendedEventEntry.Event_ID, 1);
-        cv.put(AttendedEventEntry.Rating_Score, 2);
+        cv.put(AttendedEventEntry.Resident_ID, 1);
+        cv.put(AttendedEventEntry.Event_ID, 3);
+        cv.put(AttendedEventEntry.Rating_Score, 4);
         cv.put(AttendedEventEntry.Rating_FeedBack,"It was ok");
         AttEvents.add(cv);
 
         cv = new ContentValues();
-        cv.put(AttendedEventEntry.Resident_ID, 3);
+        cv.put(AttendedEventEntry.Resident_ID, 2);
         cv.put(AttendedEventEntry.Event_ID, 2);
         cv.put(AttendedEventEntry.Rating_Score, 5);
         cv.put(AttendedEventEntry.Rating_FeedBack,"Cool event");
         AttEvents.add(cv);
 
         cv = new ContentValues();
+        cv.put(AttendedEventEntry.Resident_ID, 2);
+        cv.put(AttendedEventEntry.Event_ID, 3);
+        cv.put(AttendedEventEntry.Rating_Score, 4);
+        cv.put(AttendedEventEntry.Rating_FeedBack,"I liked the food");
+        AttEvents.add(cv);
+
+        cv = new ContentValues();
+        cv.put(AttendedEventEntry.Resident_ID, 2);
+        cv.put(AttendedEventEntry.Event_ID, 4);
+        cv.put(AttendedEventEntry.Rating_Score, 1);
+        cv.put(AttendedEventEntry.Rating_FeedBack,"Boring");
+        AttEvents.add(cv);
+
+        cv = new ContentValues();
+        cv.put(AttendedEventEntry.Resident_ID, 2);
+        cv.put(AttendedEventEntry.Event_ID, 5);
+        cv.put(AttendedEventEntry.Rating_Score, 5);
+        cv.put(AttendedEventEntry.Rating_FeedBack,"It was a fun event");
+        AttEvents.add(cv);
+
+        cv = new ContentValues();
+        cv.put(AttendedEventEntry.Resident_ID, 3);
+        cv.put(AttendedEventEntry.Event_ID, 1);
+        cv.put(AttendedEventEntry.Rating_Score, 3);
+        cv.put(AttendedEventEntry.Rating_FeedBack,"Lame event");
+        AttEvents.add(cv);
+
+        cv = new ContentValues();
+        cv.put(AttendedEventEntry.Resident_ID, 3);
+        cv.put(AttendedEventEntry.Event_ID, 6);
+        cv.put(AttendedEventEntry.Rating_Score, 4);
+        cv.put(AttendedEventEntry.Rating_FeedBack,"Had fun");
+        AttEvents.add(cv);
+
+        cv = new ContentValues();
         cv.put(AttendedEventEntry.Resident_ID, 4);
         cv.put(AttendedEventEntry.Event_ID, 2);
-        cv.put(AttendedEventEntry.Rating_Score, 4);
-        cv.put(AttendedEventEntry.Rating_FeedBack,"Event was cool");
+        cv.put(AttendedEventEntry.Rating_Score, 2);
+        cv.put(AttendedEventEntry.Rating_FeedBack,"Lame event");
+        AttEvents.add(cv);
+
+        cv = new ContentValues();
+        cv.put(AttendedEventEntry.Resident_ID, 4);
+        cv.put(AttendedEventEntry.Event_ID, 7);
+        cv.put(AttendedEventEntry.Rating_Score, 5);
+        cv.put(AttendedEventEntry.Rating_FeedBack,"Food was really good. Should have more events like this");
         AttEvents.add(cv);
 
         //insert all guests in one transaction
