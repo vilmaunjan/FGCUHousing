@@ -39,30 +39,32 @@
         tools:background="@android:color/transparent" />
 
     <Button
-        android:text="Staff"
+        android:id="@+id/btnStaff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnStaff"
-        android:layout_marginBottom="27dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:onClick="buttonOnClick" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="27dp"
+        android:background="@color/colorPrimary"
+        android:onClick="buttonOnClick"
+        android:text="Staff" />
 
     <Button
-        android:text="Resident"
+        android:id="@+id/btnResident"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnResident"
-        android:layout_marginBottom="18dp"
         android:layout_above="@+id/btnStaff"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:onClick="buttonOnClick" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="18dp"
+        android:background="@color/colorPrimary"
+        android:onClick="buttonOnClick"
+        android:text="Resident" />
 
     <ImageButton
         android:id="@+id/StarMode"

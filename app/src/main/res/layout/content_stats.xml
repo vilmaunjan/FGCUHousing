@@ -40,6 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.96"
                     android:text="RA Name"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="18sp" />
 
                 <TextView
@@ -47,6 +48,7 @@
                     android:layout_width="128dp"
                     android:layout_height="wrap_content"
                     android:text="Average Rating"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="18sp" />
             </LinearLayout>
 

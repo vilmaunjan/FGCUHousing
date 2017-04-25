@@ -135,11 +135,12 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
+        android:text="Enter information to create an event :"
+        android:textSize="18sp"
+        tools:ignore="HardcodedText"
         android:layout_alignParentTop="true"
-        android:text="Enter information to create an event (all fields are required):"
-        tools:ignore="HardcodedText" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp" />
 
     <Button
         android:id="@+id/btnConfirm"
@@ -151,6 +152,7 @@
         android:layout_alignRight="@+id/btnPoster"
         android:layout_alignStart="@+id/textView26"
         android:layout_marginBottom="11dp"
+        android:background="@color/colorPrimary"
         android:onClick="buttonOnClick"
         android:text="@string/confirm"
         tools:layout_editor_absoluteX="89dp"
@@ -160,13 +162,14 @@
         android:id="@+id/btnPoster"
         android:layout_width="183dp"
         android:layout_height="48dp"
-        android:text="Insert Poster"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="406dp"
         android:layout_above="@+id/btnConfirm"
         android:layout_alignLeft="@+id/spinnerLocation"
         android:layout_alignStart="@+id/spinnerLocation"
-        android:layout_marginBottom="9dp" />
+        android:layout_marginBottom="9dp"
+        android:background="@android:color/darker_gray"
+        android:text="Insert Poster"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="406dp" />
 
     <TextView
         android:id="@+id/textView25"

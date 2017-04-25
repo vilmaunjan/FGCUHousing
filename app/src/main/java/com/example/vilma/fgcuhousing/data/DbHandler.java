@@ -25,7 +25,7 @@ import com.example.vilma.fgcuhousing.data.HousingContract.UserEntry;
 public class DbHandler extends SQLiteOpenHelper {
     //Used for the name ad database version whenever updating schema
     private static final String DATABASE_NAME = "HousingDB";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 9;
     private static final String Tag = "DataBaseHelper";
     private static SQLiteDatabase db = null;
 
