@@ -6,19 +6,15 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,7 +22,6 @@ import android.widget.Toast;
 
 import com.example.vilma.fgcuhousing.data.CurrentUser;
 import com.example.vilma.fgcuhousing.data.DbHandler;
-import com.example.vilma.fgcuhousing.data.Event;
 import com.example.vilma.fgcuhousing.data.EventAdapter;
 import com.example.vilma.fgcuhousing.data.EventItem;
 import com.example.vilma.fgcuhousing.data.HousingContract;
@@ -195,9 +190,9 @@ public class EventEdit extends AppCompatActivity implements AdapterView.OnItemSe
     public void buttonOnClick(View v) {
         Button button = (Button)v;
         //use if statement if you want to open something when clicking a button
-        if (v == findViewById(R.id.btnSearch)) { //go to EventPage
-            //startActivity(new Intent(getApplicationContext(), EventPage.class));
-        }
+//        if (v == findViewById(R.id.btnSearch)) { //go to EventPage
+//            //startActivity(new Intent(getApplicationContext(), EventPage.class));
+//        }
     }
 
     @Override

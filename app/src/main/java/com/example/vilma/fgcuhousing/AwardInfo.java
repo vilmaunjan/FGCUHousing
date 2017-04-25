@@ -5,12 +5,10 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.vilma.fgcuhousing.data.DbHandler;
 import com.example.vilma.fgcuhousing.data.HousingContract;
-import com.example.vilma.fgcuhousing.data.HousingContract.*;
 
 
 /**

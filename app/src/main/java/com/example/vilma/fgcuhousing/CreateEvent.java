@@ -23,8 +23,6 @@ import com.example.vilma.fgcuhousing.data.Event;
 import com.example.vilma.fgcuhousing.data.HousingContract;
 
 public class CreateEvent extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-    //Need these whenever Connecting to database
-    private SQLiteDatabase mDb;
     private DbHandler datCon;
     private boolean edit = false;
     private String eveID;
@@ -56,7 +54,7 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         //Start's database
         datCon = new DbHandler(this);
         //get's and editable database to add parameters
-        mDb = datCon.getWritableDatabase();
+        SQLiteDatabase mDb = datCon.getWritableDatabase();
         title = (EditText) findViewById(R.id.txtEventName);
         description = (EditText) findViewById(R.id.txtEventDescription);
         building = (AutoCompleteTextView) findViewById(R.id.txtBuilding);
@@ -115,7 +113,7 @@ public class CreateEvent extends AppCompatActivity implements AdapterView.OnItem
         event.setImage(image);
         boolean isInserted = false;
         if (v == findViewById(R.id.btnConfirm)) {
-            if(edit==false) {
+            if(!edit) {
                 try {
                     Log.d("insertEvent", event.getDescription() + " " + event.getLocation() + "  " + event.getBuilding() + "  " + event.getTitle() + "  " + event.getDate() + "  " + event.getTime());
                     isInserted = datCon.insertEvent(event, CU);

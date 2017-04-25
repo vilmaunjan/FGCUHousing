@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.vilma.fgcuhousing.data.HousingContract.*;
+import com.example.vilma.fgcuhousing.data.HousingContract.UserEntry;
 
 /**
  * Created by Andre on 4/18/2017.

@@ -3,15 +3,9 @@ package com.example.vilma.fgcuhousing;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.vilma.fgcuhousing.data.CurrentUser;
 import com.example.vilma.fgcuhousing.data.DbHandler;
@@ -25,13 +19,8 @@ import java.util.List;
 
 public class EventFeedback extends AppCompatActivity {
 
-    //Need these whenever Connecting to database
-    private DbHandler datCon;
     private Event event;
-    private CurrentUser CU;
 
-    private ExpandableListView listView;
-    private ExpandibleListAdapter listAdapter;
     private List<String> listDataHeader;
     private HashMap<String, List<String>> listHash;
     @Override
@@ -41,9 +30,9 @@ public class EventFeedback extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        listView = (ExpandableListView)findViewById(R.id.lvExp);
+        ExpandableListView listView = (ExpandableListView) findViewById(R.id.lvExp);
         initData();
-        listAdapter = new ExpandibleListAdapter(this,listDataHeader,listHash);
+        ExpandibleListAdapter listAdapter = new ExpandibleListAdapter(this, listDataHeader, listHash);
         listView.setAdapter(listAdapter);
     }
 
@@ -52,10 +41,10 @@ public class EventFeedback extends AppCompatActivity {
         listHash = new HashMap<>();
 
         Bundle data = getIntent().getExtras();
-        CU = data.getParcelable("CurrentUser"); //this is the line that gives me problem
+        CurrentUser CU = data.getParcelable("CurrentUser");
 
         //load database
-        datCon = new DbHandler(this);
+        DbHandler datCon = new DbHandler(this);
       //-------------------------------------This is that part that doesnt work----------------------
         //datCon.insertEventAttended(event, CU);
         try{
@@ -71,7 +60,7 @@ public class EventFeedback extends AppCompatActivity {
                     HousingContract.EventEntry.Event_ID+" = o."+
                     HousingContract.OrganizedEvents.Event_ID+
                     " where o."+HousingContract.OrganizedEvents.RA_ID+
-                    " = "+CU.getID()+" GROUP BY o."+
+                    " = "+ CU.getID()+" GROUP BY o."+
                     HousingContract.OrganizedEvents.Event_ID);
 
 

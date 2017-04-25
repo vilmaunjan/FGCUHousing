@@ -1,7 +1,5 @@
 package com.example.vilma.fgcuhousing.data;
 
-import android.media.Image;
-
 /**
  * Created by Vilma on 4/14/2017.
  */

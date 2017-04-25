@@ -55,13 +55,21 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
         Bundle data = getIntent().getExtras();
         CU = data.getParcelable("CurrentUser");
 
-        Log.d("CurrentUser", "Name : " + CU.getName()+ " Password: " +CU.getPassword()+ " Account type :" + CU.getAccountType() );
+        //Log.d("CurrentUser", "Name : " + CU.getName()+ " Password: " +CU.getPassword()+ " Account type :" + CU.getAccountType() );
 
         Spinner spinnerFilter = (Spinner) findViewById(R.id.spinnerFilter);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.spinner_housing_options, android.R.layout.simple_spinner_item);
 
         spinnerFilter.setAdapter(adapter);
         spinnerFilter.setOnItemSelectedListener(this);
+
+        final SearchView eventTitle = (SearchView) findViewById(R.id.searchView);
+        eventTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eventTitle.setIconified(false);
+            }
+        });
 
         //Code for the award button on bottom
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floatingActionAwards);
@@ -180,10 +188,16 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
     //Method used when clicking on buttons
     public void buttonOnClick(View v) {
         Button button = (Button)v;
-        ArrayList<EventItem> newArrayList=new ArrayList<>();
+        final ArrayList<EventItem> newArrayList=new ArrayList<>();
         //use if statement if you want to open something when clicking a button
         if (v == findViewById(R.id.btnSearch)) { //go to EventPage
-            SearchView eventTitle = (SearchView) findViewById(R.id.searchView);
+            final SearchView eventTitle = (SearchView) findViewById(R.id.searchView);
+            eventTitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    eventTitle.setIconified(false);
+                }
+            });
             String word = eventTitle.getQuery().toString();
 
             eventAdapter.clear(); //cleans adapter so that new data can be loaded
@@ -222,18 +236,19 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
          */
         MenuItem EventManager = menu.findItem(R.id.event_manager);
         MenuItem Stats = menu.findItem(R.id.stats);
-        if(CU.getAccountType().equals("R"))
-        {
-            EventManager.setVisible(false);
-            Stats.setVisible(false);
-        }
-        else if (CU.getAccountType().equals("RA"))
-        {
-            EventManager.setVisible(true);
-            Stats.setVisible(false);
-        } else {
-            EventManager.setVisible(true);
-            Stats.setVisible(true);
+        switch (CU.getAccountType()) {
+            case "R":
+                EventManager.setVisible(false);
+                Stats.setVisible(false);
+                break;
+            case "RA":
+                EventManager.setVisible(true);
+                Stats.setVisible(false);
+                break;
+            default:
+                EventManager.setVisible(true);
+                Stats.setVisible(true);
+                break;
         }
         return true;
     }

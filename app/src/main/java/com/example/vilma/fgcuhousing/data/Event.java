@@ -1,8 +1,5 @@
 package com.example.vilma.fgcuhousing.data;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.example.vilma.fgcuhousing.R;
 
 

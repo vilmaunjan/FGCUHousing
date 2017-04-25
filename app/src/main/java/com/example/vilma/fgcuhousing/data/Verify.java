@@ -1,11 +1,8 @@
 package com.example.vilma.fgcuhousing.data;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.example.vilma.fgcuhousing.EventList;
 
 /**
  * Created by Andrew on 4/17/2017.

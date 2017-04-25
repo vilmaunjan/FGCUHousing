@@ -15,6 +15,7 @@ import com.example.vilma.fgcuhousing.data.CurrentUser;
 import com.example.vilma.fgcuhousing.data.DbHandler;
 import com.example.vilma.fgcuhousing.data.User;
 import com.example.vilma.fgcuhousing.data.Verify;
+
 import static com.example.vilma.fgcuhousing.data.logIn.LogIN;
 
 public class ResidentRegister extends AppCompatActivity {
