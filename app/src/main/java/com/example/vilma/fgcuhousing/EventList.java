@@ -126,7 +126,7 @@ public class EventList extends AppCompatActivity implements AdapterView.OnItemSe
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         TextView spinnerDialogText = (TextView) view;
         String building = "";
-        Toast.makeText(this, "You selected " + spinnerDialogText.getText(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "You selected " + spinnerDialogText.getText(), Toast.LENGTH_SHORT).show();
 
         String selected = parent.getItemAtPosition(position).toString();
 

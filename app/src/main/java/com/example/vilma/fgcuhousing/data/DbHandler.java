@@ -161,7 +161,7 @@ public class DbHandler extends SQLiteOpenHelper {
 
         String table = EventEntry.TABLE_NAME +" e  inner join " + AttendedEventEntry.TABLE_NAME +
                 " a"+
-                " on e. "+ EventEntry.Event_ID +" = a." + AttendedEventEntry.Event_ID +";";
+                " on e. "+ EventEntry.Event_ID +" = a." + AttendedEventEntry.Event_ID +"";
 
         String [] columns = {"e." + EventEntry.Event_Title, "a." +
                 AttendedEventEntry.Rating_FeedBack, "a." +

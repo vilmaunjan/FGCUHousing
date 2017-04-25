@@ -47,8 +47,8 @@ public class Awards extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), AwardInfo.class)
                         .putExtra("logoid", id));
 
-                  Toast.makeText(Awards.this, "" + position +"id is " + id,
-                        Toast.LENGTH_SHORT).show();
+//                  Toast.makeText(Awards.this, "" + position +"id is " + id,
+//                        Toast.LENGTH_SHORT).show();
                 }
         });
 

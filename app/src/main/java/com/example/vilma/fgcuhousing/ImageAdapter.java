@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
     private CurrentUser p;
-    private  ArrayList<Integer> test;
+    private  ArrayList<Integer> test = new ArrayList<>();
 
     public ImageAdapter(Context c){
         mContext = c;
@@ -28,21 +28,25 @@ public class ImageAdapter extends BaseAdapter {
     public ImageAdapter(Context c, CurrentUser p){
         mContext = c;
         this.p = p;
+        userSpecificAwards();//adds only the awards they have
     }
 
     @Override
     public int getCount() {
-        return mThumbIds.length;
+        return test.size();
+       // return mThumbIds.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return mThumbIds[position];
+        return null;
+        //return mThumbIds[position];
     }
 
     @Override
     public long getItemId(int position) {
-        return mThumbIds[position];
+        return test.get(position);
+        //return mThumbIds[position];
     }
 
     @Override
@@ -58,15 +62,15 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
 
         }
-        test = new ArrayList<>();
-        userSpecificAwards();//adds only the awards they have
+        //test = new ArrayList<>();
+
         //imageView.setImageResource(mThumbIds[position]);
         Log.d("ImagePosition", String.valueOf(position));
-        if(position < test.size()) {
+       // if(position < test.size()) {
             imageView.setImageResource(test.get(position));
-        }else{
-            imageView.setVisibility(View.INVISIBLE);
-        }
+        //}else{
+         //   imageView.setVisibility(View.INVISIBLE);
+        //}
 
         return imageView;
     }

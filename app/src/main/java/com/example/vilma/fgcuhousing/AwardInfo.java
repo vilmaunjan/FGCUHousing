@@ -48,7 +48,7 @@ public class AwardInfo extends Activity{
     private void awardDescription(){
         Cursor awardinfo;
 
-            DbHandler getit = new DbHandler(getApplicationContext());
+        DbHandler getit = new DbHandler(getApplicationContext());
         //Find the Award
         String query = "Select * from "+ HousingContract.Awards.TABLE_NAME +" where " +
                 HousingContract.Awards.COLUMN_Image +" = \"" + LogoID + "\";";

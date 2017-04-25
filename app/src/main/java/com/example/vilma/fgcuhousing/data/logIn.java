@@ -66,15 +66,15 @@ public class logIn {
     //Sets the Awards they Obtained
     public static void setAwards(CurrentUser ep, awardChecker tp, Context x) {
         //If they don't have the beta Tester Title
-        if(!db.betaTester(ep)){
+        if(!db.betaTester(ep)){//if true they have the beta tester award
             //check if they qualify
-            //logic might be flawed for local reasons but thinking in terms of
-            //having a sql database on the net later
-            if(ep.getID() < 100) {
+            if(ep.getID() < 100) {//if they qualify assign beta tester
                 Toast.makeText(x, "Obtained the BetaTester", Toast.LENGTH_SHORT).show();
                 tp.setBetaTester(true);
                 db.insertAward(ep, db.getAwardID("BetaTester"));
             }
+        }else{
+            tp.setBetaTester(true);
         }
         //Populates all the awards Obtained Such As Complicated
         //Only award that can't be auto populated at the moment

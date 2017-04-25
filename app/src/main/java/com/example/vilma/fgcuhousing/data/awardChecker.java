@@ -75,16 +75,16 @@ public class awardChecker implements Parcelable {
 
     public void checkEvent(int Number, Context c){
         //Sets event awards
-        if(Number > 0){
+        if(Number == 1){
             setFirstTime(true);
             Toast.makeText(c, "You Obtained First Time award!", Toast.LENGTH_SHORT).show();
-        }else if(Number > 2){
+        }else if(Number == 3){
             Toast.makeText(c, "You Obtained Third Time award!", Toast.LENGTH_SHORT).show();
             setThirdTimer(true);
-        } else if(Number > 6){
+        } else if(Number == 7){
             Toast.makeText(c, "You Obtained Lucky Seven award!", Toast.LENGTH_SHORT).show();
             setLuckySeven(true);
-        }else if(Number > 10){
+        }else if(Number == 10){
             Toast.makeText(c, "You Obtained OutGoing award!", Toast.LENGTH_SHORT).show();
             setOutGoing(true);
         }
