@@ -42,7 +42,7 @@ public class ResidentRegister extends AppCompatActivity {
                 android.R.layout.simple_dropdown_item_1line,BUILDINGS);
 
         //Assigning inputted values
-        Name = (EditText) findViewById(R.id.txtName);
+        Name = (EditText) findViewById(R.id.accountName);
         Email = (EditText) findViewById(R.id.txtEmail);
         Password = (EditText) findViewById(R.id.txtPassword);
         PasswordVerify = (EditText) findViewById(R.id.txtPasswordVerify);

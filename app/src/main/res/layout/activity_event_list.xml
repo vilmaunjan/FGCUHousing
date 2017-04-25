@@ -25,17 +25,6 @@
     <include layout="@layout/content_event_list"
         android:id="@+id/include" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionAwards"
-        android:layout_width="69dp"
-        android:layout_height="67dp"
-        android:layout_gravity="top|center_horizontal"
-        android:clickable="true"
-        app:backgroundTint="@android:color/transparent"
-        app:fabSize="mini"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="bottom|center_horizontal"
-        app:rippleColor="@android:color/transparent"
-        app:srcCompat="@drawable/trophy" />
+
 
 </android.support.design.widget.CoordinatorLayout>

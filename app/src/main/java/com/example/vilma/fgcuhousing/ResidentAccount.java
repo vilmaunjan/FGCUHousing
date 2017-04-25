@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -38,13 +39,13 @@ public class ResidentAccount extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line,BUILDINGS);
 
-        Name = (EditText) findViewById(R.id.txtName);
+        Name = (EditText) findViewById(R.id.accountName);
         Email = (EditText) findViewById(R.id.txtEmail);
         Password = (EditText) findViewById(R.id.txtPassword);
         Building = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
         Building.setAdapter(adapter);
-
-        setProfile();
+        Log.d("User", "Hello");
+        setProfile(CU);
     }
 
     /**
@@ -60,11 +61,13 @@ public class ResidentAccount extends AppCompatActivity {
 
     };
 
-    public void setProfile(){
-        Name.setText(CU.getName());
-        Email.setText(CU.getEmail());
-        Password.setText(CU.getPassword());
-        Building.setText(CU.getBuilding());
+    public void setProfile(CurrentUser p){
+
+
+        Name.setText(p.getName().toString());
+        Email.setText(p.getEmail());
+        Password.setText(p.getPassword());
+        Building.setText(p.getBuilding());
     }
 
     //Method used when clicking on buttons
@@ -77,20 +80,24 @@ public class ResidentAccount extends AppCompatActivity {
             awards.putExtra("CurrentUser", CU);
             startActivity(awards);
         }else if(v == findViewById(R.id.btnUpdate)){
-            DbHandler user = new DbHandler(this);
-            CU.setName(Name.getText().toString());
-            CU.setEmail(Email.getText().toString());
-            CU.setPassword(Password.getText().toString());
-            CU.setBuilding(Building.getText().toString());
-            boolean status = user.updateProfile(CU);
-            if(status){
+            if(Name.getText().toString() != "" || Email.getText().toString() != "") {
+                DbHandler user = new DbHandler(this);
+                CU.setName(Name.getText().toString());
+                CU.setEmail(Email.getText().toString());
+                CU.setPassword(Password.getText().toString());
+                CU.setBuilding(Building.getText().toString());
 
-                Toast.makeText(getApplicationContext(), "UserAccount Updated!",
-                        Toast.LENGTH_SHORT).show();
-            }else{
 
-                Toast.makeText(getApplicationContext(), "UserAccount UpdateFailed",
-                        Toast.LENGTH_SHORT).show();
+                boolean status = user.updateProfile(CU);
+                if (status) {
+
+                    Toast.makeText(getApplicationContext(), "UserAccount Updated!",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+
+                    Toast.makeText(getApplicationContext(), "UserAccount UpdateFailed",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }

@@ -9,21 +9,38 @@
     tools:showIn="@layout/activity_resident_account">
 
     <EditText
+        android:id="@+id/accountName"
+        android:layout_width="262dp"
+        android:layout_height="40dp"
+        android:layout_alignBaseline="@+id/textView10"
+        android:layout_alignBottom="@+id/textView10"
+        android:layout_alignEnd="@+id/autoCompleteTextView"
+        android:layout_alignLeft="@+id/txtEmail"
+        android:layout_alignRight="@+id/autoCompleteTextView"
+        android:layout_alignStart="@+id/txtEmail"
+        android:ems="10"
+        android:hint="Enter name"
+        android:inputType="textPersonName"
+        android:text="xyz"
+        tools:layout_editor_absoluteX="82dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <EditText
         android:id="@+id/txtEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/txtPassword"
+        android:layout_alignEnd="@+id/autoCompleteTextView"
+        android:layout_alignLeft="@+id/txtPassword"
+        android:layout_alignRight="@+id/autoCompleteTextView"
+        android:layout_alignStart="@+id/txtPassword"
+        android:layout_marginBottom="34dp"
         android:ems="10"
         android:hint="Enter eagle email"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         android:text="x@eagle.fgcu.edu"
         tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="71dp"
-        android:layout_marginBottom="34dp"
-        android:layout_above="@+id/txtPassword"
-        android:layout_alignLeft="@+id/txtPassword"
-        android:layout_alignStart="@+id/txtPassword"
-        android:layout_alignRight="@+id/autoCompleteTextView"
-        android:layout_alignEnd="@+id/autoCompleteTextView" />
+        tools:layout_editor_absoluteY="71dp" />
 
     <EditText
         android:id="@+id/txtPassword"
@@ -40,6 +57,18 @@
         android:layout_toRightOf="@+id/textView14"
         android:layout_alignRight="@+id/autoCompleteTextView"
         android:layout_alignEnd="@+id/autoCompleteTextView" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView"
+        android:layout_width="195dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/btnUpdate"
+        android:layout_marginBottom="37dp"
+        android:layout_toEndOf="@+id/textView14"
+        android:layout_toRightOf="@+id/textView14"
+        android:text="Xbuilding"
+        tools:layout_editor_absoluteX="149dp"
+        tools:layout_editor_absoluteY="187dp" />
 
     <TextView
         android:id="@+id/textView10"
@@ -67,23 +96,6 @@
         android:layout_alignLeft="@+id/textView10"
         android:layout_alignStart="@+id/textView10" />
 
-    <EditText
-        android:id="@+id/txtName"
-        android:layout_width="262dp"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:hint="Enter name"
-        android:inputType="textPersonName"
-        android:text="xyz"
-        tools:layout_editor_absoluteX="82dp"
-        tools:layout_editor_absoluteY="16dp"
-        android:layout_alignBaseline="@+id/textView10"
-        android:layout_alignBottom="@+id/textView10"
-        android:layout_alignLeft="@+id/txtEmail"
-        android:layout_alignStart="@+id/txtEmail"
-        android:layout_alignRight="@+id/autoCompleteTextView"
-        android:layout_alignEnd="@+id/autoCompleteTextView" />
-
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
@@ -96,18 +108,6 @@
         android:layout_toLeftOf="@+id/btnAwards"
         android:layout_toStartOf="@+id/btnAwards"
         android:layout_marginBottom="32dp" />
-
-    <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView"
-        android:layout_width="195dp"
-        android:layout_height="40dp"
-        android:text="Xbuilding"
-        tools:layout_editor_absoluteX="149dp"
-        tools:layout_editor_absoluteY="187dp"
-        android:layout_marginBottom="37dp"
-        android:layout_above="@+id/btnUpdate"
-        android:layout_toRightOf="@+id/textView14"
-        android:layout_toEndOf="@+id/textView14" />
 
     <TextView
         android:id="@+id/textView14"
